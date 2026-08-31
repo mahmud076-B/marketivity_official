@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colors - Marketivity Identity */
+  --color-brand-orange: #F7931E;
+  --color-brand-orange-light: #FFAA4D;
+  --color-brand-orange-dark: #E07D0F;
+  --color-brand-purple: #6F42C1;
+  --color-brand-purple-light: #8B5FC4;
+  --color-brand-purple-dark: #5A35A0;
+  --color-brand-charcoal: #2D2D2D;
+  --color-brand-offwhite: #F7F7F5;
+  
+  /* Alpha & Translucent Tones */
+  --color-brand-orange-alpha-5: rgba(247, 147, 30, 0.05);
+  --color-brand-orange-alpha-10: rgba(247, 147, 30, 0.1);
+  --color-brand-orange-alpha-20: rgba(247, 147, 30, 0.2);
+  --color-brand-orange-alpha-30: rgba(247, 147, 30, 0.3);
+  --color-brand-purple-alpha-5: rgba(111, 66, 193, 0.05);
+  --color-brand-purple-alpha-10: rgba(111, 66, 193, 0.1);
+  --color-brand-purple-alpha-20: rgba(111, 66, 193, 0.2);
+  --color-brand-purple-alpha-30: rgba(111, 66, 193, 0.3);
+  
+  /* Surface System */
+  --color-surface-white: #FFFFFF;
+  --color-surface-light: #FAFAF9;
+  --color-surface-neutral: #F5F5F4;
+  --color-surface-dark: #1C1C1E;
+  --color-surface-darker: #0D0D0F;
+  
+  /* Typography Variables */
+  --font-sans: var(--font-plus-jakarta), var(--font-bengali), var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta), var(--font-bengali), system-ui, sans-serif;
+  --font-bengali: var(--font-bengali), sans-serif;
+}
+
+:root {
+  --background: #F7F7F5;
+  --foreground: #2D2D2D;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Bengali Locale Specific Adjustments */
+html[lang="bn"] body {
+  font-family: var(--font-bengali), var(--font-sans);
+  line-height: 1.65;
+}
+
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3,
+html[lang="bn"] h4 {
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+@utility touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@utility safe-px {
+  padding-left: max(1rem, var(--safe-left));
+  padding-right: max(1rem, var(--safe-right));
+}
+
+@utility safe-pb {
+  padding-bottom: max(1rem, var(--safe-bottom));
+}
+
+@utility safe-pt {
+  padding-top: max(0px, var(--safe-top));
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes shine {
+  0% { background-position: 100%; }
+  100% { background-position: -100%; }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+.animate-shine {
+  animation: shine 5s linear infinite;
+}
+
+/* Reduced Motion Safety */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
+
+/* Selection Highlights */
+::selection {
+  background-color: rgba(247, 147, 30, 0.25);
+  color: #2D2D2D;
+}
+
+/* Accessible Focus Ring */
+:focus-visible {
+  outline: 2px solid #F7931E;
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F7F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(247, 147, 30, 0.6), rgba(111, 66, 193, 0.6));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #F7931E, #6F42C1);
+}
+
+/* Surface, Glow & Gradient Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, #F7931E 0%, #6F42C1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FFAA4D 0%, #F7931E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-hero {
+  background: 
+    radial-gradient(ellipse at 40% 10%, rgba(247, 147, 30, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 20%, rgba(111, 66, 193, 0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7F7F5 100%);
+}
+
+.gradient-cta {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(247, 147, 30, 0.15), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(111, 66, 193, 0.2), transparent 40%),
+    linear-gradient(135deg, #1C1C1E 0%, #0D0D0F 100%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(45, 45, 45, 0.08);
+}
+
+.glass-dark {
+  background: rgba(28, 28, 30, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shadow-soft-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+.shadow-soft-md {
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-glow-orange {
+  box-shadow: 0 0 25px rgba(247, 147, 30, 0.35);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 0 25px rgba(111, 66, 193, 0.35);
+}
+
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.grid-pattern-dark {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

@@ -1,0 +1,605 @@
+{
+  "metadata": {
+    "title": "Marketivity — Digital Growth Partners",
+    "description": "Premium digital marketing agency in Rajshahi, Bangladesh. SEO, social media, paid ads, content marketing & branding."
+  },
+  "common": {
+    "brand": "Marketivity",
+    "tagline": "Digital Growth Partners",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "comingSoon": "Coming Soon",
+    "startingAt": "Starting at",
+    "perMonth": "/month",
+    "perProject": "/project",
+    "currency": "৳",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "addressValue": "Padma R/A, Chandrima, Rajshahi, Bangladesh",
+    "followUs": "Follow Us",
+    "backToHome": "Back to Home",
+    "backToBlog": "Back to Blog",
+    "applyNow": "Apply Now",
+    "sendMessage": "Send Message",
+    "name": "Name",
+    "message": "Message",
+    "subject": "Subject",
+    "optional": "(optional)",
+    "allRightsReserved": "All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "careers": "Careers",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "announcement": {
+    "text": "🎉 Facebook 100% Recommended Agency — Book your free strategy call today!"
+  },
+  "home": {
+    "hero": {
+      "title": "We Grow Your",
+      "rotatingWords": ["Brand", "Revenue", "Reach", "Impact"],
+      "subtitle": "Rajshahi's trusted digital marketing partner. We turn clicks into customers and brands into market leaders.",
+      "cta": "Start Growing",
+      "secondaryCta": "View Our Work"
+    },
+    "growthEngine": {
+      "simulator": "GROWTH CORE 3D • LAB SIMULATOR",
+      "interactHint": "CLICK NODES TO INTERACT",
+      "strategyExecutionScale": "Strategy → Execution → Scale",
+      "interactiveWebgl": "Interactive WebGL",
+      "audience": {
+        "title": "Audience Profiling",
+        "metric": "120K+ Reach",
+        "desc": "Laser-focused buyer persona segmentation across Bangladesh."
+      },
+      "campaign": {
+        "title": "Precision Campaign",
+        "metric": "ROAS 5.2x",
+        "desc": "A/B tested creative hooks and automated bid management."
+      },
+      "leads": {
+        "title": "Lead Acceleration",
+        "metric": "100% Rec.",
+        "desc": "High-intent landing pages and instant WhatsApp capture."
+      },
+      "growth": {
+        "title": "Revenue Scale",
+        "metric": "+522% Sales",
+        "desc": "Compounding returns with full-funnel retention marketing."
+      }
+    },
+    "lab": {
+      "badge": "INTERACTIVE SYSTEM LAB",
+      "title": "Attention vs. Strategic Architecture",
+      "isolated": "Isolated Boosting",
+      "connected": "Connected Pipeline",
+      "wastedBudget": "Ad Budget Wasted on Non-Target Audiences",
+      "noFunnels": "Conversion Retargeting Funnels Installed",
+      "zeroRepeat": "Zero Repeat Retention or Upsell Channels",
+      "salesGrowth": "Sales Growth via Funnel Optimization",
+      "abTested": "Continuous A/B Tested Creatives",
+      "transparentReport": "Transparent Monthly Live Reporting"
+    },
+    "constellation": {
+      "badge": "INTERACTIVE GROWTH CONSTELLATION",
+      "selectSector": "SELECT SERVICE SECTOR",
+      "specialization": "MARKETIVITY SPECIALIZATION",
+      "included": "WHAT IS INCLUDED IN THIS GROWTH TRACK",
+      "transparentRetainers": "Transparent Retainers.",
+      "noHiddenFees": "No hidden ad fees or lock-in contracts."
+    },
+    "problem": {
+      "eyebrow": "THE DIGITAL REALITY",
+      "title": "Your audience is online. But are they seeing you?",
+      "subtitle": "Most businesses burn ad spend on generic boosting without strategy. We connect fragmented touchpoints into a unified digital revenue engine.",
+      "fragmented": "Fragmented Efforts",
+      "fragmentedDesc": "Scattered posts, random boosting, and zero clear ROI.",
+      "solution": "Connected Growth System",
+      "solutionDesc": "Targeted audience, high-intent campaigns, and sustainable revenue growth.",
+      "cta": "Explore Strategy"
+    },
+    "ecosystem": {
+      "eyebrow": "GROWTH VISUALIZATION",
+      "title": "Every click is part of a bigger picture.",
+      "subtitle": "Marketing isn't isolated tasks. It's a synchronized loop where every stage feeds the next.",
+      "stageFocus": "Stage Focus",
+      "stages": {
+        "0": { "label": "TRAFFIC", "sublabel": "Organic & Paid", "desc": "Capturing targeted visitors from search, social, and local directories." },
+        "1": { "label": "ATTENTION", "sublabel": "Creative Hook", "desc": "Stopping the scroll with compelling visual storytelling and brand messaging." },
+        "2": { "label": "ENGAGEMENT", "sublabel": "Active Interest", "desc": "Sparking comments, direct inquiries, content saves, and community trust." },
+        "3": { "label": "LEADS", "sublabel": "High Intent", "desc": "Collecting qualified contact details through WhatsApp, forms, and messenger." },
+        "4": { "label": "CONVERSION", "sublabel": "Revenue Closed", "desc": "Turning interested leads into paying customers and confirmed bookings." },
+        "5": { "label": "RETENTION", "sublabel": "Repeat Value", "desc": "Re-engaging past clients with remarketing, email, and loyalty campaigns." },
+        "6": { "label": "GROWTH", "sublabel": "Compounding ROI", "desc": "Reinvesting revenue into scaled campaigns for continuous market leadership." }
+      }
+    },
+    "leadCta": {
+      "title": "Ready to scale your business?",
+      "subtitle": "Get a free digital marketing audit and personalized growth plan.",
+      "cta": "Get Free Audit"
+    },
+    "stats": {
+      "clients": "Happy Clients",
+      "campaigns": "Campaigns Launched",
+      "recommended": "Facebook Recommended",
+      "ranking": "Top 3 in Bangladesh"
+    },
+    "valueProp": {
+      "eyebrow": "THE MARKETIVITY STANDARD",
+      "title": "Why Choose Marketivity?",
+      "subtitle": "We combine data-driven strategy with creative excellence to deliver measurable results.",
+      "items": {
+        "results": {
+          "title": "Results-Driven",
+          "description": "Every campaign is built around KPIs that matter — leads, sales, and ROI."
+        },
+        "local": {
+          "title": "Local Expertise",
+          "description": "Deep understanding of the Bangladesh market and Rajshahi business landscape."
+        },
+        "transparent": {
+          "title": "Transparent Reporting",
+          "description": "Monthly dashboards and clear communication so you always know where you stand."
+        },
+        "recommended": {
+          "title": "Facebook Recommended",
+          "description": "Officially recognized for excellence in Facebook & Instagram advertising."
+        }
+      }
+    },
+    "process": {
+      "badge": "5-STAGE GROWTH ENGINE",
+      "title": "Our 5-Step Growth Engine",
+      "subtitle": "A structured, systematic framework that transforms digital presence into sustainable market leadership.",
+      "steps": {
+        "discover": {
+          "title": "Discover",
+          "description": "We audit your brand, competitors, and audience to uncover high-impact growth opportunities."
+        },
+        "strategize": {
+          "title": "Strategize",
+          "description": "Custom growth roadmap with tailored channel mix, budget allocation, and clear KPI targets."
+        },
+        "create": {
+          "title": "Create",
+          "description": "High-converting creatives, engaging copy, and precision campaigns engineered to convert."
+        },
+        "optimize": {
+          "title": "Optimize",
+          "description": "Continuous data monitoring, A/B testing, and funnel refinement to lower acquisition cost."
+        },
+        "scale": {
+          "title": "Scale",
+          "description": "Doubling down on top-performing channels to aggressively expand reach and revenue."
+        }
+      },
+      "primaryKpi": "PRIMARY KPI",
+      "stagePrefix": "STAGE 0",
+      "details": {
+        "0": {
+          "phase": "AUDIT & DISCOVERY",
+          "kpi": "Benchmark Identification",
+          "action": "Competitor gap analysis, pixel health audit, and customer persona mapping."
+        },
+        "1": {
+          "phase": "STRATEGIC ARCHITECTURE",
+          "kpi": "Channel Budget Allocation",
+          "action": "Custom media plan with targeted ROAS and lead volume targets."
+        },
+        "2": {
+          "phase": "CREATIVE ENGINEERING",
+          "kpi": "High-Converting Assets",
+          "action": "High-CTR ad creatives, persuasive copywriting, and dedicated landing pages."
+        },
+        "3": {
+          "phase": "FUNNEL OPTIMIZATION",
+          "kpi": "Acquisition Cost Reduction",
+          "action": "Real-time bid adjustments, creative fatigue monitoring, and A/B split testing."
+        },
+        "4": {
+          "phase": "AGGRESSIVE SCALING",
+          "kpi": "Revenue Expansion",
+          "action": "Doubling ad spend on top-performing segments to capture maximum market share."
+        }
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Full-stack digital marketing solutions tailored for Bangladeshi businesses."
+    },
+    "testimonials": {
+      "title": "What Clients Say",
+      "subtitle": "Real reviews from our Facebook community.",
+      "items": {
+        "review1": {
+          "name": "Rahim Uddin",
+          "text": "Marketivity transformed our social media presence. Our engagement tripled in just 3 months!",
+          "rating": 5
+        },
+        "review2": {
+          "name": "Fatima Akter",
+          "text": "Professional team, transparent reporting, and real results. Highly recommended for any business in Rajshahi.",
+          "rating": 5
+        },
+        "review3": {
+          "name": "Karim Hassan",
+          "text": "Their Facebook ads strategy brought us 200+ qualified leads. Best investment we made this year.",
+          "rating": 5
+        },
+        "review4": {
+          "name": "Nusrat Jahan",
+          "text": "From branding to content — Marketivity handled everything. Our brand looks premium now.",
+          "rating": 5
+        }
+      }
+    },
+    "caseStudy": {
+      "badge": "Real Results",
+      "title": "Case Studies",
+      "subtitle": "Real campaigns. Real businesses. Real growth across Bangladesh.",
+      "before": "Before",
+      "after": "After",
+      "duration": "Campaign Duration",
+      "learnMore": "Explore",
+      "disclaimer": "* Results are from real client campaigns managed by Marketivity. Client names may be anonymized on request.",
+      "placeholder": "Detailed case studies coming soon. Stay tuned for success stories from our clients."
+    },
+    "footerCta": {
+      "badge": "START THE GROWTH ENGINE",
+      "title": "Let's Build Something Great",
+      "subtitle": "Partner with Rajshahi's top-rated digital marketing agency to turn clicks into customers.",
+      "cta": "Start Your Project",
+      "whatsapp": "Direct WhatsApp Chat",
+      "metaRecommended": "100% Meta Recommended Agency",
+      "monthlyReporting": "Transparent Monthly Reporting",
+      "acceptingClients": "Accepting Q1/Q2 Growth Retainers"
+    }
+  },
+  "services": {
+    "includedTitle": "What's Included",
+    "otherServices": "Other Services",
+    "seo": {
+      "title": "SEO Services",
+      "shortDescription": "Rank higher on Google and drive organic traffic that converts.",
+      "price": "15,000",
+      "priceUnit": "month",
+      "heroSubtitle": "Dominate search results and attract customers who are actively looking for your products.",
+      "features": {
+        "0": "Keyword research & competitor analysis",
+        "1": "On-page & technical SEO optimization",
+        "2": "Local SEO for Rajshahi & Bangladesh",
+        "3": "Monthly ranking & traffic reports",
+        "4": "Content optimization strategy",
+        "5": "Google Business Profile management"
+      },
+      "benefits": {
+        "title": "Why SEO Matters",
+        "description": "Organic search drives 53% of all website traffic. With proper SEO, your business becomes discoverable 24/7 without paying for every click."
+      },
+      "process": {
+        "title": "Our SEO Approach",
+        "steps": {
+          "0": "Comprehensive site audit",
+          "1": "Keyword & content strategy",
+          "2": "On-page optimization",
+          "3": "Link building & authority",
+          "4": "Monthly performance review"
+        }
+      },
+      "cta": "Boost Your Rankings"
+    },
+    "socialMedia": {
+      "title": "Social Media Marketing",
+      "shortDescription": "Build engaged communities and grow your brand on every platform.",
+      "price": "12,000",
+      "priceUnit": "month",
+      "heroSubtitle": "Turn followers into loyal customers with strategic social media management.",
+      "features": {
+        "0": "Content calendar & creative design",
+        "1": "Facebook & Instagram management",
+        "2": "Community engagement & moderation",
+        "3": "Influencer collaboration",
+        "4": "Analytics & growth reporting",
+        "5": "Trend-based content strategy"
+      },
+      "benefits": {
+        "title": "Social Media Impact",
+        "description": "4.9 billion people use social media worldwide. A strong presence builds trust, drives traffic, and creates direct sales channels."
+      },
+      "process": {
+        "title": "Our Social Media Process",
+        "steps": {
+          "0": "Brand voice & audience research",
+          "1": "Content strategy & calendar",
+          "2": "Creative production",
+          "3": "Publishing & engagement",
+          "4": "Analytics & optimization"
+        }
+      },
+      "cta": "Grow Your Following"
+    },
+    "paidAds": {
+      "title": "Paid Advertising",
+      "shortDescription": "Facebook, Instagram & Google Ads that deliver measurable ROI.",
+      "price": "10,000",
+      "priceUnit": "month",
+      "heroSubtitle": "As a Facebook Recommended agency, we maximize every taka of your ad spend.",
+      "features": {
+        "0": "Facebook & Instagram ad campaigns",
+        "1": "Google Ads setup & management",
+        "2": "Audience targeting & retargeting",
+        "3": "A/B testing & creative optimization",
+        "4": "Conversion tracking setup",
+        "5": "Weekly performance reports"
+      },
+      "benefits": {
+        "title": "Why Paid Ads Work",
+        "description": "Paid advertising delivers immediate visibility and precise targeting. Reach your ideal customers at the exact moment they're ready to buy."
+      },
+      "process": {
+        "title": "Our Ads Process",
+        "steps": {
+          "0": "Goal setting & budget planning",
+          "1": "Audience & creative development",
+          "2": "Campaign launch & monitoring",
+          "3": "A/B testing & optimization",
+          "4": "ROI analysis & scaling"
+        }
+      },
+      "cta": "Launch Your Campaign"
+    },
+    "contentMarketing": {
+      "title": "Content Marketing",
+      "shortDescription": "Compelling content that educates, engages, and converts.",
+      "price": "8,000",
+      "priceUnit": "month",
+      "heroSubtitle": "Stories that resonate with your audience and build lasting brand authority.",
+      "features": {
+        "0": "Blog posts & articles",
+        "1": "Social media copywriting",
+        "2": "Email newsletter content",
+        "3": "Video scripts & captions",
+        "4": "Infographic design briefs",
+        "5": "Content calendar management"
+      },
+      "benefits": {
+        "title": "Content is King",
+        "description": "Quality content builds trust, improves SEO, and nurtures leads through the buyer journey. It's the foundation of every successful digital strategy."
+      },
+      "process": {
+        "title": "Our Content Process",
+        "steps": {
+          "0": "Audience & topic research",
+          "1": "Content strategy & planning",
+          "2": "Writing & design production",
+          "3": "Distribution across channels",
+          "4": "Performance measurement"
+        }
+      },
+      "cta": "Start Creating"
+    },
+    "branding": {
+      "title": "Branding & Identity",
+      "shortDescription": "Memorable brand identities that stand out in the market.",
+      "price": "25,000",
+      "priceUnit": "project",
+      "heroSubtitle": "From logo to brand guidelines — we craft identities that tell your story.",
+      "features": {
+        "0": "Logo design & variations",
+        "1": "Brand color palette & typography",
+        "2": "Business card & stationery design",
+        "3": "Social media brand kit",
+        "4": "Brand guidelines document",
+        "5": "Packaging design consultation"
+      },
+      "benefits": {
+        "title": "The Power of Branding",
+        "description": "Strong branding increases recognition, builds customer loyalty, and allows you to charge premium prices. It's your business's most valuable asset."
+      },
+      "process": {
+        "title": "Our Branding Process",
+        "steps": {
+          "0": "Brand discovery workshop",
+          "1": "Concept development",
+          "2": "Design refinement",
+          "3": "Brand guidelines creation",
+          "4": "Asset delivery & handoff"
+        }
+      },
+      "cta": "Build Your Brand"
+    }
+  },
+  "about": {
+    "title": "About Marketivity",
+    "subtitle": "Your partners in digital growth, based in the heart of Rajshahi.",
+    "story": {
+      "title": "Our Story",
+      "p1": "Founded in Rajshahi, Marketivity was born from a simple belief: every Bangladeshi business deserves world-class digital marketing. We started with a mission to help local brands compete on the global stage.",
+      "p2": "Today, we're proud to be a Facebook 100% Recommended agency, serving 20+ clients across Bangladesh with data-driven strategies and creative excellence."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To empower businesses with digital strategies that drive real, measurable growth — making premium marketing accessible to every entrepreneur in Bangladesh."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To become Bangladesh's most trusted digital marketing partner, known for transparency, results, and innovation."
+    },
+    "values": {
+      "title": "Our Values",
+      "items": {
+        "integrity": { "title": "Integrity", "description": "Honest reporting and ethical marketing practices." },
+        "excellence": { "title": "Excellence", "description": "We never settle for average — only outstanding results." },
+        "innovation": { "title": "Innovation", "description": "Staying ahead with the latest tools and strategies." },
+        "partnership": { "title": "Partnership", "description": "Your success is our success. We grow together." }
+      }
+    },
+    "team": {
+      "title": "Meet the Team",
+      "subtitle": "Passionate marketers dedicated to your growth."
+    },
+    "stats": {
+      "title": "By the Numbers"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a project in mind? We'd love to hear from you.",
+    "form": {
+      "title": "Send us a message",
+      "success": "Your message is on its way! We'll be in touch within 24 hours.",
+      "successTitle": "Message Sent!",
+      "sendAnother": "Send another message",
+      "serviceLabel": "Interested in",
+      "servicePlaceholder": "Select a service...",
+      "options": {
+        "seo": "SEO Services",
+        "social": "Social Media Marketing",
+        "ads": "Paid Advertising",
+        "content": "Content Marketing",
+        "branding": "Branding & Identity",
+        "full": "Full Package",
+        "other": "Other"
+      },
+      "sending": "Sending...",
+      "privacyNote": "We respect your privacy. Your information is never shared.",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "subjectPlaceholder": "How can we help?",
+      "messagePlaceholder": "Tell us about your project..."
+    },
+    "info": {
+      "title": "Contact Information",
+      "hours": "Business Hours",
+      "hoursValue": "Sat – Thu: 10:00 AM – 7:00 PM",
+      "response": "We typically respond within 24 hours."
+    }
+  },
+  "careers": {
+    "title": "Join Our Team",
+    "subtitle": "Build your career at one of Bangladesh's top digital marketing agencies.",
+    "culture": {
+      "title": "Why Work With Us",
+      "items": {
+        "growth": { "title": "Career Growth", "description": "Learn from industry experts and grow your skills." },
+        "impact": { "title": "Real Impact", "description": "Work on campaigns that transform businesses." },
+        "culture": { "title": "Great Culture", "description": "Collaborative, creative, and supportive team environment." },
+        "flexible": { "title": "Flexible Work", "description": "Hybrid options and a healthy work-life balance." }
+      }
+    },
+    "openings": {
+      "title": "Open Positions",
+      "subtitle": "We're always looking for talented people.",
+      "positions": {
+        "socialMedia": {
+          "title": "Social Media Manager",
+          "type": "Full-time",
+          "location": "Rajshahi"
+        },
+        "graphicDesigner": {
+          "title": "Graphic Designer",
+          "type": "Full-time",
+          "location": "Rajshahi"
+        },
+        "contentWriter": {
+          "title": "Content Writer",
+          "type": "Part-time",
+          "location": "Remote"
+        }
+      },
+      "noMatch": "Don't see a fit? Send your CV to marketivitybd@gmail.com"
+    }
+  },
+  "pricing": {
+    "title": "Transparent Pricing",
+    "subtitle": "Quality digital marketing that fits your budget. Full tier packages coming soon.",
+    "note": "Prices shown are starting rates. Custom packages available based on your goals and scale.",
+    "tiersComing": "Detailed pricing tiers with feature comparisons coming soon.",
+    "cta": "Get a Custom Quote"
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "A showcase of brands we've helped grow across Bangladesh.",
+    "featuredBadge": "FEATURED CLIENT GROWTH STORIES",
+    "featuredTitle": "Measurable Case Studies",
+    "ctaSubtitle": "Ready to be our next success story? Let's discuss your custom growth strategy.",
+    "comingSoon": "Portfolio case studies are coming soon. Check back for detailed project showcases.",
+    "categories": {
+      "all": "All",
+      "social": "Social Media",
+      "ads": "Paid Ads",
+      "branding": "Branding",
+      "seo": "SEO"
+    }
+  },
+  "blog": {
+    "title": "Insights & Tips",
+    "subtitle": "Digital marketing knowledge from our team.",
+    "readTime": "min read",
+    "posts": {
+      "digital-marketing-trends-bangladesh-2026": {
+        "title": "Digital Marketing Trends in Bangladesh 2026",
+        "excerpt": "Discover the top digital marketing trends shaping Bangladesh's business landscape this year.",
+        "content": {
+          "p1": "Bangladesh's digital economy is growing faster than ever. With over 130 million internet users, businesses that embrace digital marketing are pulling ahead of the competition.",
+          "p2": "Video content continues to dominate, especially short-form videos on Facebook and Instagram. Brands that invest in authentic, engaging video content see 3x higher engagement rates.",
+          "p3": "AI-powered marketing tools are becoming accessible to small businesses. From chatbots to automated ad optimization, AI is leveling the playing field.",
+          "p4": "Local SEO is more important than ever for Rajshahi businesses. Optimizing for 'near me' searches and Google Business Profile can drive significant foot traffic.",
+          "p5": "At Marketivity, we help businesses navigate these trends with strategies tailored for the Bangladesh market. Contact us for a free consultation."
+        }
+      },
+      "facebook-ads-roi-tips": {
+        "title": "5 Tips to Maximize Your Facebook Ads ROI",
+        "excerpt": "Learn how to get more results from every taka you spend on Facebook advertising.",
+        "content": {
+          "p1": "Facebook advertising remains one of the most cost-effective ways to reach customers in Bangladesh. But without the right strategy, ad spend can disappear without results.",
+          "p2": "Tip 1: Define clear conversion goals before launching. Whether it's leads, sales, or app installs, your campaign structure should match your objective.",
+          "p3": "Tip 2: Use lookalike audiences based on your best customers. This helps Facebook find people similar to those who already love your brand.",
+          "p4": "Tip 3: Test multiple ad creatives. Run at least 3-5 variations and let the data tell you which performs best.",
+          "p5": "Tip 4: Set up proper conversion tracking (Pixel & APIs). Without measuring actions, you cannot optimize or scale your campaigns effectively.",
+          "p6": "Tip 5: Work with a Facebook Recommended partner like Marketivity for expert campaign management and optimization."
+        }
+      },
+      "seo-local-business-rajshahi": {
+        "title": "SEO Guide for Local Businesses in Rajshahi",
+        "excerpt": "A practical guide to getting your Rajshahi business found on Google.",
+        "content": {
+          "p1": "If you run a business in Rajshahi, local SEO should be your top priority. When someone searches 'best restaurant Rajshahi' or 'digital marketing agency near me', you want to appear at the top.",
+          "p2": "Start by claiming and optimizing your Google Business Profile. Add accurate business hours, photos, and encourage customers to leave reviews.",
+          "p3": "Create location-specific content on your website. Mention Rajshahi neighborhoods, landmarks, and local events to build geographic relevance.",
+          "p4": "Build local citations by listing your business on Bangladeshi directories and ensuring your NAP (Name, Address, Phone) is consistent everywhere.",
+          "p5": "Marketivity specializes in local SEO for Rajshahi businesses. Our starting package at ৳15,000/month includes full Google Business Profile management."
+        }
+      }
+    }
+  },
+  "footer": {
+    "description": "Premium digital marketing agency helping Bangladeshi businesses grow online.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contact": "Contact",
+    "engineered": "Engineered for measurable digital growth.",
+    "newsletter": {
+      "title": "Stay Updated",
+      "placeholder": "Your email",
+      "button": "Subscribe"
+    }
+  },
+  "facebookBadge": {
+    "recommended": "100% Recommended",
+    "onFacebook": "on Facebook"
+  }
+}
