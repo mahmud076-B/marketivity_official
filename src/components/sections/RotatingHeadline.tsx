@@ -1,8 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { motion as motionTokens } from "@/lib/design-tokens";
 
 type RotatingHeadlineProps = {
   words: string[];
@@ -18,25 +17,32 @@ export default function RotatingHeadline({
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(timer);
   }, [words.length]);
 
+  const longestWord = [...words].sort((a, b) => b.length - a.length)[0];
+
   return (
     <span
-      className={`relative inline-flex overflow-hidden align-bottom ${className}`}
+      className={`relative inline-grid overflow-hidden align-bottom ${className}`}
     >
+      <span className="invisible col-start-1 row-start-1 font-bold pb-2 pt-1 px-1">
+        {longestWord}
+      </span>
+
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          initial={{ y: 40, opacity: 0 }}
+          initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -40, opacity: 0 }}
+          exit={{ y: -15, opacity: 0 }}
           transition={{ 
-            duration: motionTokens.duration.normal,
-            ease: motionTokens.ease.inOut 
+            duration: 0.3,
+            ease: "easeOut" 
           }}
-          className="font-bold"
+          className={`text-gradient col-start-1 row-start-1 font-bold pb-2 pt-1 px-1 ${className}`}
+          style={{ backgroundSize: "200% 200%" }}
         >
           {words[index]}
         </motion.span>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Compass, BarChart2, Eye, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 
 type PillarItem = {
@@ -56,15 +57,27 @@ export default function WhyMarketivity({
             const isOrange = pillar.color === "orange";
 
             return (
-              <SpotlightCard
+              <motion.div
                 key={i}
-                spotlightColor={
-                  isOrange
-                    ? "rgba(247, 147, 30, 0.18)"
-                    : "rgba(111, 66, 193, 0.18)"
-                }
-                className="p-6 sm:p-7 hover:-translate-y-1"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.35 }}
+                transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -5 }}
+                className="h-full"
               >
+                <SpotlightCard
+                  spotlightColor={
+                    isOrange
+                      ? "rgba(247, 147, 30, 0.22)"
+                      : "rgba(111, 66, 193, 0.22)"
+                  }
+                  className={`h-full p-6 sm:p-7 shadow-soft-md transition-shadow hover:shadow-soft-lg ${
+                    isOrange
+                      ? "bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10 border-brand-orange/20"
+                      : "bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10 border-brand-purple/20"
+                  }`}
+                >
                 <div
                   className={`mb-4 sm:mb-5 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl transition-all duration-300 ${
                     isOrange
@@ -81,7 +94,8 @@ export default function WhyMarketivity({
                 <p className="text-sm leading-relaxed text-brand-charcoal/70">
                   {pillar.description}
                 </p>
-              </SpotlightCard>
+                </SpotlightCard>
+              </motion.div>
             );
           })}
         </div>

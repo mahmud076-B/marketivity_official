@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Search, Compass, Palette, TrendingUp, Rocket, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -29,16 +29,23 @@ export default function ProcessSteps({ steps }: ProcessStepsProps) {
           const isActive = activeStep === i;
 
           return (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setActiveStep(i)}
-              className={`relative flex sm:flex-col items-center sm:text-center rounded-2xl p-4 sm:p-5 border text-left transition-all duration-300 ${
-                isActive
-                  ? "bg-white border-brand-orange shadow-soft-md scale-[1.01] sm:scale-[1.03] ring-2 ring-brand-orange/20"
-                  : "bg-white/70 border-brand-charcoal/8 hover:bg-white hover:border-brand-charcoal/20 opacity-80 hover:opacity-100"
-              }`}
-            >
+            <Fragment key={i}>
+              <motion.button
+                type="button"
+                onClick={() => setActiveStep(i)}
+                initial={{ opacity: 0, y: 28, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.35 }}
+                whileHover={{ y: -4, scale: isActive ? 1.04 : 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: i * 0.045 }}
+                style={{ willChange: "transform, opacity" }}
+                className={`relative flex transform-gpu sm:flex-col items-center sm:text-center rounded-2xl p-4 sm:p-5 border text-left transition-shadow duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-br from-white via-brand-orange/10 to-brand-purple/10 border-brand-orange shadow-glow-orange scale-[1.01] sm:scale-[1.03] ring-2 ring-brand-orange/20"
+                    : "bg-white/85 border-brand-charcoal/12 shadow-soft-sm hover:bg-white hover:border-brand-purple/30 hover:shadow-soft-md opacity-90 hover:opacity-100"
+                }`}
+              >
               {/* Step Badge */}
               <div className="relative mr-3.5 sm:mr-0 sm:mb-3.5 shrink-0">
                 <div
@@ -75,7 +82,34 @@ export default function ProcessSteps({ steps }: ProcessStepsProps) {
               {isActive && (
                 <div className="hidden sm:block absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-1 rounded-full bg-brand-orange" />
               )}
-            </button>
+              </motion.button>
+
+              {isActive && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="sm:hidden rounded-3xl border border-brand-orange/30 bg-gradient-to-br from-white via-brand-orange/10 to-brand-purple/10 p-5 shadow-soft-lg"
+                >
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-purple">
+                    {t("stagePrefix")}{activeStep + 1} • {t(`details.${activeStep}.phase`)}
+                  </span>
+                  <h4 className="mt-1 text-base font-extrabold text-brand-charcoal">
+                    {steps[activeStep]?.title}
+                  </h4>
+                  <p className="mt-1 text-xs leading-relaxed text-brand-charcoal/70">
+                    {t(`details.${activeStep}.action`)}
+                  </p>
+                  <div className="mt-4 border-t border-brand-charcoal/8 pt-3">
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/50">
+                      {t("primaryKpi")}
+                    </span>
+                    <span className="text-xs font-black text-brand-orange">
+                      {t(`details.${activeStep}.kpi`)}
+                    </span>
+                  </div>
+                </motion.div>
+              )}
+            </Fragment>
           );
         })}
       </div>
@@ -88,7 +122,7 @@ export default function ProcessSteps({ steps }: ProcessStepsProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="rounded-3xl border border-brand-charcoal/10 bg-gradient-to-r from-white via-white to-brand-offwhite p-5 sm:p-6 md:p-8 shadow-soft-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6"
+          className="hidden sm:flex rounded-3xl border border-brand-orange/30 bg-gradient-to-br from-white via-brand-orange/10 to-brand-purple/10 p-5 sm:p-6 md:p-8 shadow-soft-lg flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6"
         >
           <div className="flex items-start sm:items-center gap-3.5 sm:gap-4">
             <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple shrink-0 mt-0.5 sm:mt-0">

@@ -92,7 +92,7 @@ export default async function HomePage({ params }: Props) {
         <div className="mx-auto max-w-7xl relative z-10">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Content Column */}
-            <ScrollReveal direction="up" className="lg:col-span-6 text-center lg:text-left">
+            <ScrollReveal direction="up" className="w-full min-w-0 lg:col-span-6 text-center lg:text-left">
               <div className="mb-5 flex justify-center lg:justify-start">
                 <FacebookBadge
                   recommended={tfb("recommended")}
@@ -109,8 +109,8 @@ export default async function HomePage({ params }: Props) {
 
               <h1 className="mb-5 font-display text-4xl font-extrabold leading-[1.12] text-brand-charcoal sm:text-5xl md:text-6xl">
                 {t("hero.title")}{" "}
-                <span className="block mt-1 sm:inline sm:mt-0">
-                  <GradientText className="text-4xl sm:text-5xl md:text-6xl">
+                <span className="block mt-2">
+                  <GradientText className="text-4xl sm:text-5xl md:text-6xl pb-2">
                     <RotatingHeadline
                       words={rotatingWords}
                       className="text-4xl sm:text-5xl md:text-6xl"
@@ -141,7 +141,7 @@ export default async function HomePage({ params }: Props) {
             </ScrollReveal>
 
             {/* Right Interactive 3D Growth Core & Digital Lab */}
-            <ScrollReveal direction="right" delay={0.2} className="lg:col-span-6">
+            <ScrollReveal direction="right" delay={0.2} className="w-full min-w-0 lg:col-span-6">
               <DigitalGrowthEngine />
             </ScrollReveal>
           </div>
@@ -166,20 +166,17 @@ export default async function HomePage({ params }: Props) {
       </ScrollReveal>
 
       {/* ── 04. CENTERPIECE: DIGITAL GROWTH ECOSYSTEM ───────────────── */}
-      <ScrollReveal direction="up">
-        <GrowthEcosystem
-          eyebrow={t("ecosystem.eyebrow")}
-          title={t("ecosystem.title")}
-          subtitle={t("ecosystem.subtitle")}
-        />
-      </ScrollReveal>
+      <GrowthEcosystem
+        eyebrow={t("ecosystem.eyebrow")}
+        title={t("ecosystem.title")}
+        subtitle={t("ecosystem.subtitle")}
+      />
 
       {/* ── 05. CLIENT TRUST MARQUEE ─────────────────────────────────── */}
       <LogoMarquee />
 
       {/* ── 06. 5-STEP PROCESS SECTION (HOW WE GROW) ─────────────────── */}
-      <ScrollReveal direction="up">
-        <section className="safe-px py-16 sm:py-20 md:py-28 bg-brand-offwhite">
+      <section className="safe-px py-16 sm:py-20 md:py-28 bg-brand-offwhite">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
               <span className="inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-3">
@@ -194,36 +191,30 @@ export default async function HomePage({ params }: Props) {
             </div>
             <ProcessSteps steps={processSteps} />
           </div>
-        </section>
-      </ScrollReveal>
+      </section>
 
       {/* ── 07. INTERACTIVE SERVICE CONSTELLATION ───────────────────── */}
-      <ScrollReveal direction="up">
-        <ServiceConstellation
-          title={t("services.title")}
-          subtitle={t("services.subtitle")}
-          currency={tc("currency")}
-          startingAt={tc("startingAt")}
-          perMonth={tc("perMonth")}
-          perProject={tc("perProject")}
-          learnMore={tc("learnMore")}
-          servicesData={servicesData}
-        />
-      </ScrollReveal>
+      <ServiceConstellation
+        title={t("services.title")}
+        subtitle={t("services.subtitle")}
+        currency={tc("currency")}
+        startingAt={tc("startingAt")}
+        perMonth={tc("perMonth")}
+        perProject={tc("perProject")}
+        learnMore={tc("learnMore")}
+        servicesData={servicesData}
+      />
 
       {/* ── 08. WHY MARKETIVITY 4 PILLARS ────────────────────────────── */}
-      <ScrollReveal direction="up">
-        <WhyMarketivity
-          eyebrow={t("valueProp.eyebrow")}
-          title={t("valueProp.title")}
-          subtitle={t("valueProp.subtitle")}
-          items={valuePropItems}
-        />
-      </ScrollReveal>
+      <WhyMarketivity
+        eyebrow={t("valueProp.eyebrow")}
+        title={t("valueProp.title")}
+        subtitle={t("valueProp.subtitle")}
+        items={valuePropItems}
+      />
 
       {/* ── 09. REAL VERIFIED CASE STUDIES ──────────────────────────── */}
-      <ScrollReveal direction="up">
-        <section className="safe-px py-20 md:py-28 bg-brand-offwhite">
+      <section className="safe-px py-20 md:py-28 bg-brand-offwhite">
           <div className="mx-auto max-w-7xl">
             <div className="mb-14 text-center max-w-3xl mx-auto">
               <span className="mb-3 inline-block rounded-full bg-brand-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-orange">
@@ -257,12 +248,10 @@ export default async function HomePage({ params }: Props) {
               </p>
             </div>
           </div>
-        </section>
-      </ScrollReveal>
+      </section>
 
       {/* ── 10. TESTIMONIALS & SOCIAL PROOF ─────────────────────────── */}
-      <ScrollReveal direction="up">
-        <section className="safe-px py-20 md:py-28 bg-white">
+      <section className="safe-px py-20 md:py-28 bg-white">
           <div className="mx-auto max-w-7xl">
             <div className="mb-14 text-center max-w-3xl mx-auto">
               <span className="inline-block rounded-full bg-brand-purple/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-purple mb-3">
@@ -281,8 +270,7 @@ export default async function HomePage({ params }: Props) {
               badgeOnFacebook={tfb("onFacebook")}
             />
           </div>
-        </section>
-      </ScrollReveal>
+      </section>
 
       {/* ── 11. FINAL HIGH IMPACT CTA ───────────────────────────────── */}
       <ScrollReveal direction="up">

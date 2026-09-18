@@ -110,11 +110,19 @@ html[lang="bn"] h4 {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 20s linear infinite;
 }
 
 .animate-marquee-reverse {
-  animation: marquee-reverse 30s linear infinite;
+  animation: marquee-reverse 90s linear infinite;
+}
+
+.animate-logo-marquee {
+  animation: marquee 24s linear infinite;
+}
+
+.animate-logo-marquee-reverse {
+  animation: marquee-reverse 24s linear infinite;
 }
 
 .animate-shine {

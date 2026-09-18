@@ -10,6 +10,7 @@ import {
 import CTASection from "@/components/sections/CTASection";
 import FacebookBadge from "@/components/ui/FacebookBadge";
 import { Check, ArrowRight } from "lucide-react";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -84,7 +85,8 @@ export default async function ServicePage({ params }: Props) {
               {ts(`${key}.benefits.description`)}
             </p>
           </div>
-          <div className="rounded-2xl border border-brand-charcoal/10 bg-white p-8 shadow-sm">
+          <ScrollReveal direction="up" delay={0.08}>
+          <div className="rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm">
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {ts("includedTitle")}
             </h2>
@@ -97,6 +99,7 @@ export default async function ServicePage({ params }: Props) {
               ))}
             </ul>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -107,12 +110,14 @@ export default async function ServicePage({ params }: Props) {
           </h2>
           <div className="space-y-6">
             {steps.map((step, i) => (
-              <div key={i} className="flex items-start gap-4">
+              <ScrollReveal key={i} direction="up" delay={i * 0.07}>
+              <div className="flex items-start gap-4 rounded-2xl border border-brand-orange/15 bg-white/65 p-4 shadow-soft-sm backdrop-blur-sm">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-purple text-sm font-bold text-white">
                   {i + 1}
                 </span>
                 <p className="pt-2 text-brand-charcoal/80">{step}</p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

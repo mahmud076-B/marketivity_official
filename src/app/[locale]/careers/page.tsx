@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Briefcase, TrendingUp, Users, Clock } from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -38,10 +39,8 @@ export default async function CareersPage({ params }: Props) {
             {cultureKeys.map((key, i) => {
               const Icon = cultureIcons[i];
               return (
-                <div
-                  key={key}
-                  className="rounded-2xl border border-brand-charcoal/10 p-6 text-center"
-                >
+                <ScrollReveal key={key} direction="up" delay={i * 0.07}>
+                <div className="rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-purple/10 p-6 text-center shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
                   <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
                     <Icon className="h-6 w-6" />
                   </div>
@@ -52,6 +51,7 @@ export default async function CareersPage({ params }: Props) {
                     {t(`culture.items.${key}.description`)}
                   </p>
                 </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -67,11 +67,9 @@ export default async function CareersPage({ params }: Props) {
             <p className="text-brand-charcoal/70">{t("openings.subtitle")}</p>
           </div>
           <div className="space-y-4">
-            {positionKeys.map((key) => (
-              <div
-                key={key}
-                className="flex flex-col gap-4 rounded-2xl border border-brand-charcoal/10 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between"
-              >
+            {positionKeys.map((key, index) => (
+              <ScrollReveal key={key} direction="up" delay={index * 0.08}>
+              <div className="flex flex-col gap-4 rounded-2xl border border-brand-purple/25 bg-gradient-to-r from-white via-brand-purple/5 to-brand-orange/10 p-6 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h3 className="text-lg font-bold text-brand-charcoal">
                     {t(`openings.positions.${key}.title`)}
@@ -88,6 +86,7 @@ export default async function CareersPage({ params }: Props) {
                   {tc("applyNow")}
                 </a>
               </div>
+              </ScrollReveal>
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-brand-charcoal/60">

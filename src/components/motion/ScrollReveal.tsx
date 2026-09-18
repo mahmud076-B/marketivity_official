@@ -20,7 +20,7 @@ export default function ScrollReveal({
   delay = 0,
   duration = motionTokens.duration.normal,
   direction = "up",
-  once = true,
+  once = false,
   viewportMargin = "-60px",
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,8 +31,8 @@ export default function ScrollReveal({
 
   const variants = {
     up: {
-      hidden: { opacity: 0, y: 28 },
-      visible: { opacity: 1, y: 0 },
+      hidden: { opacity: 0, y: 46, scale: 0.92, rotateX: 5 },
+      visible: { opacity: 1, y: 0, scale: 1, rotateX: 0 },
     },
     down: {
       hidden: { opacity: 0, y: -28 },
@@ -65,11 +65,15 @@ export default function ScrollReveal({
       animate={isInView ? "visible" : "hidden"}
       variants={currentVariant}
       transition={{
-        duration,
+        type: "spring",
+        stiffness: 110,
+        damping: 20,
+        mass: 0.7,
+        visualDuration: duration,
         delay,
-        ease: motionTokens.ease.out,
       }}
-      className={className}
+      style={{ willChange: "transform, opacity" }}
+      className={`transform-gpu ${className}`}
     >
       {children}
     </motion.div>

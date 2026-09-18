@@ -5,6 +5,7 @@ import StatsMarquee from "@/components/sections/StatsMarquee";
 import { createStatItems } from "@/lib/stats";
 import CTASection from "@/components/sections/CTASection";
 import FacebookBadge from "@/components/ui/FacebookBadge";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 const teamMembersEn = [
   {
@@ -121,7 +122,8 @@ export default async function AboutPage({ params }: Props) {
 
       <section className="safe-px bg-white py-16">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-brand-charcoal/10 p-8">
+          <ScrollReveal direction="up" delay={0} className="h-full">
+          <div className="h-full rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
             <h2 className="mb-4 text-2xl font-bold text-brand-orange">
               {t("mission.title")}
             </h2>
@@ -129,7 +131,9 @@ export default async function AboutPage({ params }: Props) {
               {t("mission.description")}
             </p>
           </div>
-          <div className="rounded-2xl border border-brand-charcoal/10 p-8">
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.08} className="h-full">
+          <div className="h-full rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
             <h2 className="mb-4 text-2xl font-bold text-brand-purple">
               {t("vision.title")}
             </h2>
@@ -137,6 +141,7 @@ export default async function AboutPage({ params }: Props) {
               {t("vision.description")}
             </p>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -146,10 +151,14 @@ export default async function AboutPage({ params }: Props) {
             {t("values.title")}
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {valueKeys.map((key) => (
+            {valueKeys.map((key, index) => (
+              <ScrollReveal key={key} direction="up" delay={index * 0.07} className="h-full">
               <div
-                key={key}
-                className="rounded-2xl border border-brand-charcoal/10 bg-white p-6 text-center shadow-sm"
+                className={`h-full rounded-2xl border p-6 text-center shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg ${
+                  index % 2 === 0
+                    ? "border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10"
+                    : "border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10"
+                }`}
               >
                 <h3 className="mb-2 font-bold text-brand-charcoal">
                   {t(`values.items.${key}.title`)}
@@ -158,6 +167,7 @@ export default async function AboutPage({ params }: Props) {
                   {t(`values.items.${key}.description`)}
                 </p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -172,9 +182,10 @@ export default async function AboutPage({ params }: Props) {
             <p className="text-brand-charcoal/70">{t("team.subtitle")}</p>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {members.map((member) => (
-              <div key={member.name} className="text-center">
-                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[200px] overflow-hidden rounded-2xl">
+            {members.map((member, index) => (
+              <ScrollReveal key={member.name} direction="up" delay={index * 0.07}>
+              <div className="rounded-2xl border border-brand-charcoal/10 bg-white/70 p-4 text-center shadow-soft-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-brand-purple/30 hover:shadow-soft-lg">
+                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[200px] overflow-hidden rounded-2xl border border-white/70 shadow-soft-md">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -186,6 +197,7 @@ export default async function AboutPage({ params }: Props) {
                 <h3 className="font-bold text-brand-charcoal">{member.name}</h3>
                 <p className="text-sm text-brand-charcoal/60">{member.role}</p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

@@ -23,9 +23,9 @@ export default async function Footer() {
   ];
 
   return (
-    <footer className="relative bg-brand-charcoal text-white safe-pb overflow-hidden">
+    <footer className="relative bg-brand-offwhite text-brand-charcoal safe-pb overflow-hidden">
       {/* Subtle Top Border Gradient */}
-      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-brand-orange/40 to-transparent" />
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-brand-orange/50 to-transparent" />
       
       {/* Background Soft Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-brand-purple/10 blur-3xl pointer-events-none" />
@@ -35,14 +35,14 @@ export default async function Footer() {
           {/* Brand Info */}
           <div>
             <Image
-              src="/logo/marketivity-logo.png"
+              src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
               alt={tc("brand")}
-              width={160}
-              height={44}
-              className="mb-4 h-9 w-auto brightness-0 invert"
+              width={45}
+              height={39}
+              className="mb-4 h-9 w-auto object-contain"
             />
             <p className="mb-2 text-sm font-semibold text-brand-orange">{tc("tagline")}</p>
-            <p className="mb-5 text-sm leading-relaxed text-white/65">
+            <p className="mb-5 text-sm leading-relaxed text-brand-charcoal/65">
               {t("description")}
             </p>
             <FacebookBadge
@@ -54,13 +54,13 @@ export default async function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-4 text-base font-bold text-white tracking-wide">{t("quickLinks")}</h3>
+            <h3 className="mb-4 text-base font-bold text-brand-charcoal tracking-wide">{t("quickLinks")}</h3>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 transition-colors hover:text-brand-orange"
+                    className="text-sm text-brand-charcoal/70 transition-colors hover:text-brand-orange"
                   >
                     {link.label}
                   </Link>
@@ -71,13 +71,13 @@ export default async function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="mb-4 text-base font-bold text-white tracking-wide">{t("services")}</h3>
+            <h3 className="mb-4 text-base font-bold text-brand-charcoal tracking-wide">{t("services")}</h3>
             <ul className="space-y-2.5">
               {serviceSlugs.map((slug) => (
                 <li key={slug}>
                   <Link
                     href={`/services/${slug}`}
-                    className="text-sm text-white/70 transition-colors hover:text-brand-orange"
+                    className="text-sm text-brand-charcoal/70 transition-colors hover:text-brand-orange"
                   >
                     {ts(`${serviceKeys[slug]}.title`)}
                   </Link>
@@ -88,8 +88,8 @@ export default async function Footer() {
 
           {/* Contact Details */}
           <div>
-            <h3 className="mb-4 text-base font-bold text-white tracking-wide">{t("contact")}</h3>
-            <ul className="space-y-3.5 text-sm text-white/70">
+            <h3 className="mb-4 text-base font-bold text-brand-charcoal tracking-wide">{t("contact")}</h3>
+            <ul className="space-y-3.5 text-sm text-brand-charcoal/70">
               <li className="flex items-start gap-2.5">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-orange" />
                 <a
@@ -121,7 +121,7 @@ export default async function Footer() {
                 href="https://facebook.com/marketivitybd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-orange hover:text-white"
+                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-charcoal shadow-soft-sm transition-colors hover:bg-brand-orange hover:text-white"
                 aria-label="Facebook"
               >
                 <FacebookIcon className="h-5 w-5" />
@@ -130,7 +130,7 @@ export default async function Footer() {
                 href="https://instagram.com/marketivitybd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-orange hover:text-white"
+                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-charcoal shadow-soft-sm transition-colors hover:bg-brand-orange hover:text-white"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="h-5 w-5" />
@@ -149,9 +149,9 @@ export default async function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <div className="mt-12 border-t border-brand-charcoal/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-charcoal/55">
           <p>© {new Date().getFullYear()} {tc("brand")}. {tc("allRightsReserved")}</p>
-          <p className="text-white/40">{t("engineered")}</p>
+          <p className="text-brand-charcoal/45">{t("engineered")}</p>
         </div>
       </div>
     </footer>

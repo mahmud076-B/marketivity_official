@@ -55,11 +55,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="safe-px flex items-center justify-between border-b border-brand-charcoal/10 py-4 bg-white/80 backdrop-blur-md">
             <Link href="/" onClick={onClose} className="flex items-center gap-2">
               <Image
-                src="/logo/marketivity-logo.png"
+                src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
                 alt={tc("brand")}
-                width={140}
-                height={40}
-                className="h-8 w-auto"
+                width={39}
+                height={34}
+                className="h-[30px] w-auto object-contain"
               />
             </Link>
             <div className="flex items-center gap-3">

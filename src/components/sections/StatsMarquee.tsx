@@ -19,7 +19,9 @@ export default function StatsMarquee({ items }: StatsMarqueeProps) {
           >
             <span className="text-brand-orange">{item.icon}</span>
             <span className="text-xl font-bold">{item.value}</span>
-            <span className="text-sm text-white/70">{item.label}</span>
+            {item.label && (
+              <span className="text-sm text-white/70">{item.label}</span>
+            )}
             <span className="mx-4 text-brand-orange/40">•</span>
           </div>
         ))}

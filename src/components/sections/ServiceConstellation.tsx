@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -101,17 +101,24 @@ export default function ServiceConstellation({
               const Icon = serviceIcons[slug];
 
               return (
-                <button
-                  key={slug}
-                  type="button"
-                  onClick={() => setSelectedSlug(slug)}
-                  onMouseEnter={() => setSelectedSlug(slug)}
-                  className={`group relative flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-300 ${
-                    isSelected
-                      ? "bg-gradient-to-r from-brand-orange/10 via-brand-purple/5 to-white border-brand-orange shadow-soft-md scale-[1.01] sm:scale-[1.02]"
-                      : "bg-brand-offwhite/50 border-brand-charcoal/8 hover:bg-white hover:border-brand-charcoal/20 opacity-80 hover:opacity-100"
-                  }`}
-                >
+                <Fragment key={slug}>
+                  <motion.button
+                    type="button"
+                    onClick={() => setSelectedSlug(slug)}
+                    onMouseEnter={() => setSelectedSlug(slug)}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.35 }}
+                    whileHover={{ y: -4, scale: isSelected ? 1.02 : 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: serviceSlugs.indexOf(slug) * 0.05 }}
+                    style={{ willChange: "transform, opacity" }}
+                    className={`group relative flex transform-gpu items-center justify-between p-3.5 sm:p-4 rounded-2xl border text-left transition-shadow duration-300 ${
+                      isSelected
+                        ? "bg-gradient-to-r from-brand-orange/10 via-brand-purple/5 to-white border-brand-orange shadow-soft-md scale-[1.01] sm:scale-[1.02]"
+                        : "bg-brand-offwhite/50 border-brand-charcoal/8 hover:bg-white hover:border-brand-charcoal/20 opacity-80 hover:opacity-100"
+                    }`}
+                  >
                   <div className="flex items-center gap-3 sm:gap-3.5">
                     <div
                       className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all duration-300 ${
@@ -153,13 +160,59 @@ export default function ServiceConstellation({
                       }`}
                     />
                   </div>
-                </button>
+                  </motion.button>
+
+                  {isSelected && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      layout
+                      className="lg:hidden rounded-3xl border border-brand-charcoal/10 bg-white p-5 shadow-soft-md"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-purple">
+                            {tConst("specialization")}
+                          </span>
+                          <h3 className="text-xl font-extrabold text-brand-charcoal">
+                            {item?.title || slug}
+                          </h3>
+                        </div>
+                        <p className="shrink-0 text-right text-lg font-black text-brand-orange">
+                          {currency}{item?.price}
+                          <span className="block text-[10px] font-normal text-brand-charcoal/60">
+                            {slug === "branding" ? perProject : perMonth}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="mt-4 text-sm leading-relaxed text-brand-charcoal/75">
+                        {item?.shortDescription}
+                      </p>
+                      <div className="mt-5 space-y-2">
+                        {item?.features?.map((feature, idx) => (
+                          <div key={idx} className="flex items-center gap-2 rounded-xl border border-brand-charcoal/8 p-3">
+                            <CheckCircle2 className="h-4 w-4 shrink-0 text-brand-orange" />
+                            <span className="text-xs font-semibold text-brand-charcoal">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <Link
+                        href={`/services/${slug}`}
+                        className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-charcoal px-6 py-3 text-sm font-bold text-white"
+                      >
+                        {learnMore}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </motion.div>
+                  )}
+                </Fragment>
               );
             })}
           </div>
 
           {/* Right Column: Active Service Deep Dossier Showcase */}
-          <div className="lg:col-span-7">
+          <div className="hidden lg:col-span-7 lg:block">
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedSlug}

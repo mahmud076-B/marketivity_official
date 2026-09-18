@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { serviceSlugs, serviceKeys } from "@/lib/services";
 import CTASection from "@/components/sections/CTASection";
 import { Check } from "lucide-react";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -34,10 +35,8 @@ export default async function PricingPage({ params }: Props) {
             const key = serviceKeys[slug];
             const isProject = slug === "branding";
             return (
-              <div
-                key={slug}
-                className="flex flex-col rounded-2xl border border-brand-charcoal/10 bg-white p-8 shadow-sm"
-              >
+              <ScrollReveal key={slug} direction="up" delay={serviceSlugs.indexOf(slug) * 0.07} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
                 <h2 className="mb-2 text-xl font-bold text-brand-charcoal">
                   {ts(`${key}.title`)}
                 </h2>
@@ -74,6 +73,7 @@ export default async function PricingPage({ params }: Props) {
                   {tc("learnMore")}
                 </Link>
               </div>
+              </ScrollReveal>
             );
           })}
         </div>

@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import ContactForm from "@/components/forms/ContactForm";
 import FacebookBadge from "@/components/ui/FacebookBadge";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -30,14 +31,17 @@ export default async function ContactPage({ params }: Props) {
 
       <section className="safe-px pb-16 md:pb-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
-          <div className="rounded-2xl border border-brand-charcoal/10 bg-white p-8 shadow-sm">
+          <ScrollReveal direction="up">
+          <div className="rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-purple/10 p-8 shadow-soft-md backdrop-blur-sm">
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {t("form.title")}
             </h2>
             <ContactForm />
           </div>
+          </ScrollReveal>
 
-          <div>
+          <ScrollReveal direction="up" delay={0.08}>
+          <div className="rounded-2xl border border-brand-purple/20 bg-white/65 p-8 shadow-soft-md backdrop-blur-sm">
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {t("info.title")}
             </h2>
@@ -113,6 +117,7 @@ export default async function ContactPage({ params }: Props) {
               </a>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </section>
     </>

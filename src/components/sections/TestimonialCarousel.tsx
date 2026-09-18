@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useCallback } from "react";
+import { motion } from "framer-motion";
 import FacebookBadge from "@/components/ui/FacebookBadge";
 
 type Review = {
@@ -43,11 +44,18 @@ export default function TestimonialCarousel({
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex gap-6">
           {reviews.map((review, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.35 }}
+              transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="min-w-0 shrink-0 grow-0 basis-full px-1 sm:basis-1/2 lg:basis-1/3"
             >
-              <div className="relative flex flex-col h-full rounded-3xl border border-brand-charcoal/10 bg-white/90 backdrop-blur-md p-7 shadow-soft-sm hover:shadow-soft-md transition-all duration-300">
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="relative flex flex-col h-full rounded-3xl border border-brand-orange/20 bg-gradient-to-br from-white via-brand-orange/5 to-brand-purple/5 p-7 shadow-soft-md transition-shadow duration-300 hover:shadow-soft-lg"
+              >
                 <Quote className="absolute top-6 right-6 h-8 w-8 text-brand-orange/15 pointer-events-none" />
 
                 {/* Rating Stars */}
@@ -77,8 +85,8 @@ export default function TestimonialCarousel({
                     <span className="text-[11px] text-brand-charcoal/50">Verified Facebook Client</span>
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>

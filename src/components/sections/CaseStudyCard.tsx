@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, TrendingUp, MapPin, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { CaseStudy } from "@/lib/case-studies";
@@ -54,8 +55,19 @@ export default function CaseStudyCard({
   const c = colorMap[study.color];
 
   return (
-    <div
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-brand-charcoal/10 bg-white shadow-soft-sm transition-all duration-300 hover:shadow-soft-lg hover:-translate-y-1 ${c.border}`}
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.35 }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border shadow-soft-md transition-all duration-300 hover:shadow-soft-lg ${
+        study.color === "orange"
+          ? "border-brand-orange/20 bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10"
+          : study.color === "purple"
+          ? "border-brand-purple/20 bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10"
+          : "border-emerald-200/60 bg-gradient-to-br from-white via-emerald-50/40 to-emerald-50"
+      } ${c.border}`}
     >
       {/* Top Accent Gradient Bar */}
       <div className={`h-1.5 w-full ${c.accent}`} />
@@ -93,7 +105,13 @@ export default function CaseStudyCard({
         </div>
 
         {/* Big Metric Banner */}
-        <div className="mb-4 flex items-center gap-3.5 rounded-2xl bg-brand-offwhite p-4 border border-brand-charcoal/5">
+        <div className={`mb-4 flex items-center gap-3.5 rounded-2xl p-4 border shadow-soft-sm ${
+          study.color === "orange"
+            ? "border-brand-orange/20 bg-brand-orange/10"
+            : study.color === "purple"
+            ? "border-brand-purple/20 bg-brand-purple/10"
+            : "border-emerald-200 bg-emerald-50"
+        }`}>
           <div
             className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${c.icon}`}
           >
@@ -180,6 +198,6 @@ export default function CaseStudyCard({
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -132,10 +132,13 @@
       "cta": "Get Free Audit"
     },
     "stats": {
-      "clients": "Happy Clients",
+      "clients": "Happy Customers",
       "campaigns": "Campaigns Launched",
       "recommended": "Facebook Recommended",
-      "ranking": "Top 3 in Bangladesh"
+      "ranking": "Best in Bangladesh",
+      "roas": "Average ROAS",
+      "dataDriven": "Data-Driven Marketing",
+      "growth": "Growth Strategy"
     },
     "valueProp": {
       "eyebrow": "THE MARKETIVITY STANDARD",

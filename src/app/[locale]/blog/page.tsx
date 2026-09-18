@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { blogPosts } from "@/lib/blog";
 import { Calendar } from "lucide-react";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -29,11 +30,9 @@ export default async function BlogPage({ params }: Props) {
 
       <section className="safe-px pb-16 md:pb-20">
         <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post) => (
-            <article
-              key={post.slug}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-charcoal/10 bg-white shadow-sm transition-shadow hover:shadow-md"
-            >
+          {blogPosts.map((post, index) => (
+            <ScrollReveal key={post.slug} direction="up" delay={index * 0.08} className="h-full">
+            <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-purple/20 bg-gradient-to-br from-white via-brand-purple/5 to-brand-orange/10 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
                   src={post.image}
@@ -72,6 +71,7 @@ export default async function BlogPage({ params }: Props) {
                 </Link>
               </div>
             </article>
+            </ScrollReveal>
           ))}
         </div>
       </section>

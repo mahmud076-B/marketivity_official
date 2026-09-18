@@ -44,11 +44,11 @@ export default function Header() {
           <Link href="/" className="flex shrink-0 items-center gap-2 group">
             <div className="transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/logo/marketivity-logo.png"
+                src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
                 alt={tc("brand")}
-                width={160}
-                height={44}
-                className="h-9 md:h-10 w-auto transition-opacity group-hover:opacity-95"
+                width={42}
+                height={37}
+                className="h-8 w-auto object-contain transition-opacity group-hover:opacity-95 md:h-9"
                 priority
               />
             </div>

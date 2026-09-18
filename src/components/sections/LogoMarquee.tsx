@@ -1,40 +1,34 @@
-function ClientLogoPlaceholder({ index }: { index: number }) {
-  const variants = [
-    "M12 2L2 22h20L12 2z",
-    "M4 4h16v16H4z",
-    "M12 2a10 10 0 100 20 10 10 0 000-20z",
-    "M2 12h20M12 2v20",
-    "M4 8l8-6 8 6v12H4V8z",
-    "M6 6h12v12H6z",
-  ];
-
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="h-8 w-24 text-brand-charcoal/20"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d={variants[index % variants.length]} />
-    </svg>
-  );
-}
+import Image from "next/image";
 
 export default function LogoMarquee() {
-  const logos = Array.from({ length: 12 }, (_, i) => i);
+  const logos = Array.from({ length: 18 }, (_, i) => i + 1);
   const doubled = [...logos, ...logos];
 
+  const renderTrack = (animationClass: string, keyPrefix: string) => (
+    <div className={`flex w-max items-center will-change-transform ${animationClass}`}>
+      {doubled.map((i, idx) => (
+        <div
+          key={`${keyPrefix}-${i}-${idx}`}
+          className="mx-8 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-charcoal/10 bg-white shadow-soft-sm sm:mx-12 sm:h-[84px] sm:w-[84px]"
+        >
+          <Image
+            src={`/${i}.svg`}
+            alt=""
+            width={144}
+            height={144}
+            className="h-full w-full scale-125 object-cover"
+            aria-hidden="true"
+          />
+        </div>
+      ))}
+    </div>
+  );
+
   return (
-    <section className="overflow-hidden bg-white py-10">
-      <div className="flex animate-marquee-reverse items-center">
-        {doubled.map((i, idx) => (
-          <div
-            key={idx}
-            className="mx-10 flex shrink-0 items-center justify-center opacity-60 grayscale"
-          >
-            <ClientLogoPlaceholder index={i} />
-          </div>
-        ))}
+    <section className="overflow-hidden bg-white py-8 sm:py-10">
+      <div className="space-y-4 sm:space-y-5">
+        {renderTrack("animate-logo-marquee-reverse", "top")}
+        {renderTrack("animate-logo-marquee", "bottom")}
       </div>
     </section>
   );
