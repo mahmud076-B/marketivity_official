@@ -25,9 +25,12 @@ export default function RotatingHeadline({
 
   return (
     <span
-      className={`relative inline-grid overflow-hidden align-bottom ${className}`}
+      className={`relative inline-grid max-w-full align-bottom ${className}`}
     >
-      <span className="invisible col-start-1 row-start-1 font-bold pb-2 pt-1 px-1">
+      <span
+        aria-hidden="true"
+        className="invisible col-start-1 row-start-1 block font-bold pb-2 pt-1 px-1"
+      >
         {longestWord}
       </span>
 
@@ -41,7 +44,7 @@ export default function RotatingHeadline({
             duration: 0.3,
             ease: "easeOut" 
           }}
-          className={`text-gradient col-start-1 row-start-1 font-bold pb-2 pt-1 px-1 ${className}`}
+          className={`text-gradient col-start-1 row-start-1 block font-bold pb-2 pt-1 px-1 ${className}`}
           style={{ backgroundSize: "200% 200%" }}
         >
           {words[index]}
