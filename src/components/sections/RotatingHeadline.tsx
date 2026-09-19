@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -34,7 +34,7 @@ export default function RotatingHeadline({
         {longestWord}
       </span>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.span
           key={words[index]}
           initial={{ y: 15, opacity: 0 }}
