@@ -70,9 +70,8 @@ export default async function LocaleLayout({
       className={`${plusJakarta.variable} ${inter.variable} ${hindSiliguri.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-brand-offwhite font-sans text-brand-charcoal">
+      <body className="flex min-h-full flex-col bg-brand-offwhite font-sans text-brand-charcoal">
         <NextIntlClientProvider messages={messages}>
-          <AnnouncementBar />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

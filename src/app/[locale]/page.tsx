@@ -11,7 +11,7 @@ import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
 import CTASection from "@/components/sections/CTASection";
 import FacebookBadge from "@/components/ui/FacebookBadge";
 import CaseStudyCard from "@/components/sections/CaseStudyCard";
-import DigitalGrowthEngine from "@/components/hero/DigitalGrowthEngine";
+import InteractiveGrowthFunnel from "@/components/hero/InteractiveGrowthFunnel";
 import AnimatedBackground from "@/components/motion/AnimatedBackground";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import GradientText from "@/components/motion/GradientText";
@@ -93,12 +93,6 @@ export default async function HomePage({ params }: Props) {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             {/* Left Content Column */}
             <ScrollReveal direction="up" className="w-full min-w-0 lg:col-span-6 text-center lg:text-left">
-              <div className="mb-5 flex justify-center lg:justify-start">
-                <FacebookBadge
-                  recommended={tfb("recommended")}
-                  onFacebook={tfb("onFacebook")}
-                />
-              </div>
 
               <div className="inline-flex items-center gap-2 mb-3">
                 <span className="h-2 w-2 rounded-full bg-brand-orange animate-pulse" />
@@ -140,7 +134,7 @@ export default async function HomePage({ params }: Props) {
 
             {/* Right Interactive 3D Growth Core & Digital Lab */}
             <ScrollReveal direction="right" delay={0.2} className="w-full min-w-0 lg:col-span-6">
-              <DigitalGrowthEngine />
+              <InteractiveGrowthFunnel />
             </ScrollReveal>
           </div>
         </div>

@@ -33,9 +33,9 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 safe-pt ${
+        className={`fixed w-full top-0 z-50 transition-all duration-300 safe-pt ${
           scrolled
-            ? "glass shadow-soft-md border-b border-white/40 py-2.5"
+            ? "bg-white/70 backdrop-blur-xl shadow-soft-md border-b border-white/40 py-2.5"
             : "bg-transparent py-4"
         }`}
       >
@@ -70,16 +70,8 @@ export default function Header() {
 
           {/* Right Action Cluster */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="hidden sm:block">
+            <div className="flex items-center">
               <LanguageToggle />
-            </div>
-            
-            <div className="hidden sm:inline-flex">
-              <Link href="/contact">
-                <MagneticButton className="touch-target inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-orange to-brand-orange-light px-6 py-2.5 text-sm font-bold text-white shadow-soft-md hover:shadow-glow-orange transition-all duration-300">
-                  {tc("getStarted")}
-                </MagneticButton>
-              </Link>
             </div>
 
             {/* Mobile Hamburger Button */}

@@ -50,7 +50,12 @@
   "home": {
     "hero": {
       "title": "We Grow Your",
-      "rotatingWords": ["Brand", "Revenue", "Reach", "Impact"],
+      "rotatingWords": [
+        "Brand",
+        "Revenue",
+        "Reach",
+        "Impact"
+      ],
       "subtitle": "Rajshahi's trusted digital marketing partner. We turn clicks into customers and brands into market leaders.",
       "cta": "Start Growing",
       "secondaryCta": "View Our Work"
@@ -117,13 +122,41 @@
       "subtitle": "Marketing isn't isolated tasks. It's a synchronized loop where every stage feeds the next.",
       "stageFocus": "Stage Focus",
       "stages": {
-        "0": { "label": "TRAFFIC", "sublabel": "Organic & Paid", "desc": "Capturing targeted visitors from search, social, and local directories." },
-        "1": { "label": "ATTENTION", "sublabel": "Creative Hook", "desc": "Stopping the scroll with compelling visual storytelling and brand messaging." },
-        "2": { "label": "ENGAGEMENT", "sublabel": "Active Interest", "desc": "Sparking comments, direct inquiries, content saves, and community trust." },
-        "3": { "label": "LEADS", "sublabel": "High Intent", "desc": "Collecting qualified contact details through WhatsApp, forms, and messenger." },
-        "4": { "label": "CONVERSION", "sublabel": "Revenue Closed", "desc": "Turning interested leads into paying customers and confirmed bookings." },
-        "5": { "label": "RETENTION", "sublabel": "Repeat Value", "desc": "Re-engaging past clients with remarketing, email, and loyalty campaigns." },
-        "6": { "label": "GROWTH", "sublabel": "Compounding ROI", "desc": "Reinvesting revenue into scaled campaigns for continuous market leadership." }
+        "0": {
+          "label": "TRAFFIC",
+          "sublabel": "Organic & Paid",
+          "desc": "Capturing targeted visitors from search, social, and local directories."
+        },
+        "1": {
+          "label": "ATTENTION",
+          "sublabel": "Creative Hook",
+          "desc": "Stopping the scroll with compelling visual storytelling and brand messaging."
+        },
+        "2": {
+          "label": "ENGAGEMENT",
+          "sublabel": "Active Interest",
+          "desc": "Sparking comments, direct inquiries, content saves, and community trust."
+        },
+        "3": {
+          "label": "LEADS",
+          "sublabel": "High Intent",
+          "desc": "Collecting qualified contact details through WhatsApp, forms, and messenger."
+        },
+        "4": {
+          "label": "CONVERSION",
+          "sublabel": "Revenue Closed",
+          "desc": "Turning interested leads into paying customers and confirmed bookings."
+        },
+        "5": {
+          "label": "RETENTION",
+          "sublabel": "Repeat Value",
+          "desc": "Re-engaging past clients with remarketing, email, and loyalty campaigns."
+        },
+        "6": {
+          "label": "GROWTH",
+          "sublabel": "Compounding ROI",
+          "desc": "Reinvesting revenue into scaled campaigns for continuous market leadership."
+        }
       }
     },
     "leadCta": {
@@ -269,6 +302,40 @@
       "metaRecommended": "100% Meta Recommended Agency",
       "monthlyReporting": "Transparent Monthly Reporting",
       "acceptingClients": "Accepting Q1/Q2 Growth Retainers"
+    },
+    "roiCalculator": {
+      "title": "ROI Simulator",
+      "budgetLabel": "Monthly Marketing Budget",
+      "reachLabel": "Estimated Reach",
+      "leadsLabel": "Qualified Leads",
+      "revenueLabel": "Expected Revenue",
+      "interactHint": "DRAG TO SIMULATE",
+      "currency": "$",
+      "suffix": "/mo"
+    },
+    "growthFunnel": {
+      "subtitle": "INTERACTIVE 3D FUNNEL",
+      "interactHint": "CLICK STAGES TO INTERACT",
+      "traffic": {
+        "title": "Traffic",
+        "metric": "Top of Funnel",
+        "desc": "Laser-focused buyer persona segmentation to drive targeted awareness."
+      },
+      "leads": {
+        "title": "Leads",
+        "metric": "Engagement",
+        "desc": "High-intent landing pages and instant capture mechanisms."
+      },
+      "sales": {
+        "title": "Sales",
+        "metric": "Conversion",
+        "desc": "Optimized sales funnels to maximize conversion rates and revenue."
+      },
+      "scale": {
+        "title": "Scale",
+        "metric": "Retention",
+        "desc": "Compounding returns with full-funnel retention marketing."
+      }
     }
   },
   "services": {
@@ -444,10 +511,22 @@
     "values": {
       "title": "Our Values",
       "items": {
-        "integrity": { "title": "Integrity", "description": "Honest reporting and ethical marketing practices." },
-        "excellence": { "title": "Excellence", "description": "We never settle for average — only outstanding results." },
-        "innovation": { "title": "Innovation", "description": "Staying ahead with the latest tools and strategies." },
-        "partnership": { "title": "Partnership", "description": "Your success is our success. We grow together." }
+        "integrity": {
+          "title": "Integrity",
+          "description": "Honest reporting and ethical marketing practices."
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "We never settle for average — only outstanding results."
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "Staying ahead with the latest tools and strategies."
+        },
+        "partnership": {
+          "title": "Partnership",
+          "description": "Your success is our success. We grow together."
+        }
       }
     },
     "team": {
@@ -497,10 +576,22 @@
     "culture": {
       "title": "Why Work With Us",
       "items": {
-        "growth": { "title": "Career Growth", "description": "Learn from industry experts and grow your skills." },
-        "impact": { "title": "Real Impact", "description": "Work on campaigns that transform businesses." },
-        "culture": { "title": "Great Culture", "description": "Collaborative, creative, and supportive team environment." },
-        "flexible": { "title": "Flexible Work", "description": "Hybrid options and a healthy work-life balance." }
+        "growth": {
+          "title": "Career Growth",
+          "description": "Learn from industry experts and grow your skills."
+        },
+        "impact": {
+          "title": "Real Impact",
+          "description": "Work on campaigns that transform businesses."
+        },
+        "culture": {
+          "title": "Great Culture",
+          "description": "Collaborative, creative, and supportive team environment."
+        },
+        "flexible": {
+          "title": "Flexible Work",
+          "description": "Hybrid options and a healthy work-life balance."
+        }
       }
     },
     "openings": {
