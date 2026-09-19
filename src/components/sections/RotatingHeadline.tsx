@@ -15,37 +15,32 @@ export default function RotatingHeadline({
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (!words || words.length <= 1) return;
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(timer);
-  }, [words.length]);
+  }, [words]);
 
-  const longestWord = [...words].sort((a, b) => b.length - a.length)[0];
+  if (!words || words.length === 0) return null;
 
   return (
-    <span
-      className={`relative inline-grid max-w-full align-bottom ${className}`}
-    >
-      <span
-        aria-hidden="true"
-        className="invisible col-start-1 row-start-1 block font-bold pb-2 pt-1 px-1"
-      >
-        {longestWord}
-      </span>
-
-      <AnimatePresence>
+    <span className="relative inline-flex overflow-hidden align-bottom">
+      <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={words[index]}
-          initial={{ y: 15, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -15, opacity: 0 }}
-          transition={{ 
-            duration: 0.3,
-            ease: "easeOut" 
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{
+            y: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 0.35, ease: "easeOut" },
           }}
-          className={`text-gradient col-start-1 row-start-1 block font-bold pb-2 pt-1 px-1 ${className}`}
-          style={{ backgroundSize: "200% 200%" }}
+          className={`text-gradient inline-block font-extrabold pb-2 pt-1 px-1 ${className}`}
+          style={{
+            backgroundSize: "200% 200%",
+            willChange: "transform, opacity",
+          }}
         >
           {words[index]}
         </motion.span>

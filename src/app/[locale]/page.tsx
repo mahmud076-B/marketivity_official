@@ -110,12 +110,10 @@ export default async function HomePage({ params }: Props) {
               <h1 className="mb-5 font-display text-4xl font-extrabold leading-[1.12] text-brand-charcoal sm:text-5xl md:text-6xl">
                 {t("hero.title")}{" "}
                 <span className="block mt-2">
-                  <GradientText className="text-4xl sm:text-5xl md:text-6xl pb-2">
-                    <RotatingHeadline
-                      words={rotatingWords}
-                      className="text-4xl sm:text-5xl md:text-6xl"
-                    />
-                  </GradientText>
+                  <RotatingHeadline
+                    words={rotatingWords}
+                    className="text-4xl sm:text-5xl md:text-6xl"
+                  />
                 </span>
               </h1>
 
