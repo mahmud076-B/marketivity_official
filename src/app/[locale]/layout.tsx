@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 import CookieConsent from "@/components/consent/CookieConsent";
 import Analytics from "@/components/consent/Analytics";
+import { CurrencyProvider } from "@/components/pricing/currency";
 import { organizationJsonLd } from "@/lib/seo";
 import { isLocale, site } from "@/lib/site";
 import "../globals.css";
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col bg-brand-offwhite font-sans text-brand-charcoal">
         <NextIntlClientProvider messages={messages}>
+          <CurrencyProvider>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
@@ -113,6 +115,7 @@ export default async function LocaleLayout({
           <WhatsAppFloat />
           <CookieConsent locale={locale === "bn" ? "bn" : "en"} />
           <Analytics />
+          </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
     </html>

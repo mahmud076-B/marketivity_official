@@ -19,6 +19,12 @@ export type PortfolioItem = {
   stack: Record<Locale, string>;
   cover: string;
   coverAlt: Record<Locale, string>;
+  /** Client page, when the founder confirmed it. */
+  client?: Record<Locale, string>;
+  /** Ads Manager campaign name, when it differs from the client page. */
+  campaign?: string;
+  /** Logo file that clearly reads as this client. */
+  logo?: string;
   visit?: {
     href: string;
     kind: "site" | "demo";
@@ -129,15 +135,64 @@ const softwareAndSites: PortfolioItem[] = [
   },
 ];
 
+function clientLabel(campaign: FeaturedCampaign, locale: Locale): string {
+  if (campaign.clientBn) {
+    return locale === "bn"
+      ? `${campaign.clientBn} (${campaign.client})`
+      : `${campaign.client} (${campaign.clientBn})`;
+  }
+  return campaign.client;
+}
+
 function adsItem(campaign: FeaturedCampaign): PortfolioItem {
   const resultLabel = {
     en: campaignResultLabel(campaign.kind, "en"),
     bn: campaignResultLabel(campaign.kind, "bn"),
   };
+  const client = {
+    en: clientLabel(campaign, "en"),
+    bn: clientLabel(campaign, "bn"),
+  };
+  const results: PortfolioItem["results"] = [
+    {
+      label: { en: "Spend", bn: "খরচ" },
+      value: `$${campaign.spend.toFixed(2)}`,
+    },
+    {
+      label: resultLabel,
+      value: campaign.results.toLocaleString("en-US"),
+    },
+    {
+      label: { en: "Impressions", bn: "ইমপ্রেশন" },
+      value: campaign.impressions.toLocaleString("en-US"),
+    },
+  ];
+  if (campaign.reach != null) {
+    results.push({
+      label: { en: "Reach", bn: "রিচ" },
+      value: campaign.reach.toLocaleString("en-US"),
+    });
+  }
+  results.push({
+    label: campaign.statedCost
+      ? { en: "Cost per result", bn: "প্রতি ফলের খরচ" }
+      : {
+          en: "Cost per result (not rounded up)",
+          bn: "প্রতি ফলের খরচ (উপরের দিকে পূর্ণ করা হয়নি)",
+        },
+    value: `$${campaign.costPerResult}`,
+  });
+  const baseNote = {
+    en: "Ads Manager figures. This is not a sales or revenue result.",
+    bn: "অ্যাডস ম্যানেজারের সংখ্যা। এটি বিক্রি বা রাজস্ব নয়।",
+  };
   return {
     id: campaign.id,
     tab: "meta-ads",
-    name: campaign.name,
+    name: campaign.client,
+    client,
+    campaign: campaign.name === campaign.client ? undefined : campaign.name,
+    logo: campaign.logo,
     kind: resultLabel,
     summary: {
       en: campaignHeadline(campaign, "en"),
@@ -147,38 +202,16 @@ function adsItem(campaign: FeaturedCampaign): PortfolioItem {
     stack: { en: "Meta Ads", bn: "মেটা অ্যাডস" },
     cover: `/portfolio/${campaign.id}.webp`,
     coverAlt: {
-      en: `${campaign.name} results from Meta Ads Manager`,
-      bn: `${campaign.name}: মেটা অ্যাডস ম্যানেজারের ফল`,
+      en: `${client.en} results from Meta Ads Manager`,
+      bn: `${client.bn}: মেটা অ্যাডস ম্যানেজারের ফল`,
     },
-    results: [
-      {
-        label: { en: "Spend", bn: "খরচ" },
-        value: `$${campaign.spend.toFixed(2)}`,
-      },
-      {
-        label: resultLabel,
-        value: campaign.results.toLocaleString("en-US"),
-      },
-      {
-        label: { en: "Impressions", bn: "ইমপ্রেশন" },
-        value: campaign.impressions.toLocaleString("en-US"),
-      },
-      {
-        label: { en: "Reach", bn: "রিচ" },
-        value: campaign.reach.toLocaleString("en-US"),
-      },
-      {
-        label: {
-          en: "Cost per result (not rounded up)",
-          bn: "প্রতি ফলের খরচ (উপরের দিকে পূর্ণ করা হয়নি)",
-        },
-        value: `$${campaign.costPerResult}`,
-      },
-    ],
-    resultNote: {
-      en: "Ads Manager figures. This is not a sales or revenue result.",
-      bn: "অ্যাডস ম্যানেজারের সংখ্যা। এটি বিক্রি বা রাজস্ব নয়।",
-    },
+    results,
+    resultNote: campaign.note
+      ? {
+          en: `${campaign.note.en} ${baseNote.en}`,
+          bn: `${campaign.note.bn} ${baseNote.bn}`,
+        }
+      : baseNote,
   };
 }
 

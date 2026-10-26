@@ -102,7 +102,7 @@
       "transparentReport": "Transparent Monthly Live Reporting",
       "conversations": "conversations on Sunglass Sell Ad",
       "sunglassSpend": "spent on that campaign",
-      "follows": "follows for Dr. Fardin Khan"
+      "follows": "conversations on Women's Watch"
     },
     "constellation": {
       "badge": "INTERACTIVE GROWTH CONSTELLATION",
@@ -441,7 +441,7 @@
   },
   "pricing": {
     "title": "Transparent Pricing",
-    "subtitle": "USD tiers for each service. A written proposal confirms the fee.",
+    "subtitle": "USD or GBP tiers for each service. A written proposal confirms the fee.",
     "note": "Ad spend is not included. Prices exclude tax.",
     "cta": "Book a free call"
   },
@@ -449,7 +449,7 @@
     "title": "Our Portfolio",
     "subtitle": "Ads Manager campaigns and software built by the founder.",
     "featuredBadge": "FEATURED CLIENT GROWTH STORIES",
-    "featuredTitle": "Six campaigns",
+    "featuredTitle": "Campaign results",
     "ctaSubtitle": "Book a free call and we will send a written proposal.",
     "categories": {
       "all": "All",
@@ -495,7 +495,7 @@
           "p2": "Start by claiming and optimizing your Google Business Profile. Add accurate business hours, photos, and encourage customers to leave reviews.",
           "p3": "Create location-specific content on your website. Mention Rajshahi neighborhoods, landmarks, and local events to build geographic relevance.",
           "p4": "Build local citations by listing your business on Bangladeshi directories and ensuring your NAP (Name, Address, Phone) is consistent everywhere.",
-          "p5": "Marketivity is a studio in Rajshahi. Website work is quoted per project in US dollars. We do not sell a fixed local-SEO retainer on this site."
+          "p5": "Marketivity is a studio in Rajshahi. Website work is quoted per project in US dollars or pounds sterling. We do not sell a fixed local-SEO retainer on this site."
         }
       }
     }

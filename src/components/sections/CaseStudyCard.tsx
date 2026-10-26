@@ -24,7 +24,7 @@ export default function CaseStudyCard({
   const Icon = campaign.kind === "messaging" ? MessagesSquare : ThumbsUp;
   const spend = `$${campaign.spend.toFixed(2)}`;
   const impressions = campaign.impressions.toLocaleString("en-US");
-  const reach = campaign.reach.toLocaleString("en-US");
+  const reach = campaign.reach != null ? campaign.reach.toLocaleString("en-US") : null;
 
   return (
     <ScrollReveal delay={index * 0.08} className="h-full">
@@ -47,12 +47,14 @@ export default function CaseStudyCard({
           </dt>
           <dd className="mt-1 font-bold text-brand-charcoal">{impressions}</dd>
         </div>
-        <div className="rounded-2xl bg-brand-offwhite px-3 py-3">
-          <dt className="text-xs font-medium text-brand-muted">
-            {locale === "bn" ? "রিচ" : "Reach"}
-          </dt>
-          <dd className="mt-1 font-bold text-brand-charcoal">{reach}</dd>
-        </div>
+        {reach ? (
+          <div className="rounded-2xl bg-brand-offwhite px-3 py-3">
+            <dt className="text-xs font-medium text-brand-muted">
+              {locale === "bn" ? "রিচ" : "Reach"}
+            </dt>
+            <dd className="mt-1 font-bold text-brand-charcoal">{reach}</dd>
+          </div>
+        ) : null}
         <div className="col-span-2 rounded-2xl bg-brand-offwhite px-3 py-3">
           <dt className="text-xs font-medium text-brand-muted">
             {locale === "bn"

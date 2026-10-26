@@ -11,9 +11,10 @@ import ProblemSection from "@/components/sections/ProblemSection";
 import GrowthEcosystem from "@/components/sections/GrowthEcosystem";
 import WhyMarketivity from "@/components/sections/WhyMarketivity";
 import ServiceConstellation from "@/components/sections/ServiceConstellation";
+import Reviews from "@/components/sections/Reviews";
 import TrustStrip from "@/components/sections/TrustStrip";
 import PageActions from "@/components/sections/PageActions";
-import { serviceCategories, startingPriceLabel } from "@/lib/pricing";
+import { serviceCategories } from "@/lib/pricing";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -64,7 +65,7 @@ export default async function HomePage({ params }: Props) {
     servicesData[category.slug] = {
       title: category.name[locale],
       shortDescription: category.summary[locale],
-      priceLabel: startingPriceLabel(category, locale),
+      priceLabel: category.slug,
       features: category.tiers[0].includes[locale].slice(0, 4),
     };
   }
@@ -102,6 +103,8 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       <TrustStrip locale={locale} />
+
+      <Reviews locale={locale} />
 
       <ScrollReveal direction="up">
         <ProblemSection

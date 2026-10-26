@@ -35,10 +35,31 @@ export default function PortfolioCard({
     </div>
   );
 
+  const title = item.client?.[locale] ?? item.name;
+
   const body = (
     <div className="flex flex-1 flex-col p-6 sm:p-7">
       <p className="text-xs font-bold uppercase tracking-widest text-brand-purple">{item.kind[locale]}</p>
-      <h3 className="mt-2 text-2xl font-bold tracking-tight text-brand-charcoal">{item.name}</h3>
+      <div className="mt-2 flex items-center gap-3">
+        {item.logo ? (
+          <Image
+            src={item.logo}
+            alt=""
+            width={112}
+            height={112}
+            sizes="56px"
+            className="h-14 w-14 shrink-0 rounded-2xl border border-brand-charcoal/10 bg-white object-contain p-1 ring-1 ring-brand-charcoal/10"
+          />
+        ) : null}
+        <div className="min-w-0">
+          <h3 className="text-2xl font-bold tracking-tight text-brand-charcoal">{title}</h3>
+          {item.campaign ? (
+            <p className="mt-1 text-sm text-brand-muted">
+              {locale === "bn" ? "ক্যাম্পেইন" : "Campaign"}: {item.campaign}
+            </p>
+          ) : null}
+        </div>
+      </div>
       <p className="mt-3 text-sm leading-relaxed text-brand-muted">{item.summary[locale]}</p>
       <p className="mt-4 text-sm leading-relaxed text-brand-charcoal">
         <span className="font-bold">{item.stackLabel[locale]}: </span>

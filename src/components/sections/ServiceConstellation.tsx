@@ -3,7 +3,7 @@
 import { Fragment, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Megaphone,
   Share2,
@@ -15,7 +15,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import { StartingPrice } from "@/components/pricing/currency";
 import { serviceSlugs, type ServiceSlug } from "@/lib/services";
+import type { Locale } from "@/lib/site";
 
 type ServiceConstellationProps = {
   title: string;
@@ -49,6 +51,7 @@ export default function ServiceConstellation({
   servicesData,
 }: ServiceConstellationProps) {
   const tConst = useTranslations("home.constellation");
+  const locale = useLocale() as Locale;
   const [selectedSlug, setSelectedSlug] = useState<ServiceSlug>("meta-ads");
   const currentService = servicesData[selectedSlug] || {
     title: "Marketivity",
@@ -132,9 +135,11 @@ export default function ServiceConstellation({
                       >
                         {item?.title || slug}
                       </h3>
-                      <span className="text-xs text-brand-charcoal/50">
-                        {item?.priceLabel}
-                      </span>
+                      <StartingPrice
+                        slug={slug}
+                        locale={locale}
+                        className="text-xs text-brand-charcoal"
+                      />
                     </div>
                   </div>
 
@@ -169,8 +174,8 @@ export default function ServiceConstellation({
                             {item?.title || slug}
                           </h3>
                         </div>
-                        <p className="shrink-0 text-right text-lg font-black text-brand-orange">
-                          {item?.priceLabel}
+                        <p className="shrink-0 text-right text-lg font-black text-brand-charcoal">
+                          <StartingPrice slug={slug} locale={locale} />
                         </p>
                       </div>
                       <p className="mt-4 text-sm leading-relaxed text-brand-charcoal/75">
@@ -234,8 +239,8 @@ export default function ServiceConstellation({
                         <span className="block text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/50">
                           {startingAt}
                         </span>
-                        <p className="text-xl sm:text-2xl md:text-3xl font-black text-brand-orange">
-                          {currentService.priceLabel}
+                        <p className="text-xl sm:text-2xl md:text-3xl font-black text-brand-charcoal">
+                          <StartingPrice slug={selectedSlug} locale={locale} />
                         </p>
                       </div>
                     </div>

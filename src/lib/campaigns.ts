@@ -21,14 +21,28 @@ export type ResultKind = "messaging" | "follows";
 
 export type FeaturedCampaign = {
   id: string;
+  /** Ads Manager campaign name. Figures belong to this campaign. */
   name: string;
+  /** Client page the founder confirmed for this campaign. */
+  client: string;
+  clientBn?: string;
+  /** Public logo path, only when the file itself reads as this client. */
+  logo?: string;
   kind: ResultKind;
   spend: number;
   results: number;
   impressions: number;
-  reach: number;
-  /** Cost per result truncated to 3 decimals. Never rounded up. */
+  /** Omitted when a combined figure would be invented. */
+  reach?: number;
+  /**
+   * Existing cards: truncated to 3 decimals, never rounded up.
+   * New cards: the 2-decimal Ads Manager figure the founder stated.
+   */
   costPerResult: string;
+  /** True when costPerResult is the founder's stated Ads Manager figure. */
+  statedCost?: boolean;
+  /** Extra sentence under the figures. */
+  note?: Record<Locale, string>;
 };
 
 function costTruncated(spend: number, results: number): string {
@@ -40,6 +54,8 @@ export const featuredCampaigns: FeaturedCampaign[] = [
   {
     id: "baby-dress",
     name: "Baby Dress",
+    client: "Siro Lifestyle",
+    logo: "/clients/7.webp",
     kind: "messaging",
     spend: 41.74,
     results: 257,
@@ -50,6 +66,9 @@ export const featuredCampaigns: FeaturedCampaign[] = [
   {
     id: "sunglass-sell-ad",
     name: "Sunglass Sell Ad",
+    client: "Bikkhata",
+    clientBn: "বিখ্যাতা",
+    logo: "/clients/2.webp",
     kind: "messaging",
     spend: 9.96,
     results: 250,
@@ -60,6 +79,8 @@ export const featuredCampaigns: FeaturedCampaign[] = [
   {
     id: "argentina-brazil-cap",
     name: "Argentina/Brazil Cap",
+    client: "Cap World",
+    logo: "/clients/11.webp",
     kind: "messaging",
     spend: 7.15,
     results: 217,
@@ -70,6 +91,8 @@ export const featuredCampaigns: FeaturedCampaign[] = [
   {
     id: "womens-watch",
     name: "Women's Watch",
+    client: "Chander Olongkar",
+    clientBn: "চাঁদের অলংকার",
     kind: "messaging",
     spend: 9.92,
     results: 183,
@@ -80,6 +103,9 @@ export const featuredCampaigns: FeaturedCampaign[] = [
   {
     id: "bikkhata-watch",
     name: "Bikkhata Watch Combo",
+    client: "Bikkhata",
+    clientBn: "বিখ্যাতা",
+    logo: "/clients/2.webp",
     kind: "messaging",
     spend: 13.93,
     results: 157,
@@ -88,14 +114,43 @@ export const featuredCampaigns: FeaturedCampaign[] = [
     costPerResult: costTruncated(13.93, 157),
   },
   {
-    id: "dr-fardin-khan",
-    name: "Dr. Fardin Khan",
-    kind: "follows",
-    spend: 7.67,
-    results: 1419,
-    impressions: 24757,
-    reach: 17564,
-    costPerResult: costTruncated(7.67, 1419),
+    id: "chittagong-gadget",
+    name: "Chittagong Gadget",
+    client: "Chittagong Gadget",
+    kind: "messaging",
+    spend: 19.4,
+    results: 139,
+    impressions: 36802,
+    costPerResult: "0.14",
+    statedCost: true,
+    note: {
+      en: "Two campaigns combined. Reach is not shown, because reach from separate campaigns cannot be added.",
+      bn: "দুটি ক্যাম্পেইন একসাথে যোগ করা হয়েছে। আলাদা ক্যাম্পেইনের রিচ যোগ করা যায় না, তাই রিচ দেখানো হয়নি।",
+    },
+  },
+  {
+    id: "lushious-bloom",
+    name: "Lushious Ad",
+    client: "Lushious Bloom",
+    kind: "messaging",
+    spend: 14.47,
+    results: 131,
+    impressions: 25540,
+    reach: 17338,
+    costPerResult: "0.11",
+    statedCost: true,
+  },
+  {
+    id: "smart-cart",
+    name: "Smart Cart",
+    client: "Smart Cart",
+    kind: "messaging",
+    spend: 9.86,
+    results: 141,
+    impressions: 13790,
+    reach: 9522,
+    costPerResult: "0.07",
+    statedCost: true,
   },
 ];
 
@@ -105,7 +160,9 @@ export const clientNames = [
   "Argentina/Brazil Cap",
   "Sunglass",
   "Bikkhata",
-  "Dr. Fardin Khan",
+  "Siro Lifestyle",
+  "Cap World",
+  "Lushious Bloom",
   "HIYAM",
   "Twistoria",
   "Prime Finds",
@@ -213,7 +270,7 @@ export const proofCopy = {
     bn: "আমরা যেসব ক্লায়েন্ট ও পেজের বিজ্ঞাপন চালিয়েছি",
   },
   clientsNote: {
-    en: "Names are taken from campaign names. Logos are client marks we have permission to show. A logo is not paired with a name, because that pairing is not in the export.",
-    bn: "নামগুলো ক্যাম্পেইনের নাম থেকে নেওয়া। লোগো সেই ক্লায়েন্ট চিহ্ন, যেগুলো দেখানোর অনুমতি আছে। কোনো লোগোকে কোনো নামের সাথে জোড়া হয়নি, কারণ সেই জোড়া এক্সপোর্টে নেই।",
+    en: "Names are taken from campaign names. Logos are client marks we have permission to show. On the portfolio, a logo sits on a card only when that file clearly reads as the client.",
+    bn: "নামগুলো ক্যাম্পেইনের নাম থেকে নেওয়া। লোগো সেই ক্লায়েন্ট চিহ্ন, যেগুলো দেখানোর অনুমতি আছে। পোর্টফোলিওতে লোগো তখনই কার্ডে বসে, যখন ফাইলে সেই ক্লায়েন্টের নাম স্পষ্ট পড়া যায়।",
   },
 } as const;

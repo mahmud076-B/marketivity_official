@@ -198,7 +198,7 @@ export default function ProblemSection({
                       </div>
                       <div className="rounded-xl bg-white p-3 sm:p-3.5 border border-emerald-200 text-center shadow-soft-xs">
                         <span className="block text-lg sm:text-xl font-black text-brand-ink mb-0.5 sm:mb-1">
-                          1,419
+                          183
                         </span>
                         <span className="block text-xs font-bold text-brand-charcoal leading-snug">
                           {tLab("follows")}

@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { TierGrid } from "@/components/pricing/PricingBoard";
-import { getCategory, pricingFaq, serviceCategories, startingPriceLabel } from "@/lib/pricing";
+import { CategoryExtras, TierGrid } from "@/components/pricing/PricingBoard";
+import { BangladeshPriceNote, CurrencyToggle, PriceTrust, StartingPrice } from "@/components/pricing/currency";
+import { getCategory, pricingFaq, serviceCategories } from "@/lib/pricing";
 import { isServiceSlug } from "@/lib/services";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -47,9 +48,12 @@ export default async function ServicePage({ params }: Props) {
             {category.name[locale]}
           </h1>
           <p className="mt-4 text-lg text-brand-muted">{category.summary[locale]}</p>
-          <p className="mt-4 text-2xl font-extrabold text-brand-purple">
-            {startingPriceLabel(category, locale)}
+          <p className="mt-4 text-2xl font-extrabold text-brand-charcoal">
+            <StartingPrice slug={category.slug} locale={locale} />
           </p>
+          <div className="mt-5 flex justify-center">
+            <CurrencyToggle locale={locale} />
+          </div>
           <div className="mt-8 flex justify-center">
             <PageActions locale={locale} topic={category.name[locale]} align="center" />
           </div>
@@ -62,6 +66,9 @@ export default async function ServicePage({ params }: Props) {
             {locale === "bn" ? "যা অন্তর্ভুক্ত" : "What’s included"}
           </h2>
           <TierGrid category={category} locale={locale} />
+          <CategoryExtras category={category} locale={locale} />
+          <PriceTrust locale={locale} />
+          <BangladeshPriceNote locale={locale} />
         </div>
       </section>
 

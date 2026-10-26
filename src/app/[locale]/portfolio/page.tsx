@@ -37,7 +37,7 @@ const copy: Record<
       },
       "meta-ads": {
         title: "Meta Ads",
-        note: "Covers show the Ads Manager results. Client logos are not paired with these campaign names.",
+        note: "The client page is the one the founder confirmed. A logo is shown only when that file clearly reads as the same brand. Figures are from Ads Manager and are not sales.",
       },
     },
   },
@@ -56,7 +56,7 @@ const copy: Record<
       },
       "meta-ads": {
         title: "মেটা অ্যাডস",
-        note: "কভারে অ্যাডস ম্যানেজারের ফল। এই ক্যাম্পেইনের নামের সাথে ক্লায়েন্ট লোগো জোড়া হয়নি।",
+        note: "ক্লায়েন্ট পেজ প্রতিষ্ঠাতার নিশ্চিত করা নাম। লোগো তখনই দেখানো হয়, যখন ফাইলে সেই ব্র্যান্ডের নাম স্পষ্ট পড়া যায়। সংখ্যা অ্যাডস ম্যানেজার থেকে, বিক্রি নয়।",
       },
     },
   },

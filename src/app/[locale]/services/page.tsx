@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { serviceCategories, startingPriceLabel } from "@/lib/pricing";
+import { BangladeshPriceNote, CurrencyToggle, StartingPrice } from "@/components/pricing/currency";
+import { serviceCategories } from "@/lib/pricing";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 import PageActions from "@/components/sections/PageActions";
@@ -50,6 +51,10 @@ export default async function ServicesPage({ params }: Props) {
               ? "মেটা অ্যাডস ও ওয়েবসাইট গ্রোথ পার্টনার, এবং একটি সফটওয়্যার এজেন্সি।"
               : "A Meta Ads and website growth partner, and a software studio."}
           </p>
+          <div className="mt-6">
+            <CurrencyToggle locale={locale} />
+          </div>
+          <BangladeshPriceNote locale={locale} />
           <div className="mt-8">
             <PageActions locale={locale} topic={copy[locale].title} />
           </div>
@@ -63,8 +68,8 @@ export default async function ServicesPage({ params }: Props) {
               </p>
               <h2 className="mt-2 text-2xl font-bold text-brand-charcoal">{category.name[locale]}</h2>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-muted">{category.summary[locale]}</p>
-              <p className="mt-4 text-sm font-semibold text-brand-purple">
-                {startingPriceLabel(category, locale)}
+              <p className="mt-4 text-sm font-semibold text-brand-charcoal">
+                <StartingPrice slug={category.slug} locale={locale} />
               </p>
               <p className="mt-1 text-xs text-brand-muted">{category.tiers[1].bestFor[locale]}</p>
               <div className="mt-5">
