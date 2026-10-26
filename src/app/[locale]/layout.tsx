@@ -11,6 +11,7 @@ import CookieConsent from "@/components/consent/CookieConsent";
 import Analytics from "@/components/consent/Analytics";
 import { CurrencyProvider } from "@/components/pricing/currency";
 import { organizationJsonLd } from "@/lib/seo";
+import { gaMeasurementId } from "@/lib/analytics";
 import { isLocale, site } from "@/lib/site";
 import "../globals.css";
 
@@ -114,7 +115,7 @@ export default async function LocaleLayout({
           <Footer />
           <WhatsAppFloat />
           <CookieConsent locale={locale === "bn" ? "bn" : "en"} />
-          <Analytics />
+          <Analytics gaId={gaMeasurementId()} />
           </CurrencyProvider>
         </NextIntlClientProvider>
       </body>

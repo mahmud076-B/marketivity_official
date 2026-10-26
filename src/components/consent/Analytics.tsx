@@ -2,15 +2,15 @@
 
 import { useEffect } from "react";
 import { CONSENT_KEY } from "@/components/consent/CookieConsent";
+import { gaMeasurementId, trackEvent } from "@/lib/analytics";
 
 const GA_PATTERN = /^G-[A-Z0-9]+$/i;
 const PIXEL_PATTERN = /^\d{5,20}$/;
 
-function loadAnalytics() {
+function loadAnalytics(gaId: string) {
   if (typeof window === "undefined") return;
   if (window.localStorage.getItem(CONSENT_KEY) !== "granted") return;
 
-  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() ?? "";
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() ?? "";
 
   if (GA_PATTERN.test(gaId) && !document.getElementById("marketivity-ga")) {
@@ -33,17 +33,46 @@ function loadAnalytics() {
   }
 }
 
-export default function Analytics() {
+function trackOutboundClick(event: MouseEvent) {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const anchor = target.closest("a");
+  if (!anchor) return;
+
+  let host = "";
+  try {
+    host = new URL(anchor.href).hostname.replace(/^www\./, "");
+  } catch {
+    return;
+  }
+
+  if (host === "wa.me" || host === "api.whatsapp.com") {
+    trackEvent("whatsapp_click");
+    return;
+  }
+  if (host === "linkedin.com" || host.endsWith(".linkedin.com")) {
+    trackEvent("social_click", { platform: "linkedin" });
+    return;
+  }
+  if (host === "facebook.com" || host === "fb.com" || host.endsWith(".facebook.com")) {
+    trackEvent("social_click", { platform: "facebook" });
+  }
+}
+
+export default function Analytics({ gaId = gaMeasurementId() }: { gaId?: string }) {
   useEffect(() => {
-    loadAnalytics();
-    const onChange = () => loadAnalytics();
+    const id = gaMeasurementId(gaId);
+    loadAnalytics(id);
+    const onChange = () => loadAnalytics(id);
     window.addEventListener("marketivity-consent", onChange);
     window.addEventListener("storage", onChange);
+    document.addEventListener("click", trackOutboundClick);
     return () => {
       window.removeEventListener("marketivity-consent", onChange);
       window.removeEventListener("storage", onChange);
+      document.removeEventListener("click", trackOutboundClick);
     };
-  }, []);
+  }, [gaId]);
 
   return null;
 }

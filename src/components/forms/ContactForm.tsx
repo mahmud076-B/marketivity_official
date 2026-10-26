@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -50,6 +51,7 @@ export default function ContactForm({
 
       setState("success");
       form.reset();
+      trackEvent("generate_lead");
     } catch (err) {
       setState("error");
       setErrorMsg(
