@@ -1,81 +1,129 @@
-import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
+import ClientReportedNote from "@/components/sections/ClientReportedNote";
 import CTASection from "@/components/sections/CTASection";
-import CaseStudyCard from "@/components/sections/CaseStudyCard";
-import ScrollReveal from "@/components/motion/ScrollReveal";
-import { getCaseStudies } from "@/lib/case-studies";
-import FacebookBadge from "@/components/ui/FacebookBadge";
+import PageActions from "@/components/sections/PageActions";
+import PortfolioCard from "@/components/sections/PortfolioCard";
+import PortfolioFilters from "@/components/sections/PortfolioFilters";
+import { proofCopy } from "@/lib/campaigns";
+import { itemsForTab, resolvePortfolioTab, type PortfolioTab } from "@/lib/portfolio-items";
+import { pageMetadata } from "@/lib/seo";
+import { isLocale, type Locale } from "@/lib/site";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ tab?: string | string[] }>;
 };
 
-export default async function PortfolioPage({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+const copy: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+    sections: Record<PortfolioTab, { title: string; note: string }>;
+  }
+> = {
+  en: {
+    title: "Portfolio",
+    description:
+      "Software, websites, and Meta Ads. Live screenshots where a public URL exists. Campaign figures are from Ads Manager. No revenue claims.",
+    sections: {
+      software: {
+        title: "Software",
+        note: "AI apps and custom software built by the founder.",
+      },
+      websites: {
+        title: "Websites",
+        note: "Websites designed and built by the founder.",
+      },
+      "meta-ads": {
+        title: "Meta Ads",
+        note: "The client page is the one the founder confirmed. A logo is shown only when that file clearly reads as the same brand. Figures are from Ads Manager and are not sales.",
+      },
+    },
+  },
+  bn: {
+    title: "পোর্টফোলিও",
+    description:
+      "সফটওয়্যার, ওয়েবসাইট ও মেটা অ্যাডস। পাবলিক ঠিকানা থাকলে লাইভ স্ক্রিনশট। ক্যাম্পেইনের সংখ্যা অ্যাডস ম্যানেজার থেকে। রাজস্বের দাবি নেই।",
+    sections: {
+      software: {
+        title: "সফটওয়্যার",
+        note: "প্রতিষ্ঠাতার তৈরি এআই অ্যাপ ও কাস্টম সফটওয়্যার।",
+      },
+      websites: {
+        title: "ওয়েবসাইট",
+        note: "প্রতিষ্ঠাতার নকশা ও তৈরি ওয়েবসাইট।",
+      },
+      "meta-ads": {
+        title: "মেটা অ্যাডস",
+        note: "ক্লায়েন্ট পেজ প্রতিষ্ঠাতার নিশ্চিত করা নাম। লোগো তখনই দেখানো হয়, যখন ফাইলে সেই ব্র্যান্ডের নাম স্পষ্ট পড়া যায়। সংখ্যা অ্যাডস ম্যানেজার থেকে, বিক্রি নয়।",
+      },
+    },
+  },
+};
 
-  const t = await getTranslations("portfolio");
-  const th = await getTranslations("home");
-  const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  return pageMetadata({
+    locale: safe,
+    path: "/portfolio",
+    title: copy[safe].title,
+    description: copy[safe].description,
+  });
+}
+
+export default async function PortfolioPage({ params, searchParams }: Props) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
+  setRequestLocale(locale);
+  const tab = resolvePortfolioTab((await searchParams).tab);
+  const text = copy[locale];
+  const section = text.sections[tab];
+  const items = itemsForTab(tab);
 
   return (
     <>
-      <section className="gradient-hero safe-px py-16 md:py-24 text-center relative overflow-hidden">
-        <div className="mx-auto max-w-4xl relative z-10">
-          <div className="mb-6 flex justify-center">
-            <FacebookBadge
-              recommended={tfb("recommended")}
-              onFacebook={tfb("onFacebook")}
-            />
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-charcoal">
-            {t("title")}
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-brand-charcoal/75 max-w-2xl mx-auto leading-relaxed">
-            {t("subtitle")}
+      <section className="gradient-hero section-block safe-px text-center">
+        <div className="mx-auto max-w-3xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple">
+            Marketivity
           </p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-brand-charcoal md:text-6xl">
+            {text.title}
+          </h1>
+          <p className="mt-4 text-lg leading-relaxed text-brand-muted">{text.description}</p>
+          <PortfolioFilters locale={locale} tab={tab} />
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={locale} topic={text.title} align="center" />
+          </div>
         </div>
       </section>
 
-      {/* Case Studies Grid */}
-      <section className="safe-px py-16 md:py-20 bg-brand-offwhite">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10">
-            <span className="inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-2">
-              {t("featuredBadge")}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-charcoal">
-              {t("featuredTitle")}
-            </h2>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {getCaseStudies(locale).map((study, i) => (
-              <ScrollReveal key={study.id} direction="up" delay={i * 0.1}>
-                <CaseStudyCard
-                  study={study}
-                  learnMoreLabel={th("caseStudy.learnMore")}
-                  beforeLabel={th("caseStudy.before")}
-                  afterLabel={th("caseStudy.after")}
-                  durationLabel={th("caseStudy.duration")}
-                />
-              </ScrollReveal>
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-brand-offwhite">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
+            {section.title}
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brand-muted">{section.note}</p>
+          {tab === "meta-ads" ? (
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brand-muted">
+              {proofCopy.source[locale]}
+            </p>
+          ) : null}
+          <div className="mt-10 grid items-stretch gap-8 sm:grid-cols-2">
+            {items.map((item, index) => (
+              <PortfolioCard key={item.id} item={item} locale={locale} index={index} />
             ))}
           </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-xs text-brand-charcoal/50 max-w-xl mx-auto">
-              {th("caseStudy.disclaimer")}
-            </p>
-          </div>
+          {tab === "meta-ads" ? <ClientReportedNote locale={locale} /> : null}
         </div>
       </section>
 
       <CTASection
-        title={t("title")}
-        subtitle={t("ctaSubtitle")}
-        cta={tc("contactUs")}
+        title={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+        subtitle={text.description}
+        cta={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
       />
     </>
   );

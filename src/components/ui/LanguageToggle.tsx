@@ -18,7 +18,7 @@ export default function LanguageToggle() {
       type="button"
       onClick={toggle}
       className="touch-target inline-flex items-center justify-center rounded-full border border-brand-charcoal/15 bg-white px-3 py-1.5 text-sm font-semibold text-brand-charcoal transition-colors hover:border-brand-orange hover:text-brand-orange"
-      aria-label={`Switch to ${locale === "en" ? "Bengali" : "English"}`}
+      aria-label={locale === "en" ? "বাং, switch to Bengali" : "EN, switch to English"}
     >
       {locale === "en" ? "বাং" : "EN"}
     </button>

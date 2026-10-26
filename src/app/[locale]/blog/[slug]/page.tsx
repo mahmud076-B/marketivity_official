@@ -6,10 +6,27 @@ import { Link } from "@/i18n/navigation";
 import { blogPosts } from "@/lib/blog";
 import CTASection from "@/components/sections/CTASection";
 import { ArrowLeft, Calendar } from "lucide-react";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { locale, slug } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const post = blogPosts.find((item) => item.slug === slug);
+  if (!post) return {};
+  const messages = (await import(`../../../../../messages/${safe}.json`)).default;
+  const entry = messages.blog.posts[slug as keyof typeof messages.blog.posts];
+  return pageMetadata({
+    locale: safe,
+    path: `/blog/${slug}`,
+    title: entry.title,
+    description: entry.excerpt,
+  });
+}
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -65,9 +82,10 @@ export default async function BlogPostPage({ params }: Props) {
               src={post.image}
               alt={t(`posts.${slug}.title`)}
               fill
+              quality={60}
+              preload
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
-              priority
             />
           </div>
 

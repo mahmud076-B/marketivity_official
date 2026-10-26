@@ -2,42 +2,46 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import RotatingHeadline from "@/components/sections/RotatingHeadline";
-import StatsMarquee from "@/components/sections/StatsMarquee";
-import { createStatItems } from "@/lib/stats";
-import LogoMarquee from "@/components/sections/LogoMarquee";
 import ProcessSteps from "@/components/sections/ProcessSteps";
-import ServiceConstellation from "@/components/sections/ServiceConstellation";
-import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
 import CTASection from "@/components/sections/CTASection";
-import FacebookBadge from "@/components/ui/FacebookBadge";
-import CaseStudyCard from "@/components/sections/CaseStudyCard";
-import InteractiveGrowthFunnel from "@/components/hero/InteractiveGrowthFunnel";
-import AnimatedBackground from "@/components/motion/AnimatedBackground";
+import SelectedWork from "@/components/sections/SelectedWork";
+import HeroGlobe from "@/components/hero/HeroGlobe";
 import ScrollReveal from "@/components/motion/ScrollReveal";
-import GradientText from "@/components/motion/GradientText";
 import ProblemSection from "@/components/sections/ProblemSection";
 import GrowthEcosystem from "@/components/sections/GrowthEcosystem";
 import WhyMarketivity from "@/components/sections/WhyMarketivity";
-import LightRays from "@/components/reactbits/LightRays";
-import { serviceSlugs, serviceKeys } from "@/lib/services";
-import { getCaseStudies } from "@/lib/case-studies";
-import { ArrowRight } from "lucide-react";
+import ServiceConstellation from "@/components/sections/ServiceConstellation";
+import Reviews from "@/components/sections/Reviews";
+import TrustStrip from "@/components/sections/TrustStrip";
+import PageActions from "@/components/sections/PageActions";
+import { serviceCategories } from "@/lib/pricing";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export default async function HomePage({ params }: Props) {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const messages = (await import(`../../../messages/${safe}.json`)).default;
+  return pageMetadata({
+    locale: safe,
+    title: messages.metadata.title,
+    description: messages.metadata.description,
+  });
+}
+
+export default async function HomePage({ params }: Props) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
   setRequestLocale(locale);
 
   const t = await getTranslations("home");
   const tc = await getTranslations("common");
-  const ts = await getTranslations("services");
-  const tfb = await getTranslations("facebookBadge");
 
   const rotatingWords = t.raw("hero.rotatingWords") as string[];
-
   const processSteps = [
     t.raw("process.steps.discover"),
     t.raw("process.steps.strategize"),
@@ -45,15 +49,6 @@ export default async function HomePage({ params }: Props) {
     t.raw("process.steps.optimize"),
     t.raw("process.steps.scale"),
   ] as { title: string; description: string }[];
-
-  const reviews = Object.values(
-    t.raw("testimonials.items") as Record<
-      string,
-      { name: string; text: string; rating: number }
-    >
-  );
-
-  const statItems = createStatItems((key) => t(`stats.${key}`));
 
   const valuePropItems = {
     results: t.raw("valueProp.items.results") as { title: string; description: string },
@@ -64,86 +59,53 @@ export default async function HomePage({ params }: Props) {
 
   const servicesData: Record<
     string,
-    {
-      title: string;
-      shortDescription: string;
-      price: string;
-      features: string[];
-    }
+    { title: string; shortDescription: string; priceLabel: string; features: string[] }
   > = {};
-
-  serviceSlugs.forEach((slug) => {
-    const key = serviceKeys[slug];
-    servicesData[key] = {
-      title: ts(`${key}.title`),
-      shortDescription: ts(`${key}.shortDescription`),
-      price: ts(`${key}.price`),
-      features: [0, 1, 2, 3].map((i) => ts(`${key}.features.${i}`)),
+  for (const category of serviceCategories) {
+    servicesData[category.slug] = {
+      title: category.name[locale],
+      shortDescription: category.summary[locale],
+      priceLabel: category.slug,
+      features: category.tiers[0].includes[locale].slice(0, 4),
     };
-  });
+  }
 
   return (
     <>
-      {/* ── 01. HERO: DIGITAL GROWTH ENGINE & 3D GROWTH CORE ─────────── */}
-      <section className="gradient-hero safe-px py-16 md:py-24 relative overflow-hidden">
-        <AnimatedBackground variant="mesh" className="absolute inset-0" />
-        <LightRays color="mixed" />
-
-        <div className="mx-auto max-w-7xl relative z-10">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-            {/* Left Content Column */}
-            <ScrollReveal direction="up" className="w-full min-w-0 lg:col-span-6 text-center lg:text-left">
-
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="h-2 w-2 rounded-full bg-brand-orange animate-pulse" />
-                <p className="text-xs md:text-sm font-black uppercase tracking-widest text-brand-purple">
-                  {tc("tagline")}
-                </p>
-              </div>
-
+      <section className="gradient-hero safe-px section-block">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="w-full min-w-0 text-center lg:col-span-6 lg:text-left">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple md:text-sm">
+                {tc("tagline")}
+              </p>
               <h1 className="mb-5 font-display text-4xl font-extrabold leading-[1.12] text-brand-charcoal sm:text-5xl md:text-6xl">
                 {t("hero.title")}{" "}
-                <span className="block mt-2">
-                  <RotatingHeadline
-                    words={rotatingWords}
-                    className="text-4xl sm:text-5xl md:text-6xl"
-                  />
+                <span className="mt-2 block">
+                  <RotatingHeadline words={rotatingWords} className="text-4xl sm:text-5xl md:text-6xl" />
                 </span>
               </h1>
-
-              <p className="mx-auto lg:mx-0 mb-8 max-w-xl text-base sm:text-lg text-brand-charcoal/75 leading-relaxed">
+              <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-brand-muted sm:text-lg lg:mx-0">
                 {t("hero.subtitle")}
               </p>
-
-              <div className="flex flex-col items-center justify-center gap-3.5 sm:flex-row lg:justify-start">
-                <Link
-                  href="/contact"
-                  className="touch-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-orange to-brand-orange-light px-8 py-4 text-base font-bold text-white shadow-soft-lg hover:shadow-glow-orange transition-all duration-300 hover:scale-105 active:scale-95 sm:w-auto"
-                >
-                  <span>{t("hero.cta")}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/portfolio"
-                  className="touch-target inline-flex w-full items-center justify-center rounded-full border border-brand-charcoal/20 bg-white/80 backdrop-blur-sm px-8 py-4 text-base font-bold text-brand-charcoal transition-all duration-300 hover:border-brand-purple hover:text-brand-purple hover:bg-brand-purple/5 sm:w-auto"
-                >
+              <div className="flex flex-col items-center gap-3 lg:items-start">
+                <PageActions locale={locale} />
+                <Link href="/portfolio" className="text-sm font-semibold text-brand-ink underline">
                   {t("hero.secondaryCta")}
                 </Link>
               </div>
-            </ScrollReveal>
-
-            {/* Right Interactive 3D Growth Core & Digital Lab */}
-            <ScrollReveal direction="right" delay={0.2} className="w-full min-w-0 lg:col-span-6">
-              <InteractiveGrowthFunnel />
-            </ScrollReveal>
+            </div>
+            <div className="w-full min-w-0 lg:col-span-6">
+              <HeroGlobe locale={locale} />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── 02. STATS MARQUEE ────────────────────────────────────────── */}
-      <StatsMarquee items={statItems} />
+      <TrustStrip locale={locale} />
 
-      {/* ── 03. PROBLEM & PAIN POINT SECTION ─────────────────────────── */}
+      <Reviews locale={locale} />
+
       <ScrollReveal direction="up">
         <ProblemSection
           eyebrow={t("problem.eyebrow")}
@@ -157,47 +119,37 @@ export default async function HomePage({ params }: Props) {
         />
       </ScrollReveal>
 
-      {/* ── 04. CENTERPIECE: DIGITAL GROWTH ECOSYSTEM ───────────────── */}
-      <GrowthEcosystem
-        eyebrow={t("ecosystem.eyebrow")}
-        title={t("ecosystem.title")}
-        subtitle={t("ecosystem.subtitle")}
-      />
+      <ScrollReveal>
+        <GrowthEcosystem
+          eyebrow={t("ecosystem.eyebrow")}
+          title={t("ecosystem.title")}
+          subtitle={t("ecosystem.subtitle")}
+        />
+      </ScrollReveal>
 
-      {/* ── 05. CLIENT TRUST MARQUEE ─────────────────────────────────── */}
-      <LogoMarquee />
-
-      {/* ── 06. 5-STEP PROCESS SECTION (HOW WE GROW) ─────────────────── */}
-      <section className="safe-px py-16 sm:py-20 md:py-28 bg-brand-offwhite">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
-              <span className="inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-3">
-                {t("process.badge")}
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-brand-charcoal mb-3 sm:mb-4">
-                {t("process.title")}
-              </h2>
-              <p className="text-base sm:text-lg text-brand-charcoal/70 leading-relaxed">
-                {t("process.subtitle")}
-              </p>
-            </div>
-            <ProcessSteps steps={processSteps} />
-          </div>
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
+        <div className="mx-auto max-w-7xl">
+          <ScrollReveal className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple">
+              {t("process.badge")}
+            </p>
+            <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
+              {t("process.title")}
+            </h2>
+            <p className="text-base leading-relaxed text-brand-muted sm:text-lg">{t("process.subtitle")}</p>
+          </ScrollReveal>
+          <ProcessSteps steps={processSteps} />
+        </div>
       </section>
 
-      {/* ── 07. INTERACTIVE SERVICE CONSTELLATION ───────────────────── */}
       <ServiceConstellation
         title={t("services.title")}
         subtitle={t("services.subtitle")}
-        currency={tc("currency")}
         startingAt={tc("startingAt")}
-        perMonth={tc("perMonth")}
-        perProject={tc("perProject")}
         learnMore={tc("learnMore")}
         servicesData={servicesData}
       />
 
-      {/* ── 08. WHY MARKETIVITY 4 PILLARS ────────────────────────────── */}
       <WhyMarketivity
         eyebrow={t("valueProp.eyebrow")}
         title={t("valueProp.title")}
@@ -205,73 +157,13 @@ export default async function HomePage({ params }: Props) {
         items={valuePropItems}
       />
 
-      {/* ── 09. REAL VERIFIED CASE STUDIES ──────────────────────────── */}
-      <section className="safe-px py-20 md:py-28 bg-brand-offwhite">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-14 text-center max-w-3xl mx-auto">
-              <span className="mb-3 inline-block rounded-full bg-brand-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-orange">
-                {t("caseStudy.badge")}
-              </span>
-              <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-brand-charcoal">
-                {t("caseStudy.title")}
-              </h2>
-              <p className="text-base sm:text-lg text-brand-charcoal/70 leading-relaxed">
-                {t("caseStudy.subtitle")}
-              </p>
-            </div>
+      <SelectedWork locale={locale} />
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {getCaseStudies(locale).map((study, i) => (
-                <ScrollReveal key={study.id} direction="up" delay={i * 0.1}>
-                  <CaseStudyCard
-                    study={study}
-                    learnMoreLabel={t("caseStudy.learnMore")}
-                    beforeLabel={t("caseStudy.before")}
-                    afterLabel={t("caseStudy.after")}
-                    durationLabel={t("caseStudy.duration")}
-                  />
-                </ScrollReveal>
-              ))}
-            </div>
-
-            <div className="mt-10 text-center">
-              <p className="text-xs text-brand-charcoal/50 max-w-xl mx-auto">
-                {t("caseStudy.disclaimer")}
-              </p>
-            </div>
-          </div>
-      </section>
-
-      {/* ── 10. TESTIMONIALS & SOCIAL PROOF ─────────────────────────── */}
-      <section className="safe-px py-20 md:py-28 bg-white">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-14 text-center max-w-3xl mx-auto">
-              <span className="inline-block rounded-full bg-brand-purple/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-purple mb-3">
-                COMMUNITY TRUST
-              </span>
-              <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-brand-charcoal">
-                {t("testimonials.title")}
-              </h2>
-              <p className="text-base sm:text-lg text-brand-charcoal/70 leading-relaxed">
-                {t("testimonials.subtitle")}
-              </p>
-            </div>
-            <TestimonialCarousel
-              reviews={reviews}
-              badgeRecommended={tfb("recommended")}
-              badgeOnFacebook={tfb("onFacebook")}
-            />
-          </div>
-      </section>
-
-      {/* ── 11. FINAL HIGH IMPACT CTA ───────────────────────────────── */}
-      <ScrollReveal direction="up">
-        <CTASection
-          title={t("footerCta.title")}
-          subtitle={t("footerCta.subtitle")}
-          cta={t("footerCta.cta")}
-        />
-      </ScrollReveal>
+      <CTASection
+        title={t("footerCta.title")}
+        subtitle={t("footerCta.subtitle")}
+        cta={t("footerCta.cta")}
+      />
     </>
   );
 }

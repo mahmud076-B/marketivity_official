@@ -1,34 +1,41 @@
-import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter, Hind_Siliguri } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Poppins, Hind_Siliguri } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import AnnouncementBar from "@/components/ui/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
+import CookieConsent from "@/components/consent/CookieConsent";
+import Analytics from "@/components/consent/Analytics";
+import { CurrencyProvider } from "@/components/pricing/currency";
+import { organizationJsonLd } from "@/lib/seo";
+import { isLocale, site } from "@/lib/site";
 import "../globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "600", "700"],
+  adjustFontFallback: true,
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
+  preload: true,
 });
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-bengali",
-  subsets: ["bengali", "latin"],
-  weight: ["400", "500", "600", "700"],
+  subsets: ["bengali"],
+  weight: ["400", "600", "700"],
   display: "swap",
+  adjustFontFallback: true,
+  preload: false,
 });
+
+export const viewport: Viewport = {
+  themeColor: "#F7931E",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -41,10 +48,32 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const messages = (await import(`../../../messages/${locale}.json`)).default;
+  const safe = isLocale(locale) ? locale : "en";
 
   return {
+    metadataBase: new URL(site.url),
     title: messages.metadata.title,
     description: messages.metadata.description,
+    alternates: {
+      canonical: `${site.url}/${safe}`,
+      languages: {
+        en: `${site.url}/en`,
+        bn: `${site.url}/bn`,
+        "x-default": `${site.url}/en`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      title: messages.metadata.title,
+      description: messages.metadata.description,
+      locale: safe === "bn" ? "bn_BD" : "en_GB",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: messages.metadata.title,
+      description: messages.metadata.description,
+    },
   };
 }
 
@@ -67,15 +96,26 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${plusJakarta.variable} ${inter.variable} ${hindSiliguri.variable} h-full antialiased`}
+      className={`${poppins.variable} ${hindSiliguri.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-brand-offwhite font-sans text-brand-charcoal">
         <NextIntlClientProvider messages={messages}>
+          <CurrencyProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+          />
+          <a href="#content" className="skip-link">
+            {locale === "bn" ? "মূল অংশে যান" : "Skip to content"}
+          </a>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="content" className="flex-1 pt-16">{children}</main>
           <Footer />
           <WhatsAppFloat />
+          <CookieConsent locale={locale === "bn" ? "bn" : "en"} />
+          <Analytics />
+          </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
     </html>

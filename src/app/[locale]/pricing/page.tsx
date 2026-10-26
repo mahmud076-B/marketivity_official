@@ -1,95 +1,67 @@
-import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { serviceSlugs, serviceKeys } from "@/lib/services";
+import PricingBoard from "@/components/pricing/PricingBoard";
 import CTASection from "@/components/sections/CTASection";
-import { Check } from "lucide-react";
-import ScrollReveal from "@/components/motion/ScrollReveal";
+import PageActions from "@/components/sections/PageActions";
+import TrustStrip from "@/components/sections/TrustStrip";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-type Props = {
-  params: Promise<{ locale: string }>;
+type Props = { params: Promise<{ locale: string }> };
+
+const copy = {
+  en: {
+    title: "Pricing",
+    description:
+      "USD or GBP pricing for Meta Ads, social media, websites, AI web apps and custom software. Three tiers in each category. Ad spend is separate.",
+    note: "Prices are set in US dollars or pounds sterling, not a conversion. Prices exclude VAT/taxes where applicable. A written proposal confirms the fee.",
+  },
+  bn: {
+    title: "মূল্য",
+    description:
+      "মেটা অ্যাডস, সোশ্যাল মিডিয়া, ওয়েবসাইট, এআই ওয়েব অ্যাপ ও কাস্টম সফটওয়্যারের ডলার বা পাউন্ড মূল্য। প্রতিটি বিভাগে তিনটি টিয়ার। বিজ্ঞাপন খরচ আলাদা।",
+    note: "দাম মার্কিন ডলার বা পাউন্ড স্টার্লিংয়ে নির্ধারিত, কনভার্সন নয়। যেখানে প্রযোজ্য, দামে ভ্যাট ও অন্যান্য কর নেই। লিখিত প্রস্তাবে ফি নিশ্চিত হয়।",
+  },
 };
 
-export default async function PricingPage({ params }: Props) {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  return pageMetadata({
+    locale: safe,
+    path: "/pricing",
+    title: copy[safe].title,
+    description: copy[safe].description,
+  });
+}
 
-  const t = await getTranslations("pricing");
-  const tc = await getTranslations("common");
-  const ts = await getTranslations("services");
+export default async function PricingPage({ params }: Props) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
+  setRequestLocale(locale);
 
   return (
     <>
       <section className="safe-px py-16 md:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">{copy[locale].title}</h1>
+          <p className="mt-4 text-lg text-brand-muted">{copy[locale].description}</p>
+          <p className="mt-3 text-sm text-brand-muted">{copy[locale].note}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={locale} topic={copy[locale].title} align="center" />
+          </div>
         </div>
       </section>
-
-      <section className="safe-px pb-8">
-        <div className="mx-auto grid max-w-7xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {serviceSlugs.map((slug) => {
-            const key = serviceKeys[slug];
-            const isProject = slug === "branding";
-            return (
-              <ScrollReveal key={slug} direction="up" delay={serviceSlugs.indexOf(slug) * 0.07} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
-                <h2 className="mb-2 text-xl font-bold text-brand-charcoal">
-                  {ts(`${key}.title`)}
-                </h2>
-                <p className="mb-6 flex-1 text-sm text-brand-charcoal/70">
-                  {ts(`${key}.shortDescription`)}
-                </p>
-                <div className="mb-6">
-                  <span className="text-xs font-medium uppercase tracking-wide text-brand-charcoal/50">
-                    {tc("startingAt")}
-                  </span>
-                  <p className="text-3xl font-bold text-brand-purple">
-                    {tc("currency")}
-                    {ts(`${key}.price`)}
-                    <span className="text-base font-normal text-brand-charcoal/60">
-                      {isProject ? tc("perProject") : tc("perMonth")}
-                    </span>
-                  </p>
-                </div>
-                <ul className="mb-6 space-y-2">
-                  {[0, 1, 2].map((i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2 text-sm text-brand-charcoal/70"
-                    >
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-orange" />
-                      {ts(`${key}.features.${i}`)}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/services/${slug}`}
-                  className="touch-target inline-flex items-center justify-center rounded-full border-2 border-brand-orange px-6 py-2.5 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange hover:text-white"
-                >
-                  {tc("learnMore")}
-                </Link>
-              </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </section>
-
+      <TrustStrip locale={locale} />
       <section className="safe-px pb-16">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-brand-purple/30 bg-brand-purple/5 p-8 text-center">
-          <p className="mb-2 text-brand-charcoal/70">{t("note")}</p>
-          <p className="font-semibold text-brand-purple">{t("tiersComing")}</p>
+        <div className="mx-auto max-w-6xl">
+          <PricingBoard locale={locale} />
         </div>
       </section>
-
       <CTASection
-        title={t("title")}
-        subtitle={t("note")}
-        cta={t("cta")}
+        title={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+        subtitle={copy[locale].note}
+        cta={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+        href="/contact"
       />
     </>
   );

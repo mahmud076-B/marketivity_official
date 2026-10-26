@@ -6,12 +6,17 @@ import { Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
-export default function ContactForm() {
+export default function ContactForm({
+  services,
+}: {
+  services: { value: string; label: string }[];
+}) {
   const t = useTranslations("contact.form");
   const tc = useTranslations("common");
 
   const [state, setState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [startedAt] = useState(() => Date.now());
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,8 +30,9 @@ export default function ContactForm() {
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
       service: (form.elements.namedItem("service") as HTMLSelectElement).value,
       subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement)
-        .value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      company: (form.elements.namedItem("company") as HTMLInputElement).value,
+      startedAt,
     };
 
     try {
@@ -82,6 +88,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <input type="hidden" name="startedAt" value={startedAt} />
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="company">Company</label>
+        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       {/* Row: Name + Phone */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
@@ -108,7 +119,7 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             disabled={isLoading}
-            placeholder="01XXXXXXXXX"
+            placeholder="+880"
             className={inputCls}
           />
         </div>
@@ -143,14 +154,12 @@ export default function ContactForm() {
           className={`${inputCls} cursor-pointer`}
           defaultValue=""
         >
-          <option value="" disabled>{t("servicePlaceholder")}</option>
-          <option value="SEO Services">{t("options.seo")}</option>
-          <option value="Social Media Marketing">{t("options.social")}</option>
-          <option value="Paid Advertising">{t("options.ads")}</option>
-          <option value="Content Marketing">{t("options.content")}</option>
-          <option value="Branding & Identity">{t("options.branding")}</option>
-          <option value="Full Package">{t("options.full")}</option>
-          <option value="Other">{t("options.other")}</option>
+          <option value="">{t("servicePlaceholder")}</option>
+          {services.map((service) => (
+            <option key={service.value} value={service.value}>
+              {service.label}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -198,7 +207,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="touch-target flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-bold text-white transition-all hover:bg-brand-orange-light hover:shadow-lg hover:shadow-brand-orange/25 disabled:cursor-not-allowed disabled:opacity-60 active:scale-95"
+        className="touch-target flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-bold text-brand-charcoal transition-all hover:bg-brand-orange-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoading ? (
           <>

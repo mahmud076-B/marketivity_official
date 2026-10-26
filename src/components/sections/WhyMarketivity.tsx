@@ -35,7 +35,7 @@ export default function WhyMarketivity({
   ];
 
   return (
-    <section className="safe-px py-16 sm:py-20 md:py-28 bg-white">
+    <section className="section-block safe-px border-t border-brand-charcoal/8 bg-brand-offwhite">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto">
           {eyebrow && (
@@ -61,7 +61,7 @@ export default function WhyMarketivity({
                 key={i}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -5 }}
                 className="h-full"

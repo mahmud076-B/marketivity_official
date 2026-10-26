@@ -5,21 +5,24 @@
   --color-brand-orange: #F7931E;
   --color-brand-orange-light: #FFAA4D;
   --color-brand-orange-dark: #E07D0F;
-  --color-brand-purple: #6F42C1;
-  --color-brand-purple-light: #8B5FC4;
-  --color-brand-purple-dark: #5A35A0;
-  --color-brand-charcoal: #2D2D2D;
-  --color-brand-offwhite: #F7F7F5;
+  /* Same hue as the brand orange, dark enough for text on cream (WCAG AA). */
+  --color-brand-ink: #8A4500;
+  --color-brand-purple: #7B3FE4;
+  --color-brand-purple-light: #9A6AEB;
+  --color-brand-purple-dark: #6429C9;
+  --color-brand-charcoal: #24202C;
+  --color-brand-muted: #4A4553;
+  --color-brand-offwhite: #F7F3F1;
   
   /* Alpha & Translucent Tones */
   --color-brand-orange-alpha-5: rgba(247, 147, 30, 0.05);
   --color-brand-orange-alpha-10: rgba(247, 147, 30, 0.1);
   --color-brand-orange-alpha-20: rgba(247, 147, 30, 0.2);
   --color-brand-orange-alpha-30: rgba(247, 147, 30, 0.3);
-  --color-brand-purple-alpha-5: rgba(111, 66, 193, 0.05);
-  --color-brand-purple-alpha-10: rgba(111, 66, 193, 0.1);
-  --color-brand-purple-alpha-20: rgba(111, 66, 193, 0.2);
-  --color-brand-purple-alpha-30: rgba(111, 66, 193, 0.3);
+  --color-brand-purple-alpha-5: rgba(123, 63, 228, 0.05);
+  --color-brand-purple-alpha-10: rgba(123, 63, 228, 0.1);
+  --color-brand-purple-alpha-20: rgba(123, 63, 228, 0.2);
+  --color-brand-purple-alpha-30: rgba(123, 63, 228, 0.3);
   
   /* Surface System */
   --color-surface-white: #FFFFFF;
@@ -29,14 +32,14 @@
   --color-surface-darker: #0D0D0F;
   
   /* Typography Variables */
-  --font-sans: var(--font-plus-jakarta), var(--font-bengali), var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-plus-jakarta), var(--font-bengali), system-ui, sans-serif;
+  --font-sans: var(--font-poppins), var(--font-bengali), system-ui, sans-serif;
+  --font-display: var(--font-poppins), var(--font-bengali), system-ui, sans-serif;
   --font-bengali: var(--font-bengali), sans-serif;
 }
 
 :root {
-  --background: #F7F7F5;
-  --foreground: #2D2D2D;
+  --background: #F7F3F1;
+  --foreground: #24202C;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
@@ -49,6 +52,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   overflow-x: clip;
 }
 
@@ -117,12 +121,54 @@ html[lang="bn"] h4 {
   animation: marquee-reverse 90s linear infinite;
 }
 
-.animate-logo-marquee {
-  animation: marquee 24s linear infinite;
+.logo-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
 
-.animate-logo-marquee-reverse {
-  animation: marquee-reverse 24s linear infinite;
+.logo-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: marquee 64s linear infinite;
+}
+
+.logo-track-reverse {
+  animation-name: marquee-reverse;
+  animation-duration: 76s;
+}
+
+.logo-marquee:hover .logo-track,
+.logo-marquee:focus-within .logo-track {
+  animation-play-state: paused;
+}
+
+.logo-item {
+  display: flex;
+  height: 4.75rem;
+  width: 4.75rem;
+  margin-right: 1.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  border: 1px solid rgba(36, 32, 44, 0.08);
+  background: #fff;
+  box-shadow: 0 10px 24px -18px rgba(36, 32, 44, 0.65);
+}
+
+.logo-item img {
+  filter: grayscale(1);
+  opacity: 0.78;
+  transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+.logo-item:hover img {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .animate-shine {
@@ -139,10 +185,39 @@ html[lang="bn"] h4 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none;
+  .animate-marquee-reverse,
+  .logo-track,
+  .logo-track-reverse {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .logo-viewport {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .logo-track {
+    width: 100%;
+    max-width: 72rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    gap: 1rem;
+  }
+
+  .logo-row-secondary,
+  .logo-item[data-clone] {
+    display: none;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -152,10 +227,70 @@ html[lang="bn"] h4 {
   color: #2D2D2D;
 }
 
-/* Accessible Focus Ring */
-:focus-visible {
-  outline: 2px solid #F7931E;
-  outline-offset: 2px;
+/* Accessible Focus Ring — dark orange so the ring is visible on cream. */
+:focus-visible,
+.outline-none:focus-visible {
+  outline: 2px solid #8A4500;
+  outline-offset: 3px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-whatsapp {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.btn-primary {
+  background: #f7931e;
+  color: #24202c;
+}
+
+.btn-primary:hover {
+  background: #e07d0f;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(36, 32, 44, 0.2);
+  background: #fff;
+  color: #24202c;
+}
+
+.btn-secondary:hover {
+  border-color: #8a4500;
+}
+
+.btn-whatsapp {
+  background: #075e54;
+  color: #fff;
+}
+
+.btn-whatsapp:hover {
+  background: #064e46;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 80;
+  transform: translateY(-150%);
+  border-radius: 9999px;
+  background: #24202c;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* Custom Scrollbar */
@@ -192,17 +327,45 @@ html[lang="bn"] h4 {
 }
 
 .gradient-hero {
-  background: 
-    radial-gradient(ellipse at 40% 10%, rgba(247, 147, 30, 0.09) 0%, transparent 60%),
-    radial-gradient(ellipse at 85% 20%, rgba(111, 66, 193, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #F7F7F5 100%);
+  background:
+    radial-gradient(ellipse at 6% 0%, rgba(247, 147, 30, 0.18) 0%, transparent 42%),
+    radial-gradient(ellipse at 96% 8%, rgba(123, 63, 228, 0.14) 0%, transparent 46%),
+    linear-gradient(180deg, #ffffff 0%, #f7f3f1 100%);
+}
+
+.section-block {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-block {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
+.surface-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(36, 32, 44, 0.08);
+  background: #fff;
+  box-shadow: 0 18px 40px -30px rgba(36, 32, 44, 0.55);
+}
+
+.surface-tint {
+  background:
+    linear-gradient(180deg, rgba(123, 63, 228, 0.045), rgba(247, 147, 30, 0.04) 120%),
+    #fff;
 }
 
 .gradient-cta {
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(247, 147, 30, 0.15), transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(111, 66, 193, 0.2), transparent 40%),
-    linear-gradient(135deg, #1C1C1E 0%, #0D0D0F 100%);
+  background:
+    radial-gradient(circle at 10% 20%, rgba(247, 147, 30, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(123, 63, 228, 0.1), transparent 40%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7F3F1 100%);
 }
 
 .glass {
@@ -258,4 +421,57 @@ html[lang="bn"] h4 {
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* Orange as text fails contrast on cream. Keep the bright orange for fills. */
+.text-brand-orange,
+.hover\:text-brand-orange:hover,
+.group-hover\:text-brand-orange:is(:where(.group):hover *),
+.group-hover\:text-brand-orange:is(:where(.group):hover) {
+  color: #8a4500;
+}
+
+.bg-brand-orange,
+.hover\:bg-brand-orange:hover {
+  color: #24202c;
+}
+
+.text-brand-charcoal\/40,
+.text-brand-charcoal\/50,
+.text-brand-charcoal\/55,
+.text-brand-charcoal\/60,
+.text-brand-charcoal\/65,
+.text-brand-charcoal\/70 {
+  color: #4a4553;
+}
+
+.font-medium {
+  font-weight: 600;
+}
+
+.portfolio-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 50px -28px rgba(36, 32, 44, 0.45);
+}
+
+.portfolio-shot {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-card:hover .portfolio-shot {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-card,
+  .portfolio-card:hover,
+  .portfolio-shot,
+  .portfolio-card:hover .portfolio-shot {
+    transition: none;
+    transform: none;
+  }
 }

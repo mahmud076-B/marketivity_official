@@ -1,79 +1,53 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { motion as motionTokens } from "@/lib/design-tokens";
+import { motion, useReducedMotion } from "framer-motion";
+
+type Direction = "up" | "down" | "left" | "right" | "fade" | "scale";
 
 type ScrollRevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   duration?: number;
-  direction?: "up" | "down" | "left" | "right" | "fade" | "scale";
+  direction?: Direction;
   once?: boolean;
   viewportMargin?: string;
+};
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const hidden: Record<Direction, { opacity: number; x: number; y: number; scale: number }> = {
+  up: { opacity: 0, x: 0, y: 22, scale: 0.985 },
+  down: { opacity: 0, x: 0, y: -16, scale: 0.985 },
+  left: { opacity: 0, x: -22, y: 0, scale: 0.985 },
+  right: { opacity: 0, x: 22, y: 0, scale: 0.985 },
+  fade: { opacity: 0, x: 0, y: 0, scale: 1 },
+  scale: { opacity: 0, x: 0, y: 0, scale: 0.97 },
 };
 
 export default function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  duration = motionTokens.duration.normal,
+  duration = 0.62,
   direction = "up",
-  once = false,
-  viewportMargin = "-60px",
+  once = true,
+  viewportMargin = "0px 0px -8% 0px",
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once,
-    margin: viewportMargin as unknown as undefined,
-  });
-
-  const variants = {
-    up: {
-      hidden: { opacity: 0, y: 46, scale: 0.92, rotateX: 5 },
-      visible: { opacity: 1, y: 0, scale: 1, rotateX: 0 },
-    },
-    down: {
-      hidden: { opacity: 0, y: -28 },
-      visible: { opacity: 1, y: 0 },
-    },
-    left: {
-      hidden: { opacity: 0, x: -28 },
-      visible: { opacity: 1, x: 0 },
-    },
-    right: {
-      hidden: { opacity: 0, x: 28 },
-      visible: { opacity: 1, x: 0 },
-    },
-    fade: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 },
-    },
-    scale: {
-      hidden: { opacity: 0, scale: 0.95 },
-      visible: { opacity: 1, scale: 1 },
-    },
-  };
-
-  const currentVariant = variants[direction];
+  const reduce = useReducedMotion();
 
   return (
     <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={currentVariant}
-      transition={{
-        type: "spring",
-        stiffness: 110,
-        damping: 20,
-        mass: 0.7,
-        visualDuration: duration,
-        delay,
-      }}
-      style={{ willChange: "transform, opacity" }}
-      className={`transform-gpu ${className}`}
+      data-reveal=""
+      className={className}
+      initial={reduce ? false : hidden[direction]}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      viewport={{ once, margin: viewportMargin }}
+      transition={
+        reduce
+          ? { duration: 0 }
+          : { duration, delay, ease }
+      }
     >
       {children}
     </motion.div>

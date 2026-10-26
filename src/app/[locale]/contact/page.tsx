@@ -1,22 +1,40 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import SocialLinks from "@/components/ui/SocialLinks";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import ContactForm from "@/components/forms/ContactForm";
-import FacebookBadge from "@/components/ui/FacebookBadge";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { serviceCategories } from "@/lib/pricing";
+import { isLocale, site, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
+import PageActions from "@/components/sections/PageActions";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const title = safe === "bn" ? "যোগাযোগ" : "Contact";
+  const description =
+    safe === "bn"
+      ? `মার্কেটিভিটিকে লিখুন বা হোয়াটসঅ্যাপ করুন ${site.phoneDisplay}। ইমেইল ${site.email}।`
+      : `Write to Marketivity or message us on WhatsApp at ${site.phoneDisplay}. Email ${site.email}.`;
+  return pageMetadata({ locale: safe, path: "/contact", title, description });
+}
+
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const safe: Locale = isLocale(locale) ? locale : "en";
 
   const t = await getTranslations("contact");
   const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
+  const services = serviceCategories.map((category) => ({
+    value: category.name.en,
+    label: category.name[safe],
+  }));
 
   return (
     <>
@@ -25,18 +43,21 @@ export default async function ContactPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+          <p className="mt-4 text-lg text-brand-muted">{t("subtitle")}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={safe} align="center" />
+          </div>
         </div>
       </section>
 
       <section className="safe-px pb-16 md:pb-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <ScrollReveal direction="up">
-          <div className="rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-purple/10 p-8 shadow-soft-md backdrop-blur-sm">
+          <div id="enquiry" className="rounded-2xl border border-brand-charcoal/10 bg-white p-6 shadow-soft-md sm:p-8">
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {t("form.title")}
             </h2>
-            <ContactForm />
+            <ContactForm services={services} />
           </div>
           </ScrollReveal>
 
@@ -68,7 +89,7 @@ export default async function ContactPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="text-brand-charcoal/70 hover:text-brand-orange"
                   >
-                    01767644696
+                    {site.phoneDisplay}
                   </a>
                 </div>
               </li>
@@ -91,30 +112,8 @@ export default async function ContactPage({ params }: Props) {
               </p>
             </div>
 
-            <FacebookBadge
-              recommended={tfb("recommended")}
-              onFacebook={tfb("onFacebook")}
-            />
-
-            <div className="mt-6 flex gap-3">
-              <a
-                href="https://facebook.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex items-center gap-2 rounded-full bg-[#1877F2] px-4 py-2 text-sm font-semibold text-white"
-              >
-                <FacebookIcon className="h-4 w-4" />
-                Facebook
-              </a>
-              <a
-                href="https://instagram.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white"
-              >
-                <InstagramIcon className="h-4 w-4" />
-                Instagram
-              </a>
+            <div className="mt-6">
+              <SocialLinks variant="pills" networks={["facebook", "instagram", "linkedin"]} />
             </div>
           </div>
           </ScrollReveal>

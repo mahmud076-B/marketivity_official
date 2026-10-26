@@ -35,7 +35,7 @@ export default function ProcessSteps({ steps }: ProcessStepsProps) {
                 onClick={() => setActiveStep(i)}
                 initial={{ opacity: 0, y: 28, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.3 }}
                 whileHover={{ y: -4, scale: isActive ? 1.04 : 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: i * 0.045 }}

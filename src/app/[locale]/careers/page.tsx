@@ -3,10 +3,24 @@ import { setRequestLocale } from "next-intl/server";
 import { Briefcase, TrendingUp, Users, Clock } from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const messages = (await import(`../../../../messages/${safe}.json`)).default;
+  return pageMetadata({
+    locale: safe,
+    path: "/careers",
+    title: messages.careers.title,
+    description: messages.careers.subtitle,
+  });
+}
 
 export default async function CareersPage({ params }: Props) {
   const { locale } = await params;
@@ -17,7 +31,6 @@ export default async function CareersPage({ params }: Props) {
 
   const cultureKeys = ["growth", "impact", "culture", "flexible"] as const;
   const cultureIcons = [TrendingUp, Briefcase, Users, Clock];
-  const positionKeys = ["socialMedia", "graphicDesigner", "contentWriter"] as const;
 
   return (
     <>
@@ -26,7 +39,7 @@ export default async function CareersPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+          <p className="mt-4 text-lg text-brand-muted">{t("subtitle")}</p>
         </div>
       </section>
 
@@ -66,39 +79,19 @@ export default async function CareersPage({ params }: Props) {
             </h2>
             <p className="text-brand-charcoal/70">{t("openings.subtitle")}</p>
           </div>
-          <div className="space-y-4">
-            {positionKeys.map((key, index) => (
-              <ScrollReveal key={key} direction="up" delay={index * 0.08}>
-              <div className="flex flex-col gap-4 rounded-2xl border border-brand-purple/25 bg-gradient-to-r from-white via-brand-purple/5 to-brand-orange/10 p-6 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-brand-charcoal">
-                    {t(`openings.positions.${key}.title`)}
-                  </h3>
-                  <p className="text-sm text-brand-charcoal/60">
-                    {t(`openings.positions.${key}.type`)} ·{" "}
-                    {t(`openings.positions.${key}.location`)}
-                  </p>
-                </div>
-                <a
-                  href="mailto:marketivitybd@gmail.com?subject=Job Application"
-                  className="touch-target inline-flex shrink-0 items-center justify-center rounded-full bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-orange-light"
-                >
-                  {tc("applyNow")}
-                </a>
-              </div>
-              </ScrollReveal>
-            ))}
+          <div className="rounded-2xl border border-brand-charcoal/10 bg-white p-6 text-center shadow-soft-sm">
+            <p className="text-brand-muted">{t("openings.noMatch")}</p>
+            <a href="mailto:marketivitybd@gmail.com" className="btn-primary mt-6">
+              {tc("email")}
+            </a>
           </div>
-          <p className="mt-8 text-center text-sm text-brand-charcoal/60">
-            {t("openings.noMatch")}
-          </p>
         </div>
       </section>
 
       <CTASection
         title={t("title")}
         subtitle={t("subtitle")}
-        cta={tc("contactUs")}
+        cta={tc("bookCall")}
       />
     </>
   );

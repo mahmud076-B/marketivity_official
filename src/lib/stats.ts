@@ -1,5 +1,7 @@
-import { Users, Megaphone, Award, Trophy, TrendingUp, BarChart3, Funnel } from "lucide-react";
+import { Megaphone, MessagesSquare, Eye, Wallet, ThumbsUp } from "lucide-react";
 import { createElement } from "react";
+import { proofHeadlines } from "@/lib/campaigns";
+import type { Locale } from "@/lib/site";
 
 export type StatItem = {
   icon: React.ReactNode;
@@ -7,44 +9,12 @@ export type StatItem = {
   label: string;
 };
 
-export function createStatItems(
-  t: (key: string) => string
-): StatItem[] {
-  return [
-    {
-      icon: createElement(Users, { className: "h-5 w-5" }),
-      value: "50+",
-      label: t("clients"),
-    },
-    {
-      icon: createElement(Megaphone, { className: "h-5 w-5" }),
-      value: "144+",
-      label: t("campaigns"),
-    },
-    {
-      icon: createElement(Award, { className: "h-5 w-5" }),
-      value: "100%",
-      label: t("recommended"),
-    },
-    {
-      icon: createElement(Trophy, { className: "h-5 w-5" }),
-      value: "Best in Bangladesh",
-      label: "",
-    },
-    {
-      icon: createElement(TrendingUp, { className: "h-5 w-5" }),
-      value: "5.2x",
-      label: t("roas"),
-    },
-    {
-      icon: createElement(BarChart3, { className: "h-5 w-5" }),
-      value: "100%",
-      label: t("dataDriven"),
-    },
-    {
-      icon: createElement(Funnel, { className: "h-5 w-5" }),
-      value: "Full-Funnel",
-      label: t("growth"),
-    },
-  ];
+const icons = [Wallet, Megaphone, Eye, MessagesSquare, ThumbsUp];
+
+export function createStatItems(locale: Locale): StatItem[] {
+  return proofHeadlines.map((item, index) => ({
+    icon: createElement(icons[index] ?? Megaphone, { className: "h-5 w-5" }),
+    value: item.value,
+    label: item.label[locale],
+  }));
 }

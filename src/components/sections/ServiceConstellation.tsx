@@ -3,71 +3,67 @@
 import { Fragment, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
-  Search,
-  Target,
+  Megaphone,
   Share2,
-  FileText,
+  Globe,
+  Bot,
+  Code2,
   Sparkles,
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
-import { serviceSlugs, serviceKeys, type ServiceSlug } from "@/lib/services";
+import { StartingPrice } from "@/components/pricing/currency";
+import { serviceSlugs, type ServiceSlug } from "@/lib/services";
+import type { Locale } from "@/lib/site";
 
 type ServiceConstellationProps = {
   title: string;
   subtitle: string;
-  currency: string;
   startingAt: string;
-  perMonth: string;
-  perProject: string;
   learnMore: string;
   servicesData: Record<
     string,
     {
       title: string;
       shortDescription: string;
-      price: string;
+      priceLabel: string;
       features: string[];
     }
   >;
 };
 
-const serviceIcons: Record<ServiceSlug, typeof Search> = {
-  seo: Search,
-  "paid-ads": Target,
+const serviceIcons: Record<string, typeof Megaphone> = {
+  "meta-ads": Megaphone,
   "social-media": Share2,
-  "content-marketing": FileText,
-  branding: Sparkles,
+  "web-development": Globe,
+  "ai-web-apps": Bot,
+  "custom-software": Code2,
 };
 
 export default function ServiceConstellation({
   title,
   subtitle,
-  currency,
   startingAt,
-  perMonth,
-  perProject,
   learnMore,
   servicesData,
 }: ServiceConstellationProps) {
   const tConst = useTranslations("home.constellation");
-  const [selectedSlug, setSelectedSlug] = useState<ServiceSlug>("paid-ads");
-  const selectedKey = serviceKeys[selectedSlug];
-  const currentService = servicesData[selectedKey] || {
-    title: "Digital Growth",
-    shortDescription: "End-to-end digital solutions.",
-    price: "15,000",
-    features: ["Strategic Roadmaps", "Data Analytics", "Conversion Optimization"],
+  const locale = useLocale() as Locale;
+  const [selectedSlug, setSelectedSlug] = useState<ServiceSlug>("meta-ads");
+  const currentService = servicesData[selectedSlug] || {
+    title: "Marketivity",
+    shortDescription: "Meta ads, websites and software.",
+    priceLabel: "Custom",
+    features: [],
   };
 
-  const isProject = selectedSlug === "branding";
   const CurrentIcon = serviceIcons[selectedSlug] || Sparkles;
 
   return (
-    <section className="safe-px py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="section-block safe-px relative overflow-hidden border-t border-brand-charcoal/8 bg-white">
       {/* Ambient background glows */}
       <div className="absolute top-1/3 -left-32 w-80 h-80 bg-brand-orange/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/3 -right-32 w-80 h-80 bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none" />
@@ -95,10 +91,9 @@ export default function ServiceConstellation({
             </p>
 
             {serviceSlugs.map((slug) => {
-              const key = serviceKeys[slug];
-              const item = servicesData[key];
+              const item = servicesData[slug];
               const isSelected = selectedSlug === slug;
-              const Icon = serviceIcons[slug];
+              const Icon = serviceIcons[slug] || Sparkles;
 
               return (
                 <Fragment key={slug}>
@@ -108,7 +103,7 @@ export default function ServiceConstellation({
                     onMouseEnter={() => setSelectedSlug(slug)}
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.35 }}
+                    viewport={{ once: true, amount: 0.25 }}
                     whileHover={{ y: -4, scale: isSelected ? 1.02 : 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: serviceSlugs.indexOf(slug) * 0.05 }}
@@ -140,11 +135,11 @@ export default function ServiceConstellation({
                       >
                         {item?.title || slug}
                       </h3>
-                      <span className="text-xs text-brand-charcoal/50">
-                        {currency}
-                        {item?.price}{" "}
-                        {slug === "branding" ? perProject : perMonth}
-                      </span>
+                      <StartingPrice
+                        slug={slug}
+                        locale={locale}
+                        className="text-xs text-brand-charcoal"
+                      />
                     </div>
                   </div>
 
@@ -179,11 +174,8 @@ export default function ServiceConstellation({
                             {item?.title || slug}
                           </h3>
                         </div>
-                        <p className="shrink-0 text-right text-lg font-black text-brand-orange">
-                          {currency}{item?.price}
-                          <span className="block text-[10px] font-normal text-brand-charcoal/60">
-                            {slug === "branding" ? perProject : perMonth}
-                          </span>
+                        <p className="shrink-0 text-right text-lg font-black text-brand-charcoal">
+                          <StartingPrice slug={slug} locale={locale} />
                         </p>
                       </div>
                       <p className="mt-4 text-sm leading-relaxed text-brand-charcoal/75">
@@ -201,8 +193,8 @@ export default function ServiceConstellation({
                         href={`/services/${slug}`}
                         className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-charcoal px-6 py-3 text-sm font-bold text-white"
                       >
-                        {learnMore}
-                        <ArrowRight className="h-4 w-4" />
+                        {item?.title ? `${learnMore}: ${item.title}` : learnMore}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
                       </Link>
                     </motion.div>
                   )}
@@ -247,12 +239,8 @@ export default function ServiceConstellation({
                         <span className="block text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/50">
                           {startingAt}
                         </span>
-                        <p className="text-xl sm:text-2xl md:text-3xl font-black text-brand-orange">
-                          {currency}
-                          {currentService.price}
-                          <span className="text-xs font-normal text-brand-charcoal/60 ml-1">
-                            {isProject ? perProject : perMonth}
-                          </span>
+                        <p className="text-xl sm:text-2xl md:text-3xl font-black text-brand-charcoal">
+                          <StartingPrice slug={selectedSlug} locale={locale} />
                         </p>
                       </div>
                     </div>
@@ -296,8 +284,12 @@ export default function ServiceConstellation({
                       href={`/services/${selectedSlug}`}
                       className="touch-target inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-brand-charcoal px-7 py-3.5 text-sm font-bold text-white shadow-soft-sm transition-all hover:bg-brand-orange hover:shadow-glow-orange active:scale-95"
                     >
-                      <span>{learnMore}</span>
-                      <ArrowRight className="h-4 w-4" />
+                      <span>
+                        {servicesData[selectedSlug]?.title
+                          ? `${learnMore}: ${servicesData[selectedSlug].title}`
+                          : learnMore}
+                      </span>
+                      <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>
                 </SpotlightCard>
