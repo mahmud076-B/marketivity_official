@@ -31,6 +31,8 @@ export type PortfolioItem = {
   };
   results?: { label: Record<Locale, string>; value: string }[];
   resultNote?: Record<Locale, string>;
+  /** Short status drawn on the cover. */
+  badge?: Record<Locale, string>;
 };
 
 const noUsage: Record<Locale, string> = {
@@ -131,6 +133,31 @@ const softwareAndSites: PortfolioItem[] = [
     resultNote: {
       en: "No traffic figures are published.",
       bn: "কোনো ট্রাফিকের সংখ্যা প্রকাশ করা হয়নি।",
+    },
+  },
+  {
+    id: "car-choice-bd",
+    tab: "websites",
+    name: "Car Choice BD",
+    kind: { en: "Website", bn: "ওয়েবসাইট" },
+    summary: {
+      en: "A website for a Japanese reconditioned car importer in Rajshahi, Bangladesh. The site says it imports Japanese reconditioned vehicles with authentic auction sheets, and lists a showroom near the BRTA office in Amchattar, Rajshahi.",
+      bn: "রাজশাহী, বাংলাদেশের একটি জাপানি রিকন্ডিশন্ড গাড়ি আমদানিকারকের ওয়েবসাইট। সাইটে বলা হয়েছে তারা অথেন্টিক অকশন শিটসহ জাপানি রিকন্ডিশন্ড গাড়ি বাংলাদেশে আমদানি করে, এবং রাজশাহীর Amchattar-এ বিআরটিএ অফিসের কাছে একটি শোরুম আছে।",
+    },
+    stackLabel: tech,
+    stack: {
+      en: "Next.js, React, TypeScript, Tailwind CSS, optional Supabase",
+      bn: "Next.js, React, TypeScript, Tailwind CSS, ঐচ্ছিক Supabase",
+    },
+    cover: "/portfolio/car-choice-bd.webp",
+    coverAlt: {
+      en: "Car Choice BD homepage",
+      bn: "কার চয়েস বিডির হোমপেজ",
+    },
+    badge: { en: "Launching soon", bn: "শীঘ্রই চালু হবে" },
+    resultNote: {
+      en: "Launching soon, so this card has no live link. No traffic figures are published.",
+      bn: "শীঘ্রই চালু হবে, তাই এই কার্ডে কোনো লাইভ লিংক নেই। কোনো ট্রাফিকের সংখ্যা প্রকাশ করা হয়নি।",
     },
   },
 ];

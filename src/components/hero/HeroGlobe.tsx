@@ -10,16 +10,8 @@ const HeroGlobeCanvas = dynamic(() => import("@/components/hero/HeroGlobeCanvas"
 });
 
 const copy = {
-  en: {
-    label: "Dotted globe showing Bangladesh, the UK, and the USA.",
-    places: "Where we work",
-    chips: ["Bangladesh", "UK", "USA"],
-  },
-  bn: {
-    label: "বাংলাদেশ, যুক্তরাজ্য ও যুক্তরাষ্ট্র দেখানো একটি বিন্দুর গ্লোব।",
-    places: "যে দেশে কাজ করি",
-    chips: ["বাংলাদেশ", "যুক্তরাজ্য", "যুক্তরাষ্ট্র"],
-  },
+  en: { label: "Earth" },
+  bn: { label: "পৃথিবী" },
 } as const;
 
 function canUseWebGL() {
@@ -88,22 +80,23 @@ export default function HeroGlobe({ locale }: { locale: Locale }) {
         <div className={ready ? "opacity-0" : "opacity-100"} aria-hidden>
           <GlobeFallback />
         </div>
+        {webgl ? null : (
+          <>
+            <span className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-[160%] rounded-full bg-brand-orange px-2 py-0.5 text-[11px] font-bold leading-none text-brand-charcoal shadow-sm">
+              Marketivity
+            </span>
+            <span
+              className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-orange shadow-[0_0_0_3px_rgba(247,147,30,0.35)]"
+              aria-hidden
+            />
+          </>
+        )}
         {webgl ? (
           <div className="absolute inset-0">
             <HeroGlobeCanvas onReady={handleReady} label={text.label} />
           </div>
         ) : null}
       </div>
-      <ul className="mt-3 flex flex-wrap justify-center gap-2" aria-label={text.places}>
-        {text.chips.map((chip) => (
-          <li
-            key={chip}
-            className="rounded-full border border-brand-charcoal/10 bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wide text-brand-charcoal shadow-sm"
-          >
-            {chip}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

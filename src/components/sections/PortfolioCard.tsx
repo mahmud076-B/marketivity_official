@@ -32,6 +32,11 @@ export default function PortfolioCard({
         sizes={wide ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
         className="portfolio-shot object-cover"
       />
+      {item.badge ? (
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-brand-charcoal shadow-sm">
+          {item.badge[locale]}
+        </span>
+      ) : null}
     </div>
   );
 
