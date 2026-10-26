@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const GA_PATTERN = /^G-[A-Z0-9]+$/i;
 const PIXEL_PATTERN = /^\d{5,20}$/;
+const CLARITY_ID = "z3sxw85xvg";
 
 function loadAnalytics() {
   if (typeof window === "undefined") return;
@@ -12,6 +13,7 @@ function loadAnalytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-HBCP7WF7SB";
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || "1433606852275637";
 
+  // 1. Google Analytics 4
   if (GA_PATTERN.test(gaId) && !document.getElementById("marketivity-ga")) {
     const script = document.createElement("script");
     script.id = "marketivity-ga";
@@ -24,10 +26,19 @@ function loadAnalytics() {
     document.head.appendChild(inline);
   }
 
+  // 2. Meta Pixel
   if (PIXEL_PATTERN.test(pixelId) && !document.getElementById("marketivity-pixel")) {
     const inline = document.createElement("script");
     inline.id = "marketivity-pixel";
     inline.text = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',${JSON.stringify(pixelId)});fbq('track','PageView');`;
+    document.head.appendChild(inline);
+  }
+
+  // 3. Microsoft Clarity
+  if (CLARITY_ID && !document.getElementById("microsoft-clarity")) {
+    const inline = document.createElement("script");
+    inline.id = "microsoft-clarity";
+    inline.text = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",${JSON.stringify(CLARITY_ID)});`;
     document.head.appendChild(inline);
   }
 }
@@ -35,9 +46,36 @@ function loadAnalytics() {
 export default function Analytics() {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
+  const loaded = useRef(false);
 
   useEffect(() => {
-    loadAnalytics();
+    const trigger = () => {
+      if (loaded.current) return;
+      loaded.current = true;
+      cleanup();
+      loadAnalytics();
+    };
+
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", trigger);
+      window.removeEventListener("touchstart", trigger);
+      window.removeEventListener("mousemove", trigger);
+      window.removeEventListener("keydown", trigger);
+      window.removeEventListener("click", trigger);
+    };
+
+    // Standard performance delay: 3.2s or first interaction
+    const timer = window.setTimeout(trigger, 3200);
+    window.addEventListener("scroll", trigger, { once: true, passive: true });
+    window.addEventListener("touchstart", trigger, { once: true, passive: true });
+    window.addEventListener("mousemove", trigger, { once: true, passive: true });
+    window.addEventListener("keydown", trigger, { once: true, passive: true });
+    window.addEventListener("click", trigger, { once: true, passive: true });
+
+    return () => {
+      cleanup();
+    };
   }, []);
 
   useEffect(() => {
