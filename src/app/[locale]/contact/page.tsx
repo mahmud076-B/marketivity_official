@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/motion/ScrollReveal";
 import { serviceCategories } from "@/lib/pricing";
 import { isLocale, site, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import PageActions from "@/components/sections/PageActions";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -42,14 +43,17 @@ export default async function ContactPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+          <p className="mt-4 text-lg text-brand-muted">{t("subtitle")}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={safe} align="center" />
+          </div>
         </div>
       </section>
 
       <section className="safe-px pb-16 md:pb-20">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <ScrollReveal direction="up">
-          <div className="rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-purple/10 p-8 shadow-soft-md backdrop-blur-sm">
+          <div id="enquiry" className="rounded-2xl border border-brand-charcoal/10 bg-white p-6 shadow-soft-md sm:p-8">
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {t("form.title")}
             </h2>

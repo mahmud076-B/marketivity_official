@@ -11,7 +11,7 @@ import MobileMenu from "./MobileMenu";
 const navItems = [
   { href: "/about", key: "about" },
   { href: "/services", key: "services" },
-  { href: "/portfolio", key: "portfolio" },
+  { href: "/work", key: "portfolio" },
   { href: "/pricing", key: "pricing" },
   { href: "/blog", key: "blog" },
   { href: "/contact", key: "contact" },
@@ -32,25 +32,23 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed w-full top-0 z-50 transition-all duration-300 safe-pt ${
+        className={`fixed top-0 z-50 h-16 w-full transition-colors duration-300 safe-pt ${
           scrolled
-            ? "bg-white/70 backdrop-blur-xl shadow-soft-md border-b border-white/40 py-2.5"
-            : "bg-transparent py-4"
+            ? "border-b border-brand-charcoal/10 bg-white/90 shadow-soft-sm backdrop-blur-xl"
+            : "bg-brand-offwhite/80 backdrop-blur-md"
         }`}
       >
-        <div className="safe-px mx-auto flex max-w-7xl items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex shrink-0 items-center gap-2 group">
-            <div className="transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
-                alt={tc("brand")}
-                width={42}
-                height={37}
-                className="h-8 w-auto object-contain transition-opacity group-hover:opacity-95 md:h-9"
-                priority
-              />
-            </div>
+        <div className="safe-px mx-auto flex h-full max-w-7xl items-center justify-between gap-3">
+          <Link href="/" className="flex shrink-0 items-center gap-2">
+            <Image
+              src="/brand/logo.webp"
+              alt={tc("brand")}
+              width={148}
+              height={128}
+              sizes="42px"
+              preload
+              className="h-8 w-auto object-contain md:h-9"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -68,7 +66,10 @@ export default function Header() {
           </nav>
 
           {/* Right Action Cluster */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link href="/contact" className="btn-primary hidden px-4 py-2 text-sm lg:inline-flex">
+              {tc("bookCall")}
+            </Link>
             <div className="flex items-center">
               <LanguageToggle />
             </div>

@@ -17,14 +17,19 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  adjustFontFallback: true,
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
+  preload: true,
 });
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-bengali",
-  subsets: ["bengali", "latin"],
-  weight: ["400", "500", "600", "700"],
+  subsets: ["bengali"],
+  weight: ["400", "600", "700"],
   display: "swap",
+  adjustFontFallback: true,
+  preload: false,
 });
 
 export function generateStaticParams() {
@@ -95,8 +100,11 @@ export default async function LocaleLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
           />
+          <a href="#content" className="skip-link">
+            {locale === "bn" ? "মূল অংশে যান" : "Skip to content"}
+          </a>
           <Header />
-          <main className="flex-1 pt-16">{children}</main>
+          <main id="content" className="flex-1 pt-16">{children}</main>
           <Footer />
           <WhatsAppFloat />
           <CookieConsent locale={locale === "bn" ? "bn" : "en"} />

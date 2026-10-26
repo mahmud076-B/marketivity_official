@@ -11,6 +11,7 @@ import {
   type ServiceCategory,
 } from "@/lib/pricing";
 import { whatsappLink, type Locale } from "@/lib/site";
+import { Link } from "@/i18n/navigation";
 
 export default function PricingBoard({
   locale,
@@ -32,7 +33,7 @@ export default function PricingBoard({
 
   return (
     <div>
-      <div className="flex gap-2 overflow-x-auto pb-2" role="tablist">
+      <div className="flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label={locale === "bn" ? "সেবার ধরন" : "Service category"}>
         {serviceCategories.map((item) => {
           const selected = item.slug === category.slug;
           return (
@@ -42,7 +43,7 @@ export default function PricingBoard({
               role="tab"
               aria-selected={selected}
               onClick={() => setSlug(item.slug)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+              className={`min-h-11 shrink-0 rounded-full px-4 py-2 text-sm font-semibold ${
                 selected
                   ? "bg-brand-orange text-white"
                   : "bg-white text-brand-charcoal border border-brand-charcoal/10"
@@ -179,19 +180,18 @@ export function TierGrid({
               </li>
             ))}
           </ul>
+          <Link href="/contact" className="btn-primary mt-6 w-full text-sm">
+            {locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+          </Link>
           <a
             href={whatsappLink(
               locale === "bn"
-                ? `হ্যালো মার্কেটিভিটি, আমি ${category.name.bn} — ${tier.name.bn} নিয়ে একটি ফ্রি কল বুক করতে চাই।`
-                : `Hello Marketivity, I would like to book a free call about ${category.name.en} — ${tier.name.en}.`
+                ? `হ্যালো মার্কেটিভিটি, আমি ${category.name.bn} — ${tier.name.bn} নিয়ে কথা বলতে চাই।`
+                : `Hello Marketivity, I would like to talk about ${category.name.en} — ${tier.name.en}.`
             )}
-            className={`mt-6 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold ${
-              tier.popular
-                ? "bg-brand-orange text-white"
-                : "border border-brand-orange text-brand-orange"
-            }`}
+            className="mt-3 block text-center text-sm font-semibold text-brand-ink underline"
           >
-            {locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+            {locale === "bn" ? "হোয়াটসঅ্যাপে লিখুন" : "Message on WhatsApp"}
           </a>
         </article>
       ))}

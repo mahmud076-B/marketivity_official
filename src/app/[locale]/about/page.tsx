@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import StatsMarquee from "@/components/sections/StatsMarquee";
-import { createStatItems } from "@/lib/stats";
 import CTASection from "@/components/sections/CTASection";
+import TrustStrip from "@/components/sections/TrustStrip";
+import PageActions from "@/components/sections/PageActions";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { SHOW_TEAM, founder, isLocale, site, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -50,10 +50,13 @@ export default async function AboutPage({ params }: Props) {
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">{titles[locale]}</h1>
           <p className="mt-4 text-lg text-brand-muted">{descriptions[locale]}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={locale} align="center" />
+          </div>
         </div>
       </section>
 
-      <StatsMarquee items={createStatItems(locale)} />
+      <TrustStrip locale={locale} />
 
       <section className="safe-px py-16">
         <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start">
@@ -88,7 +91,7 @@ export default async function AboutPage({ params }: Props) {
       <section className="safe-px bg-white py-16">
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           <div className="rounded-3xl border border-brand-orange/20 bg-brand-offwhite p-8">
-            <h2 className="mb-3 text-2xl font-bold text-brand-orange">{t("mission.title")}</h2>
+            <h2 className="mb-3 text-2xl font-bold text-brand-charcoal">{t("mission.title")}</h2>
             <p className="leading-relaxed text-brand-muted">{t("mission.description")}</p>
           </div>
           <div className="rounded-3xl border border-brand-purple/20 bg-brand-offwhite p-8">

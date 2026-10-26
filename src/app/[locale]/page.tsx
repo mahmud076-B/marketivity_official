@@ -2,27 +2,23 @@ import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import RotatingHeadline from "@/components/sections/RotatingHeadline";
-import StatsMarquee from "@/components/sections/StatsMarquee";
-import { createStatItems } from "@/lib/stats";
-import LogoMarquee from "@/components/sections/LogoMarquee";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CTASection from "@/components/sections/CTASection";
 import CaseStudyCard from "@/components/sections/CaseStudyCard";
 import ClientReportedNote from "@/components/sections/ClientReportedNote";
 import SoftwarePortfolio from "@/components/sections/SoftwarePortfolio";
 import InteractiveGrowthFunnel from "@/components/hero/InteractiveGrowthFunnel";
-import AnimatedBackground from "@/components/motion/AnimatedBackground";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import ProblemSection from "@/components/sections/ProblemSection";
 import GrowthEcosystem from "@/components/sections/GrowthEcosystem";
 import WhyMarketivity from "@/components/sections/WhyMarketivity";
 import ServiceConstellation from "@/components/sections/ServiceConstellation";
-import LightRays from "@/components/reactbits/LightRays";
-import { featuredCampaigns, clientNames, proofCopy } from "@/lib/campaigns";
+import TrustStrip from "@/components/sections/TrustStrip";
+import PageActions from "@/components/sections/PageActions";
+import { featuredCampaigns } from "@/lib/campaigns";
 import { serviceCategories, startingPriceLabel } from "@/lib/pricing";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
-import { ArrowRight } from "lucide-react";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -78,54 +74,37 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <section className="gradient-hero safe-px py-16 md:py-24 relative overflow-hidden">
-        <AnimatedBackground variant="mesh" className="absolute inset-0" />
-        <LightRays color="mixed" />
-        <div className="mx-auto max-w-7xl relative z-10">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
-            <ScrollReveal direction="up" className="w-full min-w-0 lg:col-span-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="h-2 w-2 rounded-full bg-brand-orange animate-pulse" />
-                <p className="text-xs md:text-sm font-black uppercase tracking-widest text-brand-purple">
-                  {tc("tagline")}
-                </p>
-              </div>
+      <section className="gradient-hero safe-px py-12 md:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
+            <div className="w-full min-w-0 text-center lg:col-span-6 lg:text-left">
+              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-ink md:text-sm">
+                {tc("tagline")}
+              </p>
               <h1 className="mb-5 font-display text-4xl font-extrabold leading-[1.12] text-brand-charcoal sm:text-5xl md:text-6xl">
                 {t("hero.title")}{" "}
-                <span className="block mt-2">
+                <span className="mt-2 block">
                   <RotatingHeadline words={rotatingWords} className="text-4xl sm:text-5xl md:text-6xl" />
                 </span>
               </h1>
-              <p className="mx-auto lg:mx-0 mb-8 max-w-xl text-base sm:text-lg text-brand-muted leading-relaxed">
+              <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-brand-muted sm:text-lg lg:mx-0">
                 {t("hero.subtitle")}
               </p>
-              <div className="flex flex-col items-center justify-center gap-3.5 sm:flex-row lg:justify-start">
-                <Link
-                  href="/contact"
-                  className="touch-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-4 text-base font-bold text-white sm:w-auto"
-                >
-                  <span>{t("hero.cta")}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/portfolio"
-                  className="touch-target inline-flex w-full items-center justify-center rounded-full border border-brand-charcoal/15 bg-white px-8 py-4 text-base font-bold text-brand-charcoal sm:w-auto"
-                >
+              <div className="flex flex-col items-center gap-3 lg:items-start">
+                <PageActions locale={locale} />
+                <Link href="/work" className="text-sm font-semibold text-brand-ink underline">
                   {t("hero.secondaryCta")}
                 </Link>
               </div>
-            </ScrollReveal>
-            <ScrollReveal direction="right" delay={0.2} className="w-full min-w-0 lg:col-span-6">
+            </div>
+            <div className="w-full min-w-0 lg:col-span-6">
               <InteractiveGrowthFunnel />
-            </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      <StatsMarquee items={createStatItems(locale)} />
-      <p className="safe-px mx-auto max-w-4xl py-3 text-center text-xs leading-relaxed text-brand-muted">
-        {proofCopy.source[locale]}
-      </p>
+      <TrustStrip locale={locale} />
 
       <ScrollReveal direction="up">
         <ProblemSection
@@ -146,25 +125,7 @@ export default async function HomePage({ params }: Props) {
         subtitle={t("ecosystem.subtitle")}
       />
 
-      <LogoMarquee />
-      <section className="safe-px pb-12">
-        <div className="mx-auto max-w-5xl text-center">
-          <h2 className="text-2xl font-bold text-brand-charcoal">{proofCopy.clientsLabel[locale]}</h2>
-          <p className="mt-2 text-sm text-brand-muted">{proofCopy.clientsNote[locale]}</p>
-          <ul className="mt-5 flex flex-wrap justify-center gap-2">
-            {clientNames.map((name) => (
-              <li
-                key={name}
-                className="rounded-full border border-brand-charcoal/10 bg-white px-3 py-1.5 text-sm text-brand-charcoal"
-              >
-                {name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="safe-px py-16 sm:py-20 bg-brand-offwhite">
+      <section className="safe-px bg-brand-offwhite py-16 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 text-center max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-4xl font-extrabold text-brand-charcoal mb-3">
@@ -208,7 +169,7 @@ export default async function HomePage({ params }: Props) {
           </div>
           <ClientReportedNote locale={locale} />
           <div className="mt-8 text-center">
-            <Link href="/portfolio" className="text-sm font-bold text-brand-orange">
+            <Link href="/work" className="text-sm font-bold text-brand-ink underline">
               {tc("viewAll")}
             </Link>
           </div>

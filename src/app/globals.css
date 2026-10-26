@@ -5,6 +5,8 @@
   --color-brand-orange: #F7931E;
   --color-brand-orange-light: #FFAA4D;
   --color-brand-orange-dark: #E07D0F;
+  /* Same hue as the brand orange, dark enough for text on cream (WCAG AA). */
+  --color-brand-ink: #8A4500;
   --color-brand-purple: #7B3FE4;
   --color-brand-purple-light: #9A6AEB;
   --color-brand-purple-dark: #6429C9;
@@ -153,10 +155,70 @@ html[lang="bn"] h4 {
   color: #2D2D2D;
 }
 
-/* Accessible Focus Ring */
-:focus-visible {
-  outline: 2px solid #F7931E;
-  outline-offset: 2px;
+/* Accessible Focus Ring — dark orange so the ring is visible on cream. */
+:focus-visible,
+.outline-none:focus-visible {
+  outline: 2px solid #8A4500;
+  outline-offset: 3px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-whatsapp {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.btn-primary {
+  background: #f7931e;
+  color: #24202c;
+}
+
+.btn-primary:hover {
+  background: #e07d0f;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(36, 32, 44, 0.2);
+  background: #fff;
+  color: #24202c;
+}
+
+.btn-secondary:hover {
+  border-color: #8a4500;
+}
+
+.btn-whatsapp {
+  background: #075e54;
+  color: #fff;
+}
+
+.btn-whatsapp:hover {
+  background: #064e46;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 80;
+  transform: translateY(-150%);
+  border-radius: 9999px;
+  background: #24202c;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* Custom Scrollbar */
@@ -259,4 +321,30 @@ html[lang="bn"] h4 {
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* Orange as text fails contrast on cream. Keep the bright orange for fills. */
+.text-brand-orange,
+.hover\:text-brand-orange:hover,
+.group-hover\:text-brand-orange:is(:where(.group):hover *),
+.group-hover\:text-brand-orange:is(:where(.group):hover) {
+  color: #8a4500;
+}
+
+.bg-brand-orange,
+.hover\:bg-brand-orange:hover {
+  color: #24202c;
+}
+
+.text-brand-charcoal\/40,
+.text-brand-charcoal\/50,
+.text-brand-charcoal\/55,
+.text-brand-charcoal\/60,
+.text-brand-charcoal\/65,
+.text-brand-charcoal\/70 {
+  color: #4a4553;
+}
+
+.font-medium {
+  font-weight: 600;
 }

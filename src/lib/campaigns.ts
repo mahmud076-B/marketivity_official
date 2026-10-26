@@ -213,7 +213,7 @@ export const proofCopy = {
     bn: "আমরা যেসব ক্লায়েন্ট ও পেজের বিজ্ঞাপন চালিয়েছি",
   },
   clientsNote: {
-    en: "Names are taken from campaign names. The logo strip uses the client marks we already have permission to show.",
-    bn: "নামগুলো ক্যাম্পেইনের নাম থেকে নেওয়া। লোগো স্ট্রিপে শুধু সেই চিহ্ন আছে, যেগুলো দেখানোর অনুমতি আছে।",
+    en: "Names are taken from campaign names. Logos are client marks we have permission to show. A logo is not paired with a name, because that pairing is not in the export.",
+    bn: "নামগুলো ক্যাম্পেইনের নাম থেকে নেওয়া। লোগো সেই ক্লায়েন্ট চিহ্ন, যেগুলো দেখানোর অনুমতি আছে। কোনো লোগোকে কোনো নামের সাথে জোড়া হয়নি, কারণ সেই জোড়া এক্সপোর্টে নেই।",
   },
 } as const;

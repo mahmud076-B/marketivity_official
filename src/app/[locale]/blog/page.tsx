@@ -7,6 +7,8 @@ import { Calendar } from "lucide-react";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import PageActions from "@/components/sections/PageActions";
+import CTASection from "@/components/sections/CTASection";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -38,7 +40,10 @@ export default async function BlogPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">
             {t("title")}
           </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+          <p className="mt-4 text-lg text-brand-muted">{t("subtitle")}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={isLocale(locale) ? locale : "en"} align="center" />
+          </div>
         </div>
       </section>
 
@@ -52,8 +57,9 @@ export default async function BlogPage({ params }: Props) {
                   src={post.image}
                   alt={t(`posts.${post.slug}.title`)}
                   fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  quality={60}
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
@@ -89,6 +95,7 @@ export default async function BlogPage({ params }: Props) {
           ))}
         </div>
       </section>
+      <CTASection title={t("title")} subtitle={t("subtitle")} cta={tc("bookCall")} />
     </>
   );
 }

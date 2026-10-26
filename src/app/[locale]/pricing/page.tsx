@@ -1,6 +1,8 @@
 import { setRequestLocale } from "next-intl/server";
 import PricingBoard from "@/components/pricing/PricingBoard";
 import CTASection from "@/components/sections/CTASection";
+import PageActions from "@/components/sections/PageActions";
+import TrustStrip from "@/components/sections/TrustStrip";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -44,8 +46,12 @@ export default async function PricingPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">{copy[locale].title}</h1>
           <p className="mt-4 text-lg text-brand-muted">{copy[locale].description}</p>
           <p className="mt-3 text-sm text-brand-muted">{copy[locale].note}</p>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={locale} topic={copy[locale].title} align="center" />
+          </div>
         </div>
       </section>
+      <TrustStrip locale={locale} />
       <section className="safe-px pb-16">
         <div className="mx-auto max-w-6xl">
           <PricingBoard locale={locale} />
@@ -54,7 +60,7 @@ export default async function PricingPage({ params }: Props) {
       <CTASection
         title={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
         subtitle={copy[locale].note}
-        cta={locale === "bn" ? "হোয়াটসঅ্যাপ" : "WhatsApp"}
+        cta={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
         href="/contact"
       />
     </>

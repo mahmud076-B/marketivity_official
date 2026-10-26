@@ -1,8 +1,11 @@
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { serviceCategories, startingPriceLabel } from "@/lib/pricing";
-import { isLocale, whatsappLink, type Locale } from "@/lib/site";
+import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import PageActions from "@/components/sections/PageActions";
+import TrustStrip from "@/components/sections/TrustStrip";
+import CTASection from "@/components/sections/CTASection";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -36,6 +39,7 @@ export default async function ServicesPage({ params }: Props) {
   setRequestLocale(locale);
 
   return (
+    <>
     <section className="safe-px py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-3xl">
@@ -45,6 +49,9 @@ export default async function ServicesPage({ params }: Props) {
               ? "মেটা অ্যাডস ও ওয়েবসাইট গ্রোথ পার্টনার, এবং একটি সফটওয়্যার এজেন্সি।"
               : "A Meta Ads and website growth partner, and a software studio."}
           </p>
+          <div className="mt-8">
+            <PageActions locale={locale} topic={copy[locale].title} />
+          </div>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {serviceCategories.map((category) => (
@@ -58,28 +65,22 @@ export default async function ServicesPage({ params }: Props) {
                 {startingPriceLabel(category, locale)}
               </p>
               <p className="mt-1 text-xs text-brand-muted">{category.tiers[1].bestFor[locale]}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Link
-                  href={`/services/${category.slug}`}
-                  className="rounded-full border border-brand-charcoal/15 px-4 py-2 text-sm font-semibold"
-                >
+              <div className="mt-5">
+                <Link href={`/services/${category.slug}`} className="btn-secondary px-4 py-2 text-sm">
                   {locale === "bn" ? "বিস্তারিত" : "View details"}
                 </Link>
-                <a
-                  href={whatsappLink(
-                    locale === "bn"
-                      ? `হ্যালো মার্কেটিভিটি, ${category.name.bn} নিয়ে কথা বলতে চাই।`
-                      : `Hello Marketivity, I want to talk about ${category.name.en}.`
-                  )}
-                  className="rounded-full bg-brand-orange px-4 py-2 text-sm font-bold text-white"
-                >
-                  {locale === "bn" ? "ফ্রি কল" : "Book a free call"}
-                </a>
               </div>
             </article>
           ))}
         </div>
       </div>
     </section>
+    <TrustStrip locale={locale} />
+    <CTASection
+      title={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+      subtitle={copy[locale].description}
+      cta={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+    />
+    </>
   );
 }

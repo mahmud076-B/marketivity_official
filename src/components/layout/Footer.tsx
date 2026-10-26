@@ -15,7 +15,7 @@ export default async function Footer() {
 
   const quickLinks = [
     { href: "/about", label: tn("about") },
-    { href: "/portfolio", label: tn("portfolio") },
+    { href: "/work", label: tn("portfolio") },
     { href: "/pricing", label: tn("pricing") },
     { href: "/blog", label: tn("blog") },
     { href: "/careers", label: tn("careers") },
@@ -35,11 +35,12 @@ export default async function Footer() {
           {/* Brand Info */}
           <div>
             <Image
-              src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
+              src="/brand/logo.webp"
               alt={tc("brand")}
-              width={45}
-              height={39}
-              className="mb-4 h-9 w-auto object-contain"
+              width={148}
+              height={128}
+              sizes="48px"
+              className="mb-4 h-10 w-auto object-contain"
             />
             <p className="mb-2 text-sm font-semibold text-brand-orange">{tc("tagline")}</p>
             <p className="mb-5 text-sm leading-relaxed text-brand-charcoal/65">
@@ -134,7 +135,7 @@ export default async function Footer() {
                 href="https://wa.me/8801767644696"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]/20 text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
+                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-[#075E54] text-white"
                 aria-label="WhatsApp"
               >
                 <MessageCircle className="h-5 w-5" />

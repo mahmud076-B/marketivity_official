@@ -4,8 +4,10 @@ import { Link } from "@/i18n/navigation";
 import { TierGrid } from "@/components/pricing/PricingBoard";
 import { getCategory, pricingFaq, serviceCategories, startingPriceLabel } from "@/lib/pricing";
 import { isServiceSlug } from "@/lib/services";
-import { isLocale, whatsappLink, type Locale } from "@/lib/site";
+import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import PageActions from "@/components/sections/PageActions";
+import CTASection from "@/components/sections/CTASection";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -48,16 +50,9 @@ export default async function ServicePage({ params }: Props) {
           <p className="mt-4 text-2xl font-extrabold text-brand-purple">
             {startingPriceLabel(category, locale)}
           </p>
-          <a
-            href={whatsappLink(
-              locale === "bn"
-                ? `হ্যালো মার্কেটিভিটি, ${category.name.bn} নিয়ে একটি ফ্রি কল বুক করতে চাই।`
-                : `Hello Marketivity, I would like to book a free call about ${category.name.en}.`
-            )}
-            className="mt-6 inline-flex rounded-full bg-brand-orange px-6 py-3 font-bold text-white"
-          >
-            {locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
-          </a>
+          <div className="mt-8 flex justify-center">
+            <PageActions locale={locale} topic={category.name[locale]} align="center" />
+          </div>
         </div>
       </section>
 
@@ -101,6 +96,11 @@ export default async function ServicePage({ params }: Props) {
             ))}
         </div>
       </section>
+      <CTASection
+        title={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+        subtitle={category.summary[locale]}
+        cta={locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+      />
     </>
   );
 }

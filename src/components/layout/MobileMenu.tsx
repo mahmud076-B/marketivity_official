@@ -16,7 +16,7 @@ const navItems = [
   { href: "/", key: "home" },
   { href: "/about", key: "about" },
   { href: "/services", key: "services" },
-  { href: "/portfolio", key: "portfolio" },
+  { href: "/work", key: "portfolio" },
   { href: "/pricing", key: "pricing" },
   { href: "/blog", key: "blog" },
   { href: "/careers", key: "careers" },
@@ -52,11 +52,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="safe-px flex items-center justify-between border-b border-brand-charcoal/10 py-4 bg-white/80 backdrop-blur-md">
             <Link href="/" onClick={onClose} className="flex items-center gap-2">
               <Image
-                src="/Marketivity_Exact_Logo_Web_Assets/Marketivity_logo_exact.svg"
+                src="/brand/logo.webp"
                 alt={tc("brand")}
-                width={39}
-                height={34}
-                className="h-[30px] w-auto object-contain"
+                width={148}
+                height={128}
+                sizes="36px"
+                className="h-8 w-auto object-contain"
               />
             </Link>
             <div className="flex items-center gap-3">
@@ -94,15 +95,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </nav>
 
           {/* Bottom Actions */}
-          <div className="safe-px flex flex-col items-center gap-3.5 border-t border-brand-charcoal/10 py-5 bg-white/60">
+          <div className="safe-px flex flex-col items-center gap-3 border-t border-brand-charcoal/10 bg-white/80 py-4">
+            <Link href="/contact" onClick={onClose} className="btn-primary w-full">
+              {tc("bookCall")}
+            </Link>
             <a
-              href="https://wa.me/8801767644696"
+              href="https://wa.me/8801767644696?text=Hello%20Marketivity%2C%20I%20would%20like%20to%20book%20a%20free%20call."
               target="_blank"
               rel="noopener noreferrer"
-              className="touch-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 font-bold text-white shadow-soft-md hover:brightness-105 active:scale-95 transition-all"
+              className="btn-whatsapp w-full"
             >
-              <MessageCircle className="h-5 w-5" />
-              {tc("whatsapp")}
+              <MessageCircle className="h-5 w-5" aria-hidden />
+              {tc("whatsappChat")}
             </a>
           </div>
         </motion.div>

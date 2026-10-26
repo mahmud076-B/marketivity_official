@@ -48,11 +48,11 @@ export default function CookieConsent({ locale }: { locale: "en" | "bn" }) {
         };
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[60] safe-px pb-[max(1rem,env(safe-area-inset-bottom))]">
+    <div className="fixed inset-x-0 bottom-0 z-[60] safe-px pr-20 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pr-6">
       <div className="mx-auto flex max-w-3xl flex-col gap-4 rounded-2xl border border-brand-charcoal/10 bg-white p-4 shadow-soft-lg sm:flex-row sm:items-center">
         <p className="flex-1 text-sm leading-relaxed text-brand-muted">
           {copy.text}{" "}
-          <Link href="/privacy" className="font-semibold text-brand-orange">
+          <Link href="/privacy" className="font-semibold text-brand-ink underline">
             {copy.privacy}
           </Link>
         </p>
@@ -60,14 +60,14 @@ export default function CookieConsent({ locale }: { locale: "en" | "bn" }) {
           <button
             type="button"
             onClick={() => choose("denied")}
-            className="rounded-full border border-brand-charcoal/15 px-4 py-2 text-sm font-semibold text-brand-charcoal"
+            className="btn-secondary px-4 py-2 text-sm"
           >
             {copy.reject}
           </button>
           <button
             type="button"
             onClick={() => choose("granted")}
-            className="rounded-full bg-brand-orange px-4 py-2 text-sm font-semibold text-white"
+            className="btn-primary px-4 py-2 text-sm"
           >
             {copy.accept}
           </button>

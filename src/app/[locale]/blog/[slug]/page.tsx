@@ -82,9 +82,10 @@ export default async function BlogPostPage({ params }: Props) {
               src={post.image}
               alt={t(`posts.${slug}.title`)}
               fill
+              quality={60}
+              preload
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
-              priority
             />
           </div>
 

@@ -30,13 +30,16 @@
     "message": "Message",
     "subject": "Subject",
     "optional": "(optional)",
-    "allRightsReserved": "All rights reserved."
+    "allRightsReserved": "All rights reserved.",
+    "bookCall": "Book a free call",
+    "whatsappChat": "Message on WhatsApp",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "portfolio": "Portfolio",
+    "portfolio": "Work",
     "pricing": "Pricing",
     "blog": "Blog",
     "careers": "Careers",
@@ -287,17 +290,17 @@
       "suffix": "/mo"
     },
     "growthFunnel": {
-      "subtitle": "INTERACTIVE 3D FUNNEL",
-      "interactHint": "CLICK STAGES TO INTERACT",
+      "subtitle": "How a campaign is organised",
+      "interactHint": "Four stages",
       "traffic": {
         "title": "Traffic",
-        "metric": "Top of Funnel",
-        "desc": "Laser-focused buyer persona segmentation to drive targeted awareness."
+        "metric": "Audience",
+        "desc": "The people the campaign is meant to reach."
       },
       "leads": {
         "title": "Leads",
-        "metric": "Engagement",
-        "desc": "High-intent landing pages and instant capture mechanisms."
+        "metric": "The page",
+        "desc": "Where the ad sends someone: a post, a site, or a WhatsApp thread."
       },
       "sales": {
         "title": "Conversations",
@@ -306,7 +309,7 @@
       },
       "scale": {
         "title": "Scale",
-        "metric": "Retention",
+        "metric": "A repeat",
         "desc": "More budget only on campaigns that already produce the agreed result."
       }
     }
@@ -336,7 +339,7 @@
         },
         "excellence": {
           "title": "Excellence",
-          "description": "We never settle for average — only outstanding results."
+          "description": "Campaigns and software are checked against the tool that counted the result."
         },
         "innovation": {
           "title": "Innovation",
@@ -390,32 +393,32 @@
     }
   },
   "careers": {
-    "title": "Join Our Team",
-    "subtitle": "Occasional roles at the Rajshahi studio. Send a CV if you want to be considered.",
+    "title": "Careers",
+    "subtitle": "No roles are listed. Write to the studio if you want to work with the founder.",
     "culture": {
-      "title": "Why Work With Us",
+      "title": "Working here",
       "items": {
         "growth": {
-          "title": "Career Growth",
-          "description": "Learn from industry experts and grow your skills."
+          "title": "With the founder",
+          "description": "Work would be with the founder, in Rajshahi."
         },
         "impact": {
-          "title": "Real Impact",
-          "description": "Work on campaigns that transform businesses."
+          "title": "Measured work",
+          "description": "Campaigns are judged from Ads Manager, not a slogan."
         },
         "culture": {
-          "title": "Great Culture",
-          "description": "Collaborative, creative, and supportive team environment."
+          "title": "A small studio",
+          "description": "A one-founder studio. There is no staff page yet."
         },
         "flexible": {
-          "title": "Flexible Work",
-          "description": "Hybrid options and a healthy work-life balance."
+          "title": "Rajshahi",
+          "description": "The studio is in Rajshahi. Remote work is only discussed for a real role."
         }
       }
     },
     "openings": {
-      "title": "Open Positions",
-      "subtitle": "We're always looking for talented people.",
+      "title": "No roles are listed",
+      "subtitle": "The studio is not advertising jobs. Write if you want to work with the founder.",
       "positions": {
         "socialMedia": {
           "title": "Social Media Manager",
@@ -433,7 +436,7 @@
           "location": "Remote"
         }
       },
-      "noMatch": "Don't see a fit? Send your CV to marketivitybd@gmail.com"
+      "noMatch": "Email marketivitybd@gmail.com. Do not send a CV for a role that is not listed."
     }
   },
   "pricing": {
@@ -458,14 +461,14 @@
   },
   "blog": {
     "title": "Insights & Tips",
-    "subtitle": "Digital marketing knowledge from our team.",
+    "subtitle": "Notes on Meta ads, websites and software.",
     "readTime": "min read",
     "posts": {
       "digital-marketing-trends-bangladesh-2026": {
         "title": "Digital Marketing Trends in Bangladesh 2026",
         "excerpt": "Discover the top digital marketing trends shaping Bangladesh's business landscape this year.",
         "content": {
-          "p1": "Bangladesh's digital economy is growing faster than ever. With over 130 million internet users, businesses that embrace digital marketing are pulling ahead of the competition.",
+          "p1": "Businesses in Bangladesh are selling more through Facebook, Instagram and their own websites. Marketivity does not publish a national user count.",
           "p2": "Short video is a large part of what people watch on Facebook and Instagram. We do not publish a universal engagement multiple for it.",
           "p3": "AI-powered marketing tools are becoming accessible to small businesses. From chatbots to automated ad optimization, AI is leveling the playing field.",
           "p4": "Local SEO is more important than ever for Rajshahi businesses. Optimizing for 'near me' searches and Google Business Profile can drive significant foot traffic.",
