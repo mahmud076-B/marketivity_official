@@ -2,17 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import {
-  AmbientLight,
   BackSide,
   BufferGeometry,
   Color,
-  DirectionalLight,
   Group,
   Line,
   LineBasicMaterial,
   Mesh,
   MeshBasicMaterial,
-  MeshPhongMaterial,
+  NoToneMapping,
   PerspectiveCamera,
   QuadraticBezierCurve3,
   RingGeometry,
@@ -32,25 +30,26 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
  *   three-globe examples (https://unpkg.com/three-globe@2.45.0/example/img/earth-blue-marble.jpg).
  *   NASA Visible Earth imagery is public domain.
  * - Bump: earth-topology.png from the same example set (public-domain elevation shading).
- * - Local files: /globe/earth-day-2k.webp, earth-day-1k.webp, earth-topology-2k.webp,
- *   earth-topology-1k.webp. The static fallback is /globe/earth-placeholder.webp.
- * Night lights are not used, so the face toward the cream page stays a day satellite view.
+ * - Local files: /globe/earth-day-2k.webp and earth-day-1k.webp, exposure-lifted so the
+ *   map stays bright on the cream page. The static fallback is /globe/earth-placeholder.webp.
+ * The globe is unlit, so the visible hemisphere has no dark night side.
  *
  * three.js (MIT). A small scene, not the full globe.gl bundle.
  */
 
 const HOME = { lat: 24.374, lng: 88.604 };
 
-type Destination = { lat: number; lng: number; color: string };
+type Anchor = "above" | "left" | "right";
+type Destination = { lat: number; lng: number; color: string; anchor: Anchor };
 
-/** Destinations only. Nothing here is rendered as text. */
+/** Order matches the place-name list passed in from the page locale. */
 const DESTINATIONS: Destination[] = [
-  { lat: 40.713, lng: -74.006, color: "#7B3FE4" },
-  { lat: 51.507, lng: -0.128, color: "#F7931E" },
-  { lat: 25.204, lng: 55.27, color: "#7B3FE4" },
-  { lat: 43.653, lng: -79.383, color: "#F7931E" },
-  { lat: -33.868, lng: 151.209, color: "#7B3FE4" },
-  { lat: 50.11, lng: 8.682, color: "#F7931E" },
+  { lat: 40.713, lng: -74.006, color: "#7B3FE4", anchor: "above" },
+  { lat: 51.507, lng: -0.128, color: "#F7931E", anchor: "left" },
+  { lat: 25.204, lng: 55.27, color: "#7B3FE4", anchor: "above" },
+  { lat: 43.653, lng: -79.383, color: "#F7931E", anchor: "left" },
+  { lat: -33.868, lng: 151.209, color: "#7B3FE4", anchor: "above" },
+  { lat: 50.11, lng: 8.682, color: "#F7931E", anchor: "right" },
 ];
 
 const ARC_MS = 2600;
@@ -62,7 +61,7 @@ function latLngToVec(lat: number, lng: number, radius: number) {
   return new Vector3(-ring * Math.cos(phi), radius * Math.cos(theta), ring * Math.sin(phi));
 }
 
-function makeMarker() {
+function makePill(text: string, home: boolean, dotColor: string) {
   const root = document.createElement("div");
   root.style.pointerEvents = "none";
   root.style.position = "absolute";
@@ -72,39 +71,44 @@ function makeMarker() {
   root.style.textAlign = "center";
 
   const label = document.createElement("div");
-  label.textContent = "Marketivity";
-  label.style.cssText = [
-    "background:#F7931E",
-    "color:#24202C",
-    "font:700 11px/1.1 system-ui,sans-serif",
-    "padding:3px 7px",
-    "border-radius:999px",
-    "white-space:nowrap",
-    "box-shadow:0 1px 3px rgba(36,32,44,0.22)",
-  ].join(";");
+  label.textContent = text;
+  label.style.cssText = home
+    ? "background:#F7931E;color:#24202C;font:700 11px/1.1 system-ui,sans-serif;padding:3px 7px;border-radius:999px;white-space:nowrap;box-shadow:0 1px 3px rgba(36,32,44,0.22)"
+    : "background:#F7F3F1;color:#24202C;font:700 10px/1.15 system-ui,sans-serif;padding:2px 6px;border-radius:999px;white-space:nowrap;box-shadow:0 1px 2px rgba(36,32,44,0.28)";
 
   const dot = document.createElement("div");
-  dot.style.cssText =
-    "width:8px;height:8px;margin:4px auto 0;border-radius:999px;background:#F7931E;box-shadow:0 0 0 3px rgba(247,147,30,0.35)";
+  dot.style.cssText = home
+    ? "width:8px;height:8px;margin:4px auto 0;border-radius:999px;background:#F7931E;box-shadow:0 0 0 3px rgba(247,147,30,0.35)"
+    : `width:6px;height:6px;margin:3px auto 0;border-radius:999px;background:${dotColor}`;
 
   root.append(label, dot);
-  return root;
+  return { root, label };
+}
+
+function pinTransform(anchor: Anchor, x: number, y: number) {
+  if (anchor === "left") return `translate(-108%, -55%) translate(${x}px, ${y}px)`;
+  if (anchor === "right") return `translate(8%, -55%) translate(${x}px, ${y}px)`;
+  return `translate(-50%, -135%) translate(${x}px, ${y}px)`;
 }
 
 export default function HeroGlobeCanvas({
   onReady,
   label,
+  places,
 }: {
   onReady?: () => void;
   label: string;
+  places: readonly string[];
 }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const onReadyRef = useRef(onReady);
   const labelRef = useRef(label);
+  const placesRef = useRef(places);
 
   useEffect(() => {
     onReadyRef.current = onReady;
     labelRef.current = label;
+    placesRef.current = places;
   });
 
   useEffect(() => {
@@ -124,6 +128,7 @@ export default function HeroGlobeCanvas({
     renderer.setSize(width(), width());
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = SRGBColorSpace;
+    renderer.toneMapping = NoToneMapping;
     const canvas = renderer.domElement;
     canvas.style.width = "100%";
     canvas.style.height = "100%";
@@ -157,11 +162,6 @@ export default function HeroGlobeCanvas({
     controls.addEventListener("end", resumeSpin);
     canvas.style.touchAction = "pan-y";
 
-    scene.add(new AmbientLight(0xffffff, 2.35));
-    const sun = new DirectionalLight(0xffffff, 1.15);
-    sun.position.set(1.6, 0.45, 2.2);
-    scene.add(sun);
-
     const earth = new Group();
     scene.add(earth);
 
@@ -175,10 +175,9 @@ export default function HeroGlobeCanvas({
       onReadyRef.current?.();
     });
     day.colorSpace = SRGBColorSpace;
-    const bump = loader.load(compact ? "/globe/earth-topology-1k.webp" : "/globe/earth-topology-2k.webp");
     const globe = new Mesh(
       new SphereGeometry(1, compact ? 40 : 64, compact ? 28 : 40),
-      new MeshPhongMaterial({ map: day, bumpMap: bump, bumpScale: 0.035, shininess: 6 }),
+      new MeshBasicMaterial({ map: day, toneMapped: false }),
     );
     earth.add(globe);
 
@@ -202,8 +201,8 @@ export default function HeroGlobeCanvas({
           varying vec3 vNormal;
           varying vec3 vView;
           void main() {
-            float fres = pow(1.0 - abs(dot(normalize(-vView), normalize(vNormal))), 2.4);
-            gl_FragColor = vec4(0.72, 0.84, 0.95, fres * 0.9);
+            float fres = pow(1.0 - abs(dot(normalize(-vView), normalize(vNormal))), 2.8);
+            gl_FragColor = vec4(0.93, 0.95, 0.98, fres * 0.28);
           }
         `,
       }),
@@ -259,8 +258,17 @@ export default function HeroGlobeCanvas({
       return ring;
     });
 
-    const marker = makeMarker();
-    box.appendChild(marker);
+    const homePill = makePill("Marketivity", true, "#F7931E");
+    box.appendChild(homePill.root);
+    const placePills = DESTINATIONS.map((destination, index) => {
+      const pill = makePill(placesRef.current[index] ?? "", false, destination.color);
+      box.appendChild(pill.root);
+      return {
+        ...pill,
+        anchor: destination.anchor,
+        world: latLngToVec(destination.lat, destination.lng, 1).applyQuaternion(earth.quaternion),
+      };
+    });
     const homeWorld = home.clone().applyQuaternion(earth.quaternion);
 
     let arcIndex = 0;
@@ -287,12 +295,23 @@ export default function HeroGlobeCanvas({
         (ring.material as MeshBasicMaterial).opacity = 0.65 * (1 - pulse);
       });
 
-      const projected = homeWorld.clone().project(camera);
-      const facing = homeWorld.clone().normalize().dot(camera.position.clone().normalize()) > 0.2;
-      marker.style.opacity = facing && projected.z < 1 ? "1" : "0";
-      const x = (projected.x * 0.5 + 0.5) * size;
-      const y = (-projected.y * 0.5 + 0.5) * size;
-      marker.style.transform = `translate(-50%, -130%) translate(${x}px, ${y}px)`;
+      const camDir = camera.position.clone().normalize();
+      const names = placesRef.current;
+      const pins = [
+        { root: homePill.root, label: homePill.label, world: homeWorld, anchor: "above" as Anchor, text: "Marketivity" },
+        ...placePills.map((pill, index) => ({ ...pill, text: names[index] ?? "" })),
+      ];
+      for (const pin of pins) {
+        if (pin.label.textContent !== pin.text) pin.label.textContent = pin.text;
+        const facing = pin.world.clone().normalize().dot(camDir) > 0.16;
+        const projected = pin.world.clone().project(camera);
+        const show = facing && projected.z < 1;
+        pin.root.style.visibility = show ? "visible" : "hidden";
+        if (!show) continue;
+        const x = (projected.x * 0.5 + 0.5) * size;
+        const y = (-projected.y * 0.5 + 0.5) * size;
+        pin.root.style.transform = pinTransform(pin.anchor, x, y);
+      }
 
       controls.update();
       renderer.render(scene, camera);
@@ -364,7 +383,6 @@ export default function HeroGlobeCanvas({
       document.removeEventListener("visibilitychange", sync);
       controls.dispose();
       day.dispose();
-      bump.dispose();
       scene.traverse((object) => {
         const mesh = object as Mesh;
         mesh.geometry?.dispose?.();
@@ -373,7 +391,8 @@ export default function HeroGlobeCanvas({
       });
       renderer.dispose();
       canvas.remove();
-      marker.remove();
+      homePill.root.remove();
+      placePills.forEach((pill) => pill.root.remove());
     };
   }, []);
 

@@ -33,6 +33,8 @@ export type PortfolioItem = {
   resultNote?: Record<Locale, string>;
   /** Short status drawn on the cover. */
   badge?: Record<Locale, string>;
+  /** Short feature tags. Not metrics. */
+  highlights?: Record<Locale, readonly string[]>;
 };
 
 const noUsage: Record<Locale, string> = {
@@ -109,6 +111,45 @@ const softwareAndSites: PortfolioItem[] = [
     },
     visit: { href: "https://client-portal-xi-khaki.vercel.app", kind: "demo" },
     resultNote: noUsage,
+  },
+  {
+    id: "adforge",
+    tab: "software",
+    name: "AdForge",
+    kind: { en: "AI web app", bn: "এআই ওয়েব অ্যাপ" },
+    summary: {
+      en: "An AI tool that turns a product URL, a store link, or Facebook page or post text into a Meta (Facebook and Instagram) ad campaign.",
+      bn: "একটি এআই টুল, যা একটি প্রোডাক্ট URL, স্টোর লিংক, অথবা ফেসবুক পেজ বা পোস্টের লেখা থেকে মেটা (ফেসবুক ও ইনস্টাগ্রাম) অ্যাড ক্যাম্পেইন তৈরি করে।",
+    },
+    stackLabel: tech,
+    stack: {
+      en: "Next.js, TypeScript, OpenAI, Supabase (Auth, RLS), Stripe subscriptions",
+      bn: "Next.js, TypeScript, OpenAI, Supabase (Auth, RLS), Stripe সাবস্ক্রিপশন",
+    },
+    cover: "/portfolio/adforge.webp",
+    coverAlt: {
+      en: "Concept illustration of an AdForge ad preview, not a product screenshot",
+      bn: "অ্যাডফোর্জের একটি ধারণাচিত্র, প্রোডাক্টের স্ক্রিনশট নয়",
+    },
+    badge: { en: "In development", bn: "ডেভেলপমেন্টে আছে" },
+    highlights: {
+      en: [
+        "Bangla, Banglish and English copy, with Bangladesh (BDT) and UK diaspora (GBP) presets",
+        "Six direct-response angles, Messenger and WhatsApp calls to action, and organic captions",
+        "Three AI-generated ad images, plus Facebook and Instagram feed and story previews",
+        "Agency white-label export packs",
+      ],
+      bn: [
+        "বাংলা, বাংলিশ ও ইংরেজি কপি, বাংলাদেশ (BDT) ও যুক্তরাজ্যের প্রবাসী (GBP) প্রিসেটসহ",
+        "ছয়টি ডাইরেক্ট-রেসপন্স অ্যাঙ্গেল, মেসেঞ্জার ও হোয়াটসঅ্যাপ কল টু অ্যাকশন, এবং অর্গানিক ক্যাপশন",
+        "তিনটি এআই অ্যাড ইমেজ, সাথে ফেসবুক ও ইনস্টাগ্রামের ফিড ও স্টোরি প্রিভিউ",
+        "এজেন্সির হোয়াইট-লেবেল এক্সপোর্ট প্যাক",
+      ],
+    },
+    resultNote: {
+      en: "In development. No public link yet, and no usage figures are published.",
+      bn: "ডেভেলপমেন্টে আছে। এখনো কোনো পাবলিক লিংক নেই, এবং কোনো ব্যবহারের সংখ্যা প্রকাশ করা হয়নি।",
+    },
   },
   {
     id: "marketivity-website",

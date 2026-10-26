@@ -66,6 +66,18 @@ export default function PortfolioCard({
         </div>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-brand-muted">{item.summary[locale]}</p>
+      {item.highlights ? (
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {item.highlights[locale].map((tag) => (
+            <li
+              key={tag}
+              className="rounded-full border border-brand-charcoal/10 bg-brand-offwhite px-3 py-1.5 text-xs font-semibold leading-snug text-brand-charcoal"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <p className="mt-4 text-sm leading-relaxed text-brand-charcoal">
         <span className="font-bold">{item.stackLabel[locale]}: </span>
         {item.stack[locale]}

@@ -5,8 +5,8 @@ export default function GlobeFallback() {
     <img
       src="/globe/earth-placeholder.webp"
       alt=""
-      width={880}
-      height={880}
+      width={640}
+      height={640}
       className="h-full w-full object-contain"
     />
   );
