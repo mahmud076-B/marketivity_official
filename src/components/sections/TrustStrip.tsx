@@ -13,16 +13,16 @@ export default function TrustStrip({ locale }: { locale: Locale }) {
           {proofCopy.clientsLabel[locale]}
         </h2>
 
-        <dl className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {proofHeadlines.map((item, index) => (
             <ScrollReveal key={item.value} delay={index * 0.07} className="h-full">
               <div className="surface-card surface-tint h-full px-3 py-4 text-center shadow-none">
-                <dt className="text-xs leading-snug text-brand-muted">{item.label[locale]}</dt>
-                <dd className="mt-1 text-xl font-bold text-brand-charcoal sm:text-2xl">{item.value}</dd>
+                <p className="text-xs leading-snug text-brand-muted">{item.label[locale]}</p>
+                <p className="mt-1 text-xl font-bold text-brand-charcoal sm:text-2xl">{item.value}</p>
               </div>
             </ScrollReveal>
           ))}
-        </dl>
+        </div>
         <p className="mx-auto mt-4 max-w-4xl text-center text-xs leading-relaxed text-brand-muted">
           {proofCopy.source[locale]}
         </p>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Hind_Siliguri } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -31,6 +31,10 @@ const hindSiliguri = Hind_Siliguri({
   adjustFontFallback: true,
   preload: false,
 });
+
+export const viewport: Viewport = {
+  themeColor: "#F7931E",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

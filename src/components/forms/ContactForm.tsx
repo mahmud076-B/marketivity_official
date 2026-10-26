@@ -207,7 +207,7 @@ export default function ContactForm({
       <button
         type="submit"
         disabled={isLoading}
-        className="touch-target flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-bold text-white transition-all hover:bg-brand-orange-light hover:shadow-lg hover:shadow-brand-orange/25 disabled:cursor-not-allowed disabled:opacity-60 active:scale-95"
+        className="touch-target flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-6 py-3 font-bold text-brand-charcoal transition-all hover:bg-brand-orange-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoading ? (
           <>
