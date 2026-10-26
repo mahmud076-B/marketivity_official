@@ -17,7 +17,13 @@ const THETA = 0.25;
 const ORANGE: [number, number, number] = [0.969, 0.576, 0.118];
 const PURPLE: [number, number, number] = [0.482, 0.247, 0.894];
 
-export default function HeroGlobeCanvas({ onReady }: { onReady?: () => void }) {
+export default function HeroGlobeCanvas({
+  onReady,
+  label,
+}: {
+  onReady?: () => void;
+  label: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -143,8 +149,9 @@ export default function HeroGlobeCanvas({ onReady }: { onReady?: () => void }) {
   return (
     <canvas
       ref={canvasRef}
-      aria-hidden
-      className="block h-full w-full cursor-grab"
+      tabIndex={0}
+      aria-label={label}
+      className="block h-full w-full cursor-grab focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink"
       style={{ touchAction: "none" }}
     />
   );

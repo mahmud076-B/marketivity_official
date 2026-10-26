@@ -80,13 +80,17 @@ export default function HeroGlobe({ locale }: { locale: Locale }) {
 
   return (
     <div className="mx-auto w-full max-w-[240px] sm:max-w-[300px] lg:ml-auto lg:mr-0 lg:max-w-[420px]">
-      <div className="relative aspect-square w-full" role="img" aria-label={text.label}>
+      <div
+        className="relative aspect-square w-full"
+        role={ready ? undefined : "img"}
+        aria-label={ready ? undefined : text.label}
+      >
         <div className={ready ? "opacity-0" : "opacity-100"} aria-hidden>
           <GlobeFallback />
         </div>
         {webgl ? (
           <div className="absolute inset-0">
-            <HeroGlobeCanvas onReady={handleReady} />
+            <HeroGlobeCanvas onReady={handleReady} label={text.label} />
           </div>
         ) : null}
       </div>
