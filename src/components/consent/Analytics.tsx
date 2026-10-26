@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const GA_PATTERN = /^G-[A-Z0-9]+$/i;
 const PIXEL_PATTERN = /^\d{5,20}$/;
@@ -9,7 +10,7 @@ function loadAnalytics() {
   if (typeof window === "undefined") return;
 
   const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-HBCP7WF7SB";
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() ?? "";
+  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || "1433606852275637";
 
   if (GA_PATTERN.test(gaId) && !document.getElementById("marketivity-ga")) {
     const script = document.createElement("script");
@@ -32,9 +33,23 @@ function loadAnalytics() {
 }
 
 export default function Analytics() {
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
     loadAnalytics();
   }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    // Track PageView on client-side route changes without duplicating initial load
+    if (typeof window !== "undefined" && typeof (window as unknown as { fbq?: Function }).fbq === "function") {
+      (window as unknown as { fbq: Function }).fbq("track", "PageView");
+    }
+  }, [pathname]);
 
   return null;
 }

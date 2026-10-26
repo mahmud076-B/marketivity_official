@@ -13,6 +13,11 @@ export default function WhatsAppFloat() {
       rel="noopener noreferrer"
       className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#075E54] text-white shadow-lg"
       aria-label={tc("whatsapp")}
+      onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as unknown as { fbq?: Function }).fbq === "function") {
+          (window as unknown as { fbq: Function }).fbq("track", "Contact");
+        }
+      }}
     >
       <MessageCircle className="h-7 w-7" fill="currentColor" />
     </a>

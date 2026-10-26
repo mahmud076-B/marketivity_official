@@ -49,6 +49,9 @@ export default function ContactForm({
       }
 
       setState("success");
+      if (typeof window !== "undefined" && typeof (window as unknown as { fbq?: Function }).fbq === "function") {
+        (window as unknown as { fbq: Function }).fbq("track", "Lead");
+      }
       form.reset();
     } catch (err) {
       setState("error");
