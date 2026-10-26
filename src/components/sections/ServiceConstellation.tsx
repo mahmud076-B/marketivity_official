@@ -188,8 +188,8 @@ export default function ServiceConstellation({
                         href={`/services/${slug}`}
                         className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-charcoal px-6 py-3 text-sm font-bold text-white"
                       >
-                        {learnMore}
-                        <ArrowRight className="h-4 w-4" />
+                        {item?.title ? `${learnMore}: ${item.title}` : learnMore}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
                       </Link>
                     </motion.div>
                   )}
@@ -279,8 +279,12 @@ export default function ServiceConstellation({
                       href={`/services/${selectedSlug}`}
                       className="touch-target inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-brand-charcoal px-7 py-3.5 text-sm font-bold text-white shadow-soft-sm transition-all hover:bg-brand-orange hover:shadow-glow-orange active:scale-95"
                     >
-                      <span>{learnMore}</span>
-                      <ArrowRight className="h-4 w-4" />
+                      <span>
+                        {servicesData[selectedSlug]?.title
+                          ? `${learnMore}: ${servicesData[selectedSlug].title}`
+                          : learnMore}
+                      </span>
+                      <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>
                 </SpotlightCard>

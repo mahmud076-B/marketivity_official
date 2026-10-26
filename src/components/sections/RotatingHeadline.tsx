@@ -37,7 +37,7 @@ export default function RotatingHeadline({
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={words[index]}
-            initial={{ y: "100%", opacity: 0 }}
+            initial={false}
             animate={{ y: "0%", opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
