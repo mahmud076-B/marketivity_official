@@ -1,6 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { BangladeshPriceNote, CurrencyToggle, StartingPrice } from "@/components/pricing/currency";
+import { BangladeshPriceNote, BdtPricingLine, CurrencyToggle, StartingPrice } from "@/components/pricing/currency";
 import { serviceCategories } from "@/lib/pricing";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -81,6 +81,7 @@ export default async function ServicesPage({ params }: Props) {
             </ScrollReveal>
           ))}
         </div>
+        <BdtPricingLine locale={locale} />
       </div>
     </section>
     <TrustStrip locale={locale} />

@@ -1,5 +1,6 @@
 "use client";
 
+import { MessageCircle } from "lucide-react";
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   formatExtraPrice,
@@ -112,6 +113,35 @@ export function StartingPrice({
   const category = getCategory(slug);
   if (!category) return null;
   return <span className={className}>{startingPriceLabel(category, locale, currency)}</span>;
+}
+
+const bdtPricingHref = whatsappLink(
+  "Hi Marketivity, I'm a Bangladeshi business and would like BDT pricing.",
+);
+
+/** English only. No taka amount. */
+export function BdtPricingLine({
+  locale,
+  align = "center",
+}: {
+  locale: Locale;
+  align?: "center" | "start";
+}) {
+  if (locale !== "en") return null;
+  return (
+    <p className={align === "center" ? "mt-4 text-center" : "mt-4"}>
+      <a
+        href={bdtPricingHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-xs leading-snug text-brand-muted hover:text-brand-charcoal hover:underline"
+      >
+        <MessageCircle className="h-3.5 w-3.5 shrink-0" aria-hidden />
+        Bangladeshi business? Get BDT pricing on WhatsApp.
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    </p>
+  );
 }
 
 export function BangladeshPriceNote({ locale }: { locale: Locale }) {

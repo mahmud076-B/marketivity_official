@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { pricingFaq, serviceCategories, type ServiceCategory } from "@/lib/pricing";
 import {
   BangladeshPriceNote,
+  BdtPricingLine,
   CurrencyToggle,
   ExtraPrice,
   PriceTrust,
@@ -181,6 +182,7 @@ export function TierGrid({
   locale: Locale;
 }) {
   return (
+    <>
     <div className="mt-10 grid items-stretch gap-5 pt-4 lg:grid-cols-3">
       {category.tiers.map((tier, index) => (
         <ScrollReveal key={tier.id} delay={index * 0.08} className="h-full">
@@ -230,5 +232,7 @@ export function TierGrid({
         </ScrollReveal>
       ))}
     </div>
+    <BdtPricingLine locale={locale} />
+    </>
   );
 }
