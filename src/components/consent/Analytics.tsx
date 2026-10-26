@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { CONSENT_KEY } from "@/components/consent/CookieConsent";
 
 const GA_PATTERN = /^G-[A-Z0-9]+$/i;
 const PIXEL_PATTERN = /^\d{5,20}$/;
 
 function loadAnalytics() {
   if (typeof window === "undefined") return;
-  if (window.localStorage.getItem(CONSENT_KEY) !== "granted") return;
 
-  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() ?? "";
+  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim() || "G-HBCP7WF7SB";
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() ?? "";
 
   if (GA_PATTERN.test(gaId) && !document.getElementById("marketivity-ga")) {
@@ -36,13 +34,6 @@ function loadAnalytics() {
 export default function Analytics() {
   useEffect(() => {
     loadAnalytics();
-    const onChange = () => loadAnalytics();
-    window.addEventListener("marketivity-consent", onChange);
-    window.addEventListener("storage", onChange);
-    return () => {
-      window.removeEventListener("marketivity-consent", onChange);
-      window.removeEventListener("storage", onChange);
-    };
   }, []);
 
   return null;
