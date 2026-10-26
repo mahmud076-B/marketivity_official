@@ -74,8 +74,8 @@ const softwareAndSites: PortfolioItem[] = [
     },
     cover: "/portfolio/marketivity-billing.webp",
     coverAlt: {
-      en: "Marketivity Billing screen",
-      bn: "মার্কেটিভিটি বিলিংয়ের স্ক্রিন",
+      en: "Marketivity Billing dashboard",
+      bn: "মার্কেটিভিটি বিলিংয়ের ড্যাশবোর্ড",
     },
     visit: { href: "https://marketivitybilling.vercel.app", kind: "demo" },
     resultNote: noUsage,
