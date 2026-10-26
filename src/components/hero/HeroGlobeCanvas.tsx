@@ -8,6 +8,7 @@ import {
   Group,
   Line,
   LineBasicMaterial,
+  Matrix4,
   Mesh,
   MeshBasicMaterial,
   NoToneMapping,
@@ -55,10 +56,28 @@ const DESTINATIONS: Destination[] = [
 const ARC_MS = 2600;
 
 function latLngToVec(lat: number, lng: number, radius: number) {
+  // Matches SphereGeometry: u = 0 at longitude -180, north pole at +Y.
   const theta = ((90 - lat) * Math.PI) / 180;
   const phi = ((lng + 180) * Math.PI) / 180;
   const ring = radius * Math.sin(theta);
   return new Vector3(-ring * Math.cos(phi), radius * Math.cos(theta), ring * Math.sin(phi));
+}
+
+/** Point `city` at the camera and keep geographic north upright. */
+function faceCityNorthUp(city: Vector3, cameraPosition: Vector3) {
+  const camDir = cameraPosition.clone().normalize();
+  const screenRight = new Vector3().crossVectors(new Vector3(0, 1, 0), camDir);
+  if (screenRight.lengthSq() < 1e-8) screenRight.set(1, 0, 0);
+  screenRight.normalize();
+  const screenUp = new Vector3().crossVectors(camDir, screenRight).normalize();
+  const toward = city.clone().normalize();
+  const localUp = new Vector3(0, 1, 0).sub(toward.clone().multiplyScalar(toward.y));
+  if (localUp.lengthSq() < 1e-8) localUp.set(0, 0, 1);
+  localUp.normalize();
+  const localRight = new Vector3().crossVectors(localUp, toward).normalize();
+  const localBasis = new Matrix4().makeBasis(localRight, localUp, toward);
+  const worldBasis = new Matrix4().makeBasis(screenRight, screenUp, camDir);
+  return worldBasis.multiply(localBasis.invert());
 }
 
 function makePill(text: string, home: boolean, dotColor: string) {
@@ -210,7 +229,7 @@ export default function HeroGlobeCanvas({
     earth.add(atmosphere);
 
     const home = latLngToVec(HOME.lat, HOME.lng, 1);
-    earth.quaternion.setFromUnitVectors(home.clone().normalize(), new Vector3(0, 0.08, 1).normalize());
+    earth.quaternion.setFromRotationMatrix(faceCityNorthUp(home, camera.position));
 
     const arcs = DESTINATIONS.map((destination) => {
       const start = latLngToVec(HOME.lat, HOME.lng, 1.01);

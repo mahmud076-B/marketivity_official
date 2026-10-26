@@ -20,13 +20,12 @@ const copy = {
   },
 } as const;
 
-/** Positions on the still Earth, which is centered on Rajshahi. Far-side places are omitted. */
+/** Positions on the still Earth: north up, Rajshahi centered. Far-side places are omitted. */
 const stillPins = [
   { home: true, x: "50%", y: "50%", anchor: "above" },
-  { place: 2, x: "71.8%", y: "55.9%", anchor: "above" },
-  { place: 1, x: "74.2%", y: "84.8%", anchor: "left" },
-  { place: 5, x: "74.9%", y: "82.4%", anchor: "right" },
-  { place: 4, x: "20.4%", y: "16.5%", anchor: "above" },
+  { place: 1, x: "21.7%", y: "17.8%", anchor: "left" },
+  { place: 2, x: "22.6%", y: "45.7%", anchor: "above" },
+  { place: 5, x: "20.4%", y: "19.4%", anchor: "right" },
 ] as const;
 
 function pinClass(anchor: "above" | "left" | "right") {
