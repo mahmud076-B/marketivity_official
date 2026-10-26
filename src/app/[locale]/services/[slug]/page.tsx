@@ -1,154 +1,106 @@
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import {
-  serviceSlugs,
-  serviceKeys,
-  type ServiceSlug,
-} from "@/lib/services";
-import CTASection from "@/components/sections/CTASection";
-import FacebookBadge from "@/components/ui/FacebookBadge";
-import { Check, ArrowRight } from "lucide-react";
-import ScrollReveal from "@/components/motion/ScrollReveal";
+import { TierGrid } from "@/components/pricing/PricingBoard";
+import { getCategory, pricingFaq, serviceCategories, startingPriceLabel } from "@/lib/pricing";
+import { isServiceSlug } from "@/lib/services";
+import { isLocale, whatsappLink, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-type Props = {
-  params: Promise<{ locale: string; slug: string }>;
-};
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
-  return serviceSlugs.map((slug) => ({ slug }));
+  return serviceCategories.map((category) => ({ slug: category.slug }));
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { locale, slug } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const category = getCategory(slug);
+  if (!category) return {};
+  return pageMetadata({
+    locale: safe,
+    path: `/services/${slug}`,
+    title: category.name[safe],
+    description: category.summary[safe],
+  });
 }
 
 export default async function ServicePage({ params }: Props) {
-  const { locale, slug } = await params;
+  const { locale: localeParam, slug } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
   setRequestLocale(locale);
-
-  if (!serviceSlugs.includes(slug as ServiceSlug)) notFound();
-
-  const key = serviceKeys[slug as ServiceSlug];
-  const ts = await getTranslations("services");
-  const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
-
-  const isProject = slug === "branding";
-  const features = [0, 1, 2, 3, 4, 5].map((i) =>
-    ts(`${key}.features.${i}`)
-  );
-  const steps = [0, 1, 2, 3, 4].map((i) =>
-    ts(`${key}.process.steps.${i}`)
-  );
+  if (!isServiceSlug(slug)) notFound();
+  const category = getCategory(slug);
+  if (!category) notFound();
 
   return (
     <>
-      <section className="gradient-hero safe-px py-16 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <FacebookBadge
-            recommended={tfb("recommended")}
-            onFacebook={tfb("onFacebook")}
-          />
-          <h1 className="mt-6 text-4xl font-bold text-brand-charcoal md:text-5xl">
-            {ts(`${key}.title`)}
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-charcoal/70">
-            {ts(`${key}.heroSubtitle`)}
+      <section className="gradient-hero safe-px py-16 md:py-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-orange">
+            {category.model[locale]}
           </p>
-          <div className="mt-8">
-            <span className="text-sm font-medium uppercase tracking-wide text-brand-charcoal/50">
-              {tc("startingAt")}
-            </span>
-            <p className="text-4xl font-bold text-brand-purple">
-              {tc("currency")}
-              {ts(`${key}.price`)}
-              <span className="text-lg font-normal text-brand-charcoal/60">
-                {isProject ? tc("perProject") : tc("perMonth")}
-              </span>
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="touch-target mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-3 text-base font-bold text-white transition-transform hover:scale-105"
+          <h1 className="mt-3 text-4xl font-bold text-brand-charcoal md:text-5xl">
+            {category.name[locale]}
+          </h1>
+          <p className="mt-4 text-lg text-brand-muted">{category.summary[locale]}</p>
+          <p className="mt-4 text-2xl font-extrabold text-brand-purple">
+            {startingPriceLabel(category, locale)}
+          </p>
+          <a
+            href={whatsappLink(
+              locale === "bn"
+                ? `হ্যালো মার্কেটিভিটি, ${category.name.bn} নিয়ে একটি ফ্রি কল বুক করতে চাই।`
+                : `Hello Marketivity, I would like to book a free call about ${category.name.en}.`
+            )}
+            className="mt-6 inline-flex rounded-full bg-brand-orange px-6 py-3 font-bold text-white"
           >
-            {ts(`${key}.cta`)}
-            <ArrowRight className="h-5 w-5" />
-          </Link>
+            {locale === "bn" ? "ফ্রি কল বুক করুন" : "Book a free call"}
+          </a>
         </div>
       </section>
 
-      <section className="safe-px py-16">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
-          <div>
-            <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
-              {ts(`${key}.benefits.title`)}
-            </h2>
-            <p className="leading-relaxed text-brand-charcoal/70">
-              {ts(`${key}.benefits.description`)}
-            </p>
-          </div>
-          <ScrollReveal direction="up" delay={0.08}>
-          <div className="rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm">
-            <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
-              {ts("includedTitle")}
-            </h2>
-            <ul className="space-y-3">
-              {features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
-                  <span className="text-brand-charcoal/80">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="safe-px bg-white py-16">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-10 text-center text-2xl font-bold text-brand-charcoal">
-            {ts(`${key}.process.title`)}
+      <section className="safe-px py-12">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-center text-2xl font-bold text-brand-charcoal">
+            {locale === "bn" ? "যা অন্তর্ভুক্ত" : "What’s included"}
           </h2>
-          <div className="space-y-6">
-            {steps.map((step, i) => (
-              <ScrollReveal key={i} direction="up" delay={i * 0.07}>
-              <div className="flex items-start gap-4 rounded-2xl border border-brand-orange/15 bg-white/65 p-4 shadow-soft-sm backdrop-blur-sm">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-purple text-sm font-bold text-white">
-                  {i + 1}
-                </span>
-                <p className="pt-2 text-brand-charcoal/80">{step}</p>
+          <TierGrid category={category} locale={locale} />
+        </div>
+      </section>
+
+      <section className="safe-px pb-12">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-4 text-2xl font-bold text-brand-charcoal">
+            {locale === "bn" ? "প্রশ্ন" : "Questions"}
+          </h2>
+          <div className="space-y-4">
+            {pricingFaq.slice(0, 4).map((item) => (
+              <div key={item.q.en} className="rounded-2xl border border-brand-charcoal/10 bg-white p-5">
+                <h3 className="font-semibold text-brand-charcoal">{item.q[locale]}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-muted">{item.a[locale]}</p>
               </div>
-              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="safe-px py-16">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-8 text-center text-2xl font-bold text-brand-charcoal">
-            {ts("otherServices")}
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            {serviceSlugs
-              .filter((s) => s !== slug)
-              .map((s) => (
-                <Link
-                  key={s}
-                  href={`/services/${s}`}
-                  className="touch-target rounded-full border border-brand-charcoal/15 bg-white px-5 py-2.5 text-sm font-medium text-brand-charcoal transition-colors hover:border-brand-orange hover:text-brand-orange"
-                >
-                  {ts(`${serviceKeys[s]}.title`)}
-                </Link>
-              ))}
-          </div>
+      <section className="safe-px pb-16">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-3">
+          {serviceCategories
+            .filter((item) => item.slug !== slug)
+            .map((item) => (
+              <Link
+                key={item.slug}
+                href={`/services/${item.slug}`}
+                className="rounded-full border border-brand-charcoal/15 bg-white px-4 py-2 text-sm font-medium"
+              >
+                {item.name[locale]}
+              </Link>
+            ))}
         </div>
       </section>
-
-      <CTASection
-        title={ts(`${key}.title`)}
-        subtitle={ts(`${key}.heroSubtitle`)}
-        cta={ts(`${key}.cta`)}
-      />
     </>
   );
 }

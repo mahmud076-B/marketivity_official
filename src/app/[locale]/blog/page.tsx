@@ -5,10 +5,24 @@ import { Link } from "@/i18n/navigation";
 import { blogPosts } from "@/lib/blog";
 import { Calendar } from "lucide-react";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const messages = (await import(`../../../../messages/${safe}.json`)).default;
+  return pageMetadata({
+    locale: safe,
+    path: "/blog",
+    title: messages.blog.title,
+    description: messages.blog.subtitle,
+  });
+}
 
 export default async function BlogPage({ params }: Props) {
   const { locale } = await params;

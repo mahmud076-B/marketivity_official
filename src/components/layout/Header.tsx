@@ -7,11 +7,10 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 import MobileMenu from "./MobileMenu";
-import MagneticButton from "@/components/motion/MagneticButton";
 
 const navItems = [
   { href: "/about", key: "about" },
-  { href: "/services/seo", key: "services" },
+  { href: "/services", key: "services" },
   { href: "/portfolio", key: "portfolio" },
   { href: "/pricing", key: "pricing" },
   { href: "/blog", key: "blog" },

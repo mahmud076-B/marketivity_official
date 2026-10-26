@@ -3,20 +3,37 @@ import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import ContactForm from "@/components/forms/ContactForm";
-import FacebookBadge from "@/components/ui/FacebookBadge";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { serviceCategories } from "@/lib/pricing";
+import { isLocale, site, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const title = safe === "bn" ? "যোগাযোগ" : "Contact";
+  const description =
+    safe === "bn"
+      ? `মার্কেটিভিটিকে লিখুন বা হোয়াটসঅ্যাপ করুন ${site.phoneDisplay}। ইমেইল ${site.email}।`
+      : `Write to Marketivity or message us on WhatsApp at ${site.phoneDisplay}. Email ${site.email}.`;
+  return pageMetadata({ locale: safe, path: "/contact", title, description });
+}
+
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const safe: Locale = isLocale(locale) ? locale : "en";
 
   const t = await getTranslations("contact");
   const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
+  const services = serviceCategories.map((category) => ({
+    value: category.name.en,
+    label: category.name[safe],
+  }));
 
   return (
     <>
@@ -36,7 +53,7 @@ export default async function ContactPage({ params }: Props) {
             <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
               {t("form.title")}
             </h2>
-            <ContactForm />
+            <ContactForm services={services} />
           </div>
           </ScrollReveal>
 
@@ -68,7 +85,7 @@ export default async function ContactPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="text-brand-charcoal/70 hover:text-brand-orange"
                   >
-                    01767644696
+                    {site.phoneDisplay}
                   </a>
                 </div>
               </li>
@@ -90,11 +107,6 @@ export default async function ContactPage({ params }: Props) {
                 {t("info.response")}
               </p>
             </div>
-
-            <FacebookBadge
-              recommended={tfb("recommended")}
-              onFacebook={tfb("onFacebook")}
-            />
 
             <div className="mt-6 flex gap-3">
               <a

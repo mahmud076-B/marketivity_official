@@ -3,10 +3,24 @@ import { setRequestLocale } from "next-intl/server";
 import { Briefcase, TrendingUp, Users, Clock } from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  const messages = (await import(`../../../../messages/${safe}.json`)).default;
+  return pageMetadata({
+    locale: safe,
+    path: "/careers",
+    title: messages.careers.title,
+    description: messages.careers.subtitle,
+  });
+}
 
 export default async function CareersPage({ params }: Props) {
   const { locale } = await params;

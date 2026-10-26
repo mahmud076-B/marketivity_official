@@ -7,8 +7,6 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import LanguageToggle from "@/components/ui/LanguageToggle";
-import FacebookBadge from "@/components/ui/FacebookBadge";
-
 type MobileMenuProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -17,7 +15,7 @@ type MobileMenuProps = {
 const navItems = [
   { href: "/", key: "home" },
   { href: "/about", key: "about" },
-  { href: "/services/seo", key: "services" },
+  { href: "/services", key: "services" },
   { href: "/portfolio", key: "portfolio" },
   { href: "/pricing", key: "pricing" },
   { href: "/blog", key: "blog" },
@@ -28,7 +26,6 @@ const navItems = [
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
-  const tfb = useTranslations("facebookBadge");
 
   useEffect(() => {
     if (isOpen) {
@@ -98,11 +95,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Bottom Actions */}
           <div className="safe-px flex flex-col items-center gap-3.5 border-t border-brand-charcoal/10 py-5 bg-white/60">
-            <FacebookBadge
-              recommended={tfb("recommended")}
-              onFacebook={tfb("onFacebook")}
-              size="sm"
-            />
             <a
               href="https://wa.me/8801767644696"
               target="_blank"

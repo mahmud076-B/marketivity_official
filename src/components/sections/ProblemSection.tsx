@@ -182,26 +182,26 @@ export default function ProblemSection({
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-2">
                       <div className="rounded-xl bg-white p-3 sm:p-3.5 border border-brand-orange/20 text-center shadow-soft-xs">
                         <span className="block text-lg sm:text-xl font-black text-brand-orange mb-0.5 sm:mb-1">
-                          +522%
+                          250
                         </span>
                         <span className="block text-xs font-bold text-brand-charcoal leading-snug">
-                          {tLab("salesGrowth")}
+                          {tLab("conversations")}
                         </span>
                       </div>
                       <div className="rounded-xl bg-white p-3 sm:p-3.5 border border-brand-purple/20 text-center shadow-soft-xs">
                         <span className="block text-lg sm:text-xl font-black text-brand-purple mb-0.5 sm:mb-1">
-                          ROAS 5.2x
+                          $9.96
                         </span>
                         <span className="block text-xs font-bold text-brand-charcoal leading-snug">
-                          {tLab("abTested")}
+                          {tLab("sunglassSpend")}
                         </span>
                       </div>
                       <div className="rounded-xl bg-white p-3 sm:p-3.5 border border-emerald-200 text-center shadow-soft-xs">
                         <span className="block text-lg sm:text-xl font-black text-emerald-600 mb-0.5 sm:mb-1">
-                          100%
+                          1,419
                         </span>
                         <span className="block text-xs font-bold text-brand-charcoal leading-snug">
-                          {tLab("transparentReport")}
+                          {tLab("follows")}
                         </span>
                       </div>
                     </div>

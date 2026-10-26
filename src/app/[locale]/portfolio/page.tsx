@@ -1,81 +1,92 @@
-import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
-import CTASection from "@/components/sections/CTASection";
 import CaseStudyCard from "@/components/sections/CaseStudyCard";
-import ScrollReveal from "@/components/motion/ScrollReveal";
-import { getCaseStudies } from "@/lib/case-studies";
-import FacebookBadge from "@/components/ui/FacebookBadge";
+import ClientReportedNote from "@/components/sections/ClientReportedNote";
+import SoftwarePortfolio from "@/components/sections/SoftwarePortfolio";
+import CTASection from "@/components/sections/CTASection";
+import LogoMarquee from "@/components/sections/LogoMarquee";
+import { featuredCampaigns, clientNames, proofCopy } from "@/lib/campaigns";
+import { isLocale, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-type Props = {
-  params: Promise<{ locale: string }>;
+type Props = { params: Promise<{ locale: string }> };
+
+const copy = {
+  en: {
+    title: "Work",
+    description:
+      "Meta Ads campaigns with Ads Manager figures, plus software built by the founder. Conversations, follows and visits. No revenue claims.",
+  },
+  bn: {
+    title: "কাজ",
+    description:
+      "অ্যাডস ম্যানেজারের সংখ্যাসহ মেটা অ্যাডস ক্যাম্পেইন, এবং প্রতিষ্ঠাতার তৈরি সফটওয়্যার। কথোপকথন, ফলো ও ভিজিট। রাজস্বের দাবি নেই।",
+  },
 };
 
-export default async function PortfolioPage({ params }: Props) {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  return pageMetadata({
+    locale: safe,
+    path: "/portfolio",
+    title: copy[safe].title,
+    description: copy[safe].description,
+  });
+}
 
-  const t = await getTranslations("portfolio");
-  const th = await getTranslations("home");
-  const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
+export default async function PortfolioPage({ params }: Props) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
+  setRequestLocale(locale);
 
   return (
     <>
-      <section className="gradient-hero safe-px py-16 md:py-24 text-center relative overflow-hidden">
-        <div className="mx-auto max-w-4xl relative z-10">
-          <div className="mb-6 flex justify-center">
-            <FacebookBadge
-              recommended={tfb("recommended")}
-              onFacebook={tfb("onFacebook")}
-            />
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-charcoal">
-            {t("title")}
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-brand-charcoal/75 max-w-2xl mx-auto leading-relaxed">
-            {t("subtitle")}
-          </p>
+      <section className="gradient-hero safe-px py-16 md:py-20 text-center">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="text-4xl font-extrabold text-brand-charcoal md:text-5xl">{copy[locale].title}</h1>
+          <p className="mt-4 text-lg text-brand-muted">{copy[locale].description}</p>
         </div>
       </section>
-
-      {/* Case Studies Grid */}
-      <section className="safe-px py-16 md:py-20 bg-brand-offwhite">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10">
-            <span className="inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-orange mb-2">
-              {t("featuredBadge")}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-charcoal">
-              {t("featuredTitle")}
-            </h2>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {getCaseStudies(locale).map((study, i) => (
-              <ScrollReveal key={study.id} direction="up" delay={i * 0.1}>
-                <CaseStudyCard
-                  study={study}
-                  learnMoreLabel={th("caseStudy.learnMore")}
-                  beforeLabel={th("caseStudy.before")}
-                  afterLabel={th("caseStudy.after")}
-                  durationLabel={th("caseStudy.duration")}
-                />
-              </ScrollReveal>
+      <LogoMarquee />
+      <section className="safe-px py-12">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-2xl font-bold text-brand-charcoal">
+            {locale === "bn" ? "মেটা অ্যাডস" : "Meta Ads"}
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm text-brand-muted">{proofCopy.source[locale]}</p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredCampaigns.map((campaign) => (
+              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} />
             ))}
           </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-xs text-brand-charcoal/50 max-w-xl mx-auto">
-              {th("caseStudy.disclaimer")}
-            </p>
-          </div>
+          <ClientReportedNote locale={locale} />
         </div>
       </section>
-
+      <section className="safe-px pb-8">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-2xl font-bold text-brand-charcoal">{proofCopy.clientsLabel[locale]}</h2>
+          <p className="mt-2 text-sm text-brand-muted">{proofCopy.clientsNote[locale]}</p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {clientNames.map((name) => (
+              <li key={name} className="rounded-full bg-white px-3 py-1.5 text-sm border border-brand-charcoal/10">
+                {name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <section className="safe-px py-12">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-6 text-2xl font-bold text-brand-charcoal">
+            {locale === "bn" ? "সফটওয়্যার" : "Software"}
+          </h2>
+          <SoftwarePortfolio locale={locale} />
+        </div>
+      </section>
       <CTASection
-        title={t("title")}
-        subtitle={t("ctaSubtitle")}
-        cta={tc("contactUs")}
+        title={locale === "bn" ? "একটি ফ্রি কল বুক করুন" : "Book a free call"}
+        subtitle={copy[locale].description}
+        cta={locale === "bn" ? "যোগাযোগ" : "Contact"}
       />
     </>
   );

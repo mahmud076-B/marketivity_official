@@ -67,7 +67,7 @@ export default function CTASection({
         <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-brand-charcoal/10 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-10 text-xs text-brand-charcoal/60">
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-brand-orange" />
-            <span>{tCta("metaRecommended")}</span>
+            <span>{tCta("accountInYourName")}</span>
           </div>
           <div className="flex items-center gap-2">
             <Zap className="h-4 w-4 text-brand-purple" />

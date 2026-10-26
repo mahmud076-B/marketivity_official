@@ -5,21 +5,22 @@
   --color-brand-orange: #F7931E;
   --color-brand-orange-light: #FFAA4D;
   --color-brand-orange-dark: #E07D0F;
-  --color-brand-purple: #6F42C1;
-  --color-brand-purple-light: #8B5FC4;
-  --color-brand-purple-dark: #5A35A0;
-  --color-brand-charcoal: #2D2D2D;
-  --color-brand-offwhite: #F7F7F5;
+  --color-brand-purple: #7B3FE4;
+  --color-brand-purple-light: #9A6AEB;
+  --color-brand-purple-dark: #6429C9;
+  --color-brand-charcoal: #24202C;
+  --color-brand-muted: #4A4553;
+  --color-brand-offwhite: #F7F3F1;
   
   /* Alpha & Translucent Tones */
   --color-brand-orange-alpha-5: rgba(247, 147, 30, 0.05);
   --color-brand-orange-alpha-10: rgba(247, 147, 30, 0.1);
   --color-brand-orange-alpha-20: rgba(247, 147, 30, 0.2);
   --color-brand-orange-alpha-30: rgba(247, 147, 30, 0.3);
-  --color-brand-purple-alpha-5: rgba(111, 66, 193, 0.05);
-  --color-brand-purple-alpha-10: rgba(111, 66, 193, 0.1);
-  --color-brand-purple-alpha-20: rgba(111, 66, 193, 0.2);
-  --color-brand-purple-alpha-30: rgba(111, 66, 193, 0.3);
+  --color-brand-purple-alpha-5: rgba(123, 63, 228, 0.05);
+  --color-brand-purple-alpha-10: rgba(123, 63, 228, 0.1);
+  --color-brand-purple-alpha-20: rgba(123, 63, 228, 0.2);
+  --color-brand-purple-alpha-30: rgba(123, 63, 228, 0.3);
   
   /* Surface System */
   --color-surface-white: #FFFFFF;
@@ -29,14 +30,14 @@
   --color-surface-darker: #0D0D0F;
   
   /* Typography Variables */
-  --font-sans: var(--font-plus-jakarta), var(--font-bengali), var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-plus-jakarta), var(--font-bengali), system-ui, sans-serif;
+  --font-sans: var(--font-poppins), var(--font-bengali), system-ui, sans-serif;
+  --font-display: var(--font-poppins), var(--font-bengali), system-ui, sans-serif;
   --font-bengali: var(--font-bengali), sans-serif;
 }
 
 :root {
-  --background: #F7F7F5;
-  --foreground: #2D2D2D;
+  --background: #F7F3F1;
+  --foreground: #24202C;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
@@ -195,14 +196,14 @@ html[lang="bn"] h4 {
   background: 
     radial-gradient(ellipse at 40% 10%, rgba(247, 147, 30, 0.09) 0%, transparent 60%),
     radial-gradient(ellipse at 85% 20%, rgba(111, 66, 193, 0.08) 0%, transparent 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #F7F7F5 100%);
+    linear-gradient(180deg, #FFFFFF 0%, #F7F3F1 100%);
 }
 
 .gradient-cta {
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(247, 147, 30, 0.15), transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(111, 66, 193, 0.2), transparent 40%),
-    linear-gradient(135deg, #1C1C1E 0%, #0D0D0F 100%);
+  background:
+    radial-gradient(circle at 10% 20%, rgba(247, 147, 30, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(123, 63, 228, 0.1), transparent 40%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7F3F1 100%);
 }
 
 .glass {

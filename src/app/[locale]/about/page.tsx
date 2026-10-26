@@ -1,213 +1,139 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import StatsMarquee from "@/components/sections/StatsMarquee";
 import { createStatItems } from "@/lib/stats";
 import CTASection from "@/components/sections/CTASection";
-import FacebookBadge from "@/components/ui/FacebookBadge";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { SHOW_TEAM, founder, isLocale, site, type Locale } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-const teamMembersEn = [
-  {
-    name: "Ahmed Rahman",
-    role: "Founder & CEO",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-  },
-  {
-    name: "Sadia Islam",
-    role: "Head of Strategy",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-  },
-  {
-    name: "Tanvir Hossain",
-    role: "Creative Director",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-  },
-  {
-    name: "Nadia Parvin",
-    role: "Social Media Lead",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-  },
-];
+type Props = { params: Promise<{ locale: string }> };
 
-const teamMembersBn = [
-  {
-    name: "আহমেদ রহমান",
-    role: "প্রতিষ্ঠাতা ও সিইও",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-  },
-  {
-    name: "সাদিয়া ইসলাম",
-    role: "হেড অব স্ট্র্যাটেজি",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-  },
-  {
-    name: "তানভীর হোসেন",
-    role: "ক্রিয়েটিভ ডিরেক্টর",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-  },
-  {
-    name: "নাদিয়া পারভীন",
-    role: "সোশ্যাল মিডিয়া লিড",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-  },
-];
-
-type Props = {
-  params: Promise<{ locale: string }>;
+const titles = {
+  en: "About Marketivity",
+  bn: "মার্কেটিভিটি সম্পর্কে",
+};
+const descriptions = {
+  en: "Marketivity was founded in July 2025 by S M Mahmud Hasan. A Meta ads and software studio in Rajshahi, working with clients in Bangladesh, the UK and the USA.",
+  bn: "মার্কেটিভিটি ২০২৫ সালের জুলাইয়ে এস এম মাহমুদ হাসান প্রতিষ্ঠা করেন। রাজশাহীর একটি মেটা অ্যাডস ও সফটওয়্যার স্টুডিও, যা বাংলাদেশ, যুক্তরাজ্য ও যুক্তরাষ্ট্রের ক্লায়েন্টদের সাথে কাজ করে।",
 };
 
-export default async function AboutPage({ params }: Props) {
+export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
+  const safe: Locale = isLocale(locale) ? locale : "en";
+  return pageMetadata({
+    locale: safe,
+    path: "/about",
+    title: titles[safe],
+    description: descriptions[safe],
+  });
+}
+
+const team = [
+  {
+    name: founder.name,
+    role: founder.role,
+  },
+];
+
+export default async function AboutPage({ params }: Props) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
   setRequestLocale(locale);
 
   const t = await getTranslations("about");
-  const th = await getTranslations("home");
   const tc = await getTranslations("common");
-  const tfb = await getTranslations("facebookBadge");
-
   const valueKeys = ["integrity", "excellence", "innovation", "partnership"] as const;
-  const statItems = createStatItems((key) => th(`stats.${key}`));
-  const members = locale === "bn" ? teamMembersBn : teamMembersEn;
 
   return (
     <>
       <section className="safe-px py-16 md:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <FacebookBadge
-            recommended={tfb("recommended")}
-            onFacebook={tfb("onFacebook")}
-          />
-          <h1 className="mt-6 text-4xl font-bold text-brand-charcoal md:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-4 text-lg text-brand-charcoal/70">{t("subtitle")}</p>
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">{titles[locale]}</h1>
+          <p className="mt-4 text-lg text-brand-muted">{descriptions[locale]}</p>
         </div>
       </section>
 
-      <StatsMarquee items={statItems} />
+      <StatsMarquee items={createStatItems(locale)} />
 
       <section className="safe-px py-16">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
-            <h2 className="mb-4 text-3xl font-bold text-brand-charcoal">
-              {t("story.title")}
-            </h2>
-            <p className="mb-4 leading-relaxed text-brand-charcoal/70">
-              {t("story.p1")}
-            </p>
-            <p className="leading-relaxed text-brand-charcoal/70">
-              {t("story.p2")}
-            </p>
+            <h2 className="mb-4 text-3xl font-bold text-brand-charcoal">{t("story.title")}</h2>
+            <p className="mb-4 leading-relaxed text-brand-muted">{t("story.p1")}</p>
+            <p className="leading-relaxed text-brand-muted">{t("story.p2")}</p>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-purple/10">
-            <Image
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-              alt="Marketivity team"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+          <aside className="rounded-3xl border border-brand-purple/20 bg-white p-6 shadow-soft-md">
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-orange">
+              {founder.role[locale]}
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-brand-charcoal">{founder.name}</h2>
+            <p className="mt-2 text-sm text-brand-muted">{founder.foundedLabel[locale]}</p>
+            <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+              {locale === "bn"
+                ? "তিনি মেটা ক্যাম্পেইন চালান এবং মার্কেটিভিটির সফটওয়্যার তৈরি করেন। ছবি পরে যোগ করা হবে।"
+                : "He runs the Meta campaigns and builds Marketivity’s software. A photo will be added when one is ready."}
+            </p>
+            <a
+              href={site.github}
+              className="mt-4 inline-flex text-sm font-semibold text-brand-purple"
+              rel="noreferrer"
+              target="_blank"
+            >
+              GitHub · mahmud076-B
+            </a>
+          </aside>
         </div>
       </section>
 
       <section className="safe-px bg-white py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
-          <ScrollReveal direction="up" delay={0} className="h-full">
-          <div className="h-full rounded-2xl border border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
-            <h2 className="mb-4 text-2xl font-bold text-brand-orange">
-              {t("mission.title")}
-            </h2>
-            <p className="leading-relaxed text-brand-charcoal/70">
-              {t("mission.description")}
-            </p>
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+          <div className="rounded-3xl border border-brand-orange/20 bg-brand-offwhite p-8">
+            <h2 className="mb-3 text-2xl font-bold text-brand-orange">{t("mission.title")}</h2>
+            <p className="leading-relaxed text-brand-muted">{t("mission.description")}</p>
           </div>
-          </ScrollReveal>
-          <ScrollReveal direction="up" delay={0.08} className="h-full">
-          <div className="h-full rounded-2xl border border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10 p-8 shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg">
-            <h2 className="mb-4 text-2xl font-bold text-brand-purple">
-              {t("vision.title")}
-            </h2>
-            <p className="leading-relaxed text-brand-charcoal/70">
-              {t("vision.description")}
-            </p>
+          <div className="rounded-3xl border border-brand-purple/20 bg-brand-offwhite p-8">
+            <h2 className="mb-3 text-2xl font-bold text-brand-purple">{t("vision.title")}</h2>
+            <p className="leading-relaxed text-brand-muted">{t("vision.description")}</p>
           </div>
-          </ScrollReveal>
         </div>
       </section>
 
       <section className="safe-px py-16">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-10 text-center text-3xl font-bold text-brand-charcoal">
-            {t("values.title")}
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {valueKeys.map((key, index) => (
-              <ScrollReveal key={key} direction="up" delay={index * 0.07} className="h-full">
-              <div
-                className={`h-full rounded-2xl border p-6 text-center shadow-soft-md backdrop-blur-sm transition-shadow hover:shadow-soft-lg ${
-                  index % 2 === 0
-                    ? "border-brand-orange/25 bg-gradient-to-br from-white via-brand-orange/5 to-brand-orange/10"
-                    : "border-brand-purple/25 bg-gradient-to-br from-white via-brand-purple/5 to-brand-purple/10"
-                }`}
-              >
-                <h3 className="mb-2 font-bold text-brand-charcoal">
-                  {t(`values.items.${key}.title`)}
-                </h3>
-                <p className="text-sm text-brand-charcoal/70">
-                  {t(`values.items.${key}.description`)}
-                </p>
-              </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="safe-px bg-white py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-brand-charcoal">
-              {t("team.title")}
-            </h2>
-            <p className="text-brand-charcoal/70">{t("team.subtitle")}</p>
-          </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {members.map((member, index) => (
-              <ScrollReveal key={member.name} direction="up" delay={index * 0.07}>
-              <div className="rounded-2xl border border-brand-charcoal/10 bg-white/70 p-4 text-center shadow-soft-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-brand-purple/30 hover:shadow-soft-lg">
-                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[200px] overflow-hidden rounded-2xl border border-white/70 shadow-soft-md">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                    sizes="200px"
-                  />
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-8 text-center text-3xl font-bold text-brand-charcoal">{t("values.title")}</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {valueKeys.map((key) => (
+              <ScrollReveal key={key} direction="up">
+                <div className="h-full rounded-2xl border border-brand-charcoal/10 bg-white p-5">
+                  <h3 className="font-bold text-brand-charcoal">{t(`values.items.${key}.title`)}</h3>
+                  <p className="mt-2 text-sm text-brand-muted">{t(`values.items.${key}.description`)}</p>
                 </div>
-                <h3 className="font-bold text-brand-charcoal">{member.name}</h3>
-                <p className="text-sm text-brand-charcoal/60">{member.role}</p>
-              </div>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <CTASection
-        title={t("title")}
-        subtitle={t("subtitle")}
-        cta={tc("contactUs")}
-      />
+      {SHOW_TEAM ? (
+        <section className="safe-px bg-white py-16">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="mb-8 text-center text-3xl font-bold text-brand-charcoal">{t("team.title")}</h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {team.map((member) => (
+                <div key={member.name} className="rounded-2xl border border-brand-charcoal/10 bg-brand-offwhite p-5 text-center">
+                  <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-purple/10 text-lg font-bold text-brand-purple">
+                    SM
+                  </div>
+                  <h3 className="font-bold text-brand-charcoal">{member.name}</h3>
+                  <p className="text-sm text-brand-muted">{member.role[locale]}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <CTASection title={titles[locale]} subtitle={descriptions[locale]} cta={tc("contactUs")} />
     </>
   );
 }

@@ -5,65 +5,58 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import {
-  Search,
-  Target,
+  Megaphone,
   Share2,
-  FileText,
+  Globe,
+  Bot,
+  Code2,
   Sparkles,
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
-import { serviceSlugs, serviceKeys, type ServiceSlug } from "@/lib/services";
+import { serviceSlugs, type ServiceSlug } from "@/lib/services";
 
 type ServiceConstellationProps = {
   title: string;
   subtitle: string;
-  currency: string;
   startingAt: string;
-  perMonth: string;
-  perProject: string;
   learnMore: string;
   servicesData: Record<
     string,
     {
       title: string;
       shortDescription: string;
-      price: string;
+      priceLabel: string;
       features: string[];
     }
   >;
 };
 
-const serviceIcons: Record<ServiceSlug, typeof Search> = {
-  seo: Search,
-  "paid-ads": Target,
+const serviceIcons: Record<string, typeof Megaphone> = {
+  "meta-ads": Megaphone,
   "social-media": Share2,
-  "content-marketing": FileText,
-  branding: Sparkles,
+  "web-development": Globe,
+  "ai-web-apps": Bot,
+  "custom-software": Code2,
 };
 
 export default function ServiceConstellation({
   title,
   subtitle,
-  currency,
   startingAt,
-  perMonth,
-  perProject,
   learnMore,
   servicesData,
 }: ServiceConstellationProps) {
   const tConst = useTranslations("home.constellation");
-  const [selectedSlug, setSelectedSlug] = useState<ServiceSlug>("paid-ads");
-  const selectedKey = serviceKeys[selectedSlug];
-  const currentService = servicesData[selectedKey] || {
-    title: "Digital Growth",
-    shortDescription: "End-to-end digital solutions.",
-    price: "15,000",
-    features: ["Strategic Roadmaps", "Data Analytics", "Conversion Optimization"],
+  const [selectedSlug, setSelectedSlug] = useState<ServiceSlug>("meta-ads");
+  const currentService = servicesData[selectedSlug] || {
+    title: "Marketivity",
+    shortDescription: "Meta ads, websites and software.",
+    priceLabel: "Custom",
+    features: [],
   };
 
-  const isProject = selectedSlug === "branding";
   const CurrentIcon = serviceIcons[selectedSlug] || Sparkles;
 
   return (
@@ -95,10 +88,9 @@ export default function ServiceConstellation({
             </p>
 
             {serviceSlugs.map((slug) => {
-              const key = serviceKeys[slug];
-              const item = servicesData[key];
+              const item = servicesData[slug];
               const isSelected = selectedSlug === slug;
-              const Icon = serviceIcons[slug];
+              const Icon = serviceIcons[slug] || Sparkles;
 
               return (
                 <Fragment key={slug}>
@@ -141,9 +133,7 @@ export default function ServiceConstellation({
                         {item?.title || slug}
                       </h3>
                       <span className="text-xs text-brand-charcoal/50">
-                        {currency}
-                        {item?.price}{" "}
-                        {slug === "branding" ? perProject : perMonth}
+                        {item?.priceLabel}
                       </span>
                     </div>
                   </div>
@@ -180,10 +170,7 @@ export default function ServiceConstellation({
                           </h3>
                         </div>
                         <p className="shrink-0 text-right text-lg font-black text-brand-orange">
-                          {currency}{item?.price}
-                          <span className="block text-[10px] font-normal text-brand-charcoal/60">
-                            {slug === "branding" ? perProject : perMonth}
-                          </span>
+                          {item?.priceLabel}
                         </p>
                       </div>
                       <p className="mt-4 text-sm leading-relaxed text-brand-charcoal/75">
@@ -248,11 +235,7 @@ export default function ServiceConstellation({
                           {startingAt}
                         </span>
                         <p className="text-xl sm:text-2xl md:text-3xl font-black text-brand-orange">
-                          {currency}
-                          {currentService.price}
-                          <span className="text-xs font-normal text-brand-charcoal/60 ml-1">
-                            {isProject ? perProject : perMonth}
-                          </span>
+                          {currentService.priceLabel}
                         </p>
                       </div>
                     </div>

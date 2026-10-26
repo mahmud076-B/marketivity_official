@@ -59,8 +59,8 @@ export default function Funnel3D({ activeStage = "TRAFFIC" }: Funnel3DProps) {
     const layers = [
       { id: "TRAFFIC", name: "TRAFFIC", radius: 3.2, tube: 0.45, yOffset: 1.8, color: 0x00E5FF }, // Cyan
       { id: "LEADS", name: "LEADS", radius: 2.5, tube: 0.45, yOffset: 0.3, color: 0xFFC107 },   // Yellow/Orange
-      { id: "SALES", name: "SALES", radius: 1.8, tube: 0.45, yOffset: -1.2, color: 0xE91E63 },  // Magenta/Pink
-      { id: "SCALE", name: "SCALE", radius: 1.1, tube: 0.45, yOffset: -2.7, color: 0x8B5FC4 },  // Purple
+      { id: "SALES", name: "CHATS", radius: 1.8, tube: 0.45, yOffset: -1.2, color: 0xF7931E },
+      { id: "SCALE", name: "SCALE", radius: 1.1, tube: 0.45, yOffset: -2.7, color: 0x7B3FE4 },
     ];
 
     const meshes: { [key: string]: THREE.Mesh } = {};
