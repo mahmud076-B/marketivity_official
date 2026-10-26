@@ -15,6 +15,7 @@ export const site = {
   whatsapp: "https://wa.me/8801767644696",
   facebook: "https://facebook.com/marketivitybd",
   instagram: "https://instagram.com/marketivitybd",
+  linkedin: "https://www.linkedin.com/company/marketivity-bd",
   github: "https://github.com/mahmud076-B",
   address: {
     en: "Padma R/A, Chandrima, Rajshahi, Bangladesh",

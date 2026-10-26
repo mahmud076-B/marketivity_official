@@ -1,5 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
-import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import SocialLinks from "@/components/ui/SocialLinks";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import ContactForm from "@/components/forms/ContactForm";
@@ -112,25 +112,8 @@ export default async function ContactPage({ params }: Props) {
               </p>
             </div>
 
-            <div className="mt-6 flex gap-3">
-              <a
-                href="https://facebook.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex items-center gap-2 rounded-full bg-[#1877F2] px-4 py-2 text-sm font-semibold text-white"
-              >
-                <FacebookIcon className="h-4 w-4" />
-                Facebook
-              </a>
-              <a
-                href="https://instagram.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white"
-              >
-                <InstagramIcon className="h-4 w-4" />
-                Instagram
-              </a>
+            <div className="mt-6">
+              <SocialLinks variant="pills" networks={["facebook", "instagram", "linkedin"]} />
             </div>
           </div>
           </ScrollReveal>

@@ -5,7 +5,7 @@ import RotatingHeadline from "@/components/sections/RotatingHeadline";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CTASection from "@/components/sections/CTASection";
 import SelectedWork from "@/components/sections/SelectedWork";
-import InteractiveGrowthFunnel from "@/components/hero/InteractiveGrowthFunnel";
+import HeroGlobe from "@/components/hero/HeroGlobe";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import ProblemSection from "@/components/sections/ProblemSection";
 import GrowthEcosystem from "@/components/sections/GrowthEcosystem";
@@ -96,7 +96,7 @@ export default async function HomePage({ params }: Props) {
               </div>
             </div>
             <div className="w-full min-w-0 lg:col-span-6">
-              <InteractiveGrowthFunnel />
+              <HeroGlobe locale={locale} />
             </div>
           </div>
         </div>

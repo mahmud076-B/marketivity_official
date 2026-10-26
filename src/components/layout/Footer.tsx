@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
-import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import { Mail, MapPin, Phone } from "lucide-react";
+import SocialLinks from "@/components/ui/SocialLinks";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { BdtPricingLine } from "@/components/pricing/currency";
@@ -114,34 +114,8 @@ export default async function Footer() {
             </ul>
             <BdtPricingLine locale={locale} align="start" />
 
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href="https://facebook.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-charcoal shadow-soft-sm transition-colors hover:bg-brand-orange hover:text-white"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com/marketivitybd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-charcoal shadow-soft-sm transition-colors hover:bg-brand-orange hover:text-white"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="h-5 w-5" />
-              </a>
-              <a
-                href="https://wa.me/8801767644696"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="touch-target flex h-10 w-10 items-center justify-center rounded-full bg-[#075E54] text-white"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle className="h-5 w-5" />
-              </a>
+            <div className="mt-6">
+              <SocialLinks />
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import CTASection from "@/components/sections/CTASection";
 import TrustStrip from "@/components/sections/TrustStrip";
 import PageActions from "@/components/sections/PageActions";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import SocialLinks from "@/components/ui/SocialLinks";
 import { SHOW_TEAM, founder, isLocale, site, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -84,6 +85,9 @@ export default async function AboutPage({ params }: Props) {
             >
               GitHub · mahmud076-B
             </a>
+            <div className="mt-5">
+              <SocialLinks />
+            </div>
           </aside>
         </div>
       </section>

@@ -140,24 +140,8 @@ html[lang="bn"] h4 {
 }
 
 .logo-marquee:hover .logo-track,
-.logo-marquee:focus-within .logo-track,
-.reviews-marquee:hover .reviews-track,
-.reviews-marquee:focus-within .reviews-track {
+.logo-marquee:focus-within .logo-track {
   animation-play-state: paused;
-}
-
-.reviews-viewport {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-}
-
-.reviews-track {
-  display: flex;
-  width: max-content;
-  align-items: stretch;
-  gap: 1.25rem;
-  animation: marquee 110s linear infinite;
 }
 
 .logo-item {
@@ -205,8 +189,7 @@ html[lang="bn"] h4 {
   .animate-marquee,
   .animate-marquee-reverse,
   .logo-track,
-  .logo-track-reverse,
-  .reviews-track {
+  .logo-track-reverse {
     animation: none !important;
     transform: none !important;
   }
@@ -228,24 +211,8 @@ html[lang="bn"] h4 {
   }
 
   .logo-row-secondary,
-  .logo-item[data-clone],
-  .reviews-track [data-clone] {
+  .logo-item[data-clone] {
     display: none;
-  }
-
-  .reviews-viewport {
-    overflow: visible;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .reviews-track {
-    width: 100%;
-    max-width: 72rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-inline: auto;
-    padding-inline: 1rem;
   }
 
   [data-reveal] {

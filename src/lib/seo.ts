@@ -68,6 +68,6 @@ export function organizationJsonLd() {
       addressLocality: "Rajshahi",
       addressCountry: "BD",
     },
-    sameAs: [site.facebook, site.instagram, site.github],
+    sameAs: [site.facebook, site.instagram, site.linkedin, site.github],
   };
 }
