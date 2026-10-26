@@ -448,3 +448,30 @@ html[lang="bn"] h4 {
 .font-medium {
   font-weight: 600;
 }
+
+.portfolio-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 50px -28px rgba(36, 32, 44, 0.45);
+}
+
+.portfolio-shot {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-card:hover .portfolio-shot {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-card,
+  .portfolio-card:hover,
+  .portfolio-shot,
+  .portfolio-card:hover .portfolio-shot {
+    transition: none;
+    transform: none;
+  }
+}

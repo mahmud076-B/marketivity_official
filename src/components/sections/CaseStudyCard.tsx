@@ -1,4 +1,5 @@
 import { MessagesSquare, ThumbsUp } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import {
   campaignHeadline,
   campaignResultLabel,
@@ -11,10 +12,14 @@ export default function CaseStudyCard({
   campaign,
   locale,
   index = 0,
+  href,
+  linkLabel,
 }: {
   campaign: FeaturedCampaign;
   locale: Locale;
   index?: number;
+  href?: { pathname: "/work"; query: { tab: "marketing" }; hash: string };
+  linkLabel?: string;
 }) {
   const Icon = campaign.kind === "messaging" ? MessagesSquare : ThumbsUp;
   const spend = `$${campaign.spend.toFixed(2)}`;
@@ -23,7 +28,7 @@ export default function CaseStudyCard({
 
   return (
     <ScrollReveal delay={index * 0.08} className="h-full">
-    <article className="surface-card p-6 sm:p-7">
+    <article id={campaign.id} className="surface-card scroll-mt-28 p-6 sm:p-7">
       <div className="mb-4 flex items-center justify-between gap-3">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-ink">
           <Icon className="h-3.5 w-3.5" aria-hidden />
@@ -64,6 +69,11 @@ export default function CaseStudyCard({
           ? "অ্যাডস ম্যানেজারের সংখ্যা। এটি বিক্রি বা রাজস্ব নয়।"
           : "Ads Manager figures. This is not a sales or revenue result."}
       </p>
+      {href && linkLabel ? (
+        <Link href={href} className="mt-4 text-sm font-bold text-brand-ink underline">
+          {linkLabel}
+        </Link>
+      ) : null}
     </article>
     </ScrollReveal>
   );

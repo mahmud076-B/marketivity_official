@@ -13,14 +13,14 @@ export default async function LocaleNotFound() {
           body: "এই ঠিকানায় মার্কেটিভিটির কোনো পেজ নেই।",
           home: "হোমে ফিরুন",
           services: "সেবা দেখুন",
-          work: "কাজ দেখুন",
+          portfolio: "পোর্টফোলিও",
         }
       : {
           title: "Page not found",
           body: "This address is not a page on the Marketivity site.",
           home: "Back home",
           services: "View services",
-          work: "See the work",
+          portfolio: "Portfolio",
         };
 
   return (
@@ -39,8 +39,8 @@ export default async function LocaleNotFound() {
           <Link href="/services" className="text-brand-ink underline">
             {copy.services}
           </Link>
-          <Link href="/work" className="text-brand-ink underline">
-            {copy.work}
+          <Link href="/portfolio" className="text-brand-ink underline">
+            {copy.portfolio}
           </Link>
         </nav>
       </div>

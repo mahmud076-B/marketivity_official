@@ -8,7 +8,7 @@ export default function SoftwarePortfolio({ locale }: { locale: Locale }) {
     <div className="grid gap-5 sm:grid-cols-2">
       {softwareProjects.map((project, index) => (
         <ScrollReveal key={project.id} delay={index * 0.08} className="h-full">
-        <article className="surface-card surface-tint p-6 sm:p-7">
+        <article id={project.id} className="surface-card surface-tint scroll-mt-28 p-6 sm:p-7">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-purple">
             {project.kind[locale]}
           </p>

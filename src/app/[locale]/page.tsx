@@ -4,9 +4,7 @@ import { Link } from "@/i18n/navigation";
 import RotatingHeadline from "@/components/sections/RotatingHeadline";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CTASection from "@/components/sections/CTASection";
-import CaseStudyCard from "@/components/sections/CaseStudyCard";
-import ClientReportedNote from "@/components/sections/ClientReportedNote";
-import SoftwarePortfolio from "@/components/sections/SoftwarePortfolio";
+import SelectedWork from "@/components/sections/SelectedWork";
 import InteractiveGrowthFunnel from "@/components/hero/InteractiveGrowthFunnel";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import ProblemSection from "@/components/sections/ProblemSection";
@@ -15,7 +13,6 @@ import WhyMarketivity from "@/components/sections/WhyMarketivity";
 import ServiceConstellation from "@/components/sections/ServiceConstellation";
 import TrustStrip from "@/components/sections/TrustStrip";
 import PageActions from "@/components/sections/PageActions";
-import { featuredCampaigns } from "@/lib/campaigns";
 import { serviceCategories, startingPriceLabel } from "@/lib/pricing";
 import { isLocale, type Locale } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -92,7 +89,7 @@ export default async function HomePage({ params }: Props) {
               </p>
               <div className="flex flex-col items-center gap-3 lg:items-start">
                 <PageActions locale={locale} />
-                <Link href="/work" className="text-sm font-semibold text-brand-ink underline">
+                <Link href="/portfolio" className="text-sm font-semibold text-brand-ink underline">
                   {t("hero.secondaryCta")}
                 </Link>
               </div>
@@ -157,48 +154,7 @@ export default async function HomePage({ params }: Props) {
         items={valuePropItems}
       />
 
-      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
-        <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple">
-              {locale === "bn" ? "প্রমাণ" : "Proof"}
-            </p>
-            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
-              {t("caseStudy.title")}
-            </h2>
-            <p className="text-base leading-relaxed text-brand-muted sm:text-lg">
-              {t("caseStudy.subtitle")}
-            </p>
-          </ScrollReveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredCampaigns.map((campaign, index) => (
-              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} index={index} />
-            ))}
-          </div>
-          <ClientReportedNote locale={locale} />
-          <div className="mt-8 text-center">
-            <Link href="/work" className="text-sm font-bold text-brand-ink underline">
-              {tc("viewAll")}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
-        <div className="mx-auto max-w-7xl">
-          <ScrollReveal className="mx-auto mb-10 max-w-2xl text-center">
-          <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
-            {locale === "bn" ? "সফটওয়্যার" : "Software"}
-          </h2>
-          <p className="text-brand-muted">
-            {locale === "bn"
-              ? "প্রতিষ্ঠাতার তৈরি সফটওয়্যার। কোনো পারফরম্যান্স সংখ্যা নেই। অভ্যন্তরীণ টুলের লিঙ্ক নেই।"
-              : "Software built by the founder. No performance figures. Internal tools are not linked."}
-          </p>
-          </ScrollReveal>
-          <SoftwarePortfolio locale={locale} />
-        </div>
-      </section>
+      <SelectedWork locale={locale} />
 
       <CTASection
         title={t("footerCta.title")}

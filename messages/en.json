@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "Marketivity — Meta ads, websites and software",
-    "description": "Marketivity manages Meta ads and builds websites and software for clients in the UK, the USA and Bangladesh. Founded in July 2025 by S M Mahmud Hasan."
+    "title": "Marketivity | Software Development, Web Design & Marketing Agency",
+    "description": "Marketivity builds custom software, designs and develops websites, and runs digital marketing — Meta, Facebook and Instagram ads — for businesses in the UK and the USA."
   },
   "common": {
     "brand": "Marketivity",
-    "tagline": "Meta ads and software",
+    "tagline": "Software Development, Web Design & Marketing",
     "learnMore": "Learn More",
     "getStarted": "Get Started",
     "contactUs": "Contact Us",
@@ -39,7 +39,7 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "portfolio": "Work",
+    "portfolio": "Portfolio",
     "pricing": "Pricing",
     "blog": "Blog",
     "careers": "Careers",
@@ -52,16 +52,16 @@
   },
   "home": {
     "hero": {
-      "title": "Meta ads and websites for",
+      "title": "We Grow Your",
       "rotatingWords": [
-        "shops",
-        "pages",
-        "brands",
-        "products"
+        "Brand",
+        "Revenue",
+        "Reach",
+        "Impact"
       ],
       "subtitle": "We run Facebook and Instagram campaigns and build the sites and software around them. Reports use Ads Manager: conversations, follows and visits.",
       "cta": "Book a free call",
-      "secondaryCta": "See the work"
+      "secondaryCta": "See the portfolio"
     },
     "growthEngine": {
       "simulator": "GROWTH CORE 3D • LAB SIMULATOR",

@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/services",
     ...serviceCategories.map((category) => `/services/${category.slug}`),
-    "/work",
+    "/portfolio",
     "/pricing",
     "/blog",
     ...blogPosts.map((post) => `/blog/${post.slug}`),

@@ -39,8 +39,8 @@ export default function GlobalNotFound() {
             <Link href="/en/services" className="text-[#8A4500] underline">
               Services
             </Link>
-            <Link href="/en/work" className="text-[#8A4500] underline">
-              Work
+            <Link href="/en/portfolio" className="text-[#8A4500] underline">
+              Portfolio
             </Link>
           </nav>
         </div>

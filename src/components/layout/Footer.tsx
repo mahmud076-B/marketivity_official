@@ -15,7 +15,7 @@ export default async function Footer() {
 
   const quickLinks = [
     { href: "/about", label: tn("about") },
-    { href: "/work", label: tn("portfolio") },
+    { href: "/portfolio", label: tn("portfolio") },
     { href: "/pricing", label: tn("pricing") },
     { href: "/blog", label: tn("blog") },
     { href: "/careers", label: tn("careers") },
@@ -42,7 +42,7 @@ export default async function Footer() {
               sizes="48px"
               className="mb-4 h-10 w-auto object-contain"
             />
-            <p className="mb-2 text-sm font-semibold text-brand-orange">{tc("tagline")}</p>
+            <p className="mb-2 text-sm font-semibold text-brand-charcoal">{site.name}</p>
             <p className="mb-5 text-sm leading-relaxed text-brand-charcoal/65">
               {t("description")}
             </p>

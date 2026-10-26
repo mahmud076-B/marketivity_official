@@ -51,6 +51,8 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: site.name,
+    description:
+      "Marketivity builds custom software, designs and develops websites, and runs digital marketing — Meta, Facebook and Instagram ads — for businesses in the UK and the USA.",
     url: site.url,
     email: site.email,
     telephone: site.phoneTel,
