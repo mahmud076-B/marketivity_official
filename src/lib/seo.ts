@@ -71,3 +71,13 @@ export function organizationJsonLd() {
     sameAs: [site.facebook, site.instagram, site.linkedin, site.github],
   };
 }
+
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: ["marketivity", site.domain],
+    url: `${site.url}/`,
+  };
+}

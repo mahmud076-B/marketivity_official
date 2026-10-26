@@ -10,7 +10,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 import Analytics from "@/components/consent/Analytics";
 import { CurrencyProvider } from "@/components/pricing/currency";
-import { organizationJsonLd } from "@/lib/seo";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { isLocale, site } from "@/lib/site";
 import "../globals.css";
 
@@ -105,6 +105,10 @@ export default async function LocaleLayout({
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
           />
           <a href="#content" className="skip-link">
             {locale === "bn" ? "মূল অংশে যান" : "Skip to content"}
