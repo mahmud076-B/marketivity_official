@@ -131,12 +131,12 @@ html[lang="bn"] h4 {
   display: flex;
   width: max-content;
   align-items: center;
-  animation: marquee 64s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .logo-track-reverse {
   animation-name: marquee-reverse;
-  animation-duration: 76s;
+  animation-duration: 40s;
 }
 
 .logo-marquee:hover .logo-track,
@@ -151,7 +151,7 @@ html[lang="bn"] h4 {
   display: flex;
   height: 4.75rem;
   width: 4.75rem;
-  margin-right: 1.75rem;
+  margin-right: 3.25rem;
   flex: none;
   align-items: center;
   justify-content: center;
