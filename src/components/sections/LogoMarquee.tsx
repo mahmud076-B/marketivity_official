@@ -1,34 +1,63 @@
 import Image from "next/image";
+import type { Locale } from "@/lib/site";
 
-export default function LogoMarquee() {
-  const logos = Array.from({ length: 18 }, (_, i) => i + 1);
-  const doubled = [...logos, ...logos];
+const logos = Array.from({ length: 18 }, (_, index) => index + 1);
 
-  const renderTrack = (animationClass: string, keyPrefix: string) => (
-    <div className={`flex w-max items-center will-change-transform ${animationClass}`}>
-      {doubled.map((i, idx) => (
-        <div
-          key={`${keyPrefix}-${i}-${idx}`}
-          className="mx-8 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-charcoal/10 bg-white shadow-soft-sm sm:mx-12 sm:h-[84px] sm:w-[84px]"
-        >
-          <Image
-            src={`/${i}.svg`}
-            alt=""
-            width={144}
-            height={144}
-            className="h-full w-full scale-125 object-cover"
-            aria-hidden="true"
-          />
-        </div>
-      ))}
-    </div>
-  );
+const title = {
+  en: "Trusted by growing brands",
+  bn: "ক্রমবর্ধমান ব্র্যান্ডের আস্থা",
+} as const;
+
+function Track({ reverse = false }: { reverse?: boolean }) {
+  const copies = [0, 1];
 
   return (
-    <section className="overflow-hidden bg-white py-8 sm:py-10">
-      <div className="space-y-4 sm:space-y-5">
-        {renderTrack("animate-logo-marquee-reverse", "top")}
-        {renderTrack("animate-logo-marquee", "bottom")}
+    <div className="logo-viewport">
+      <ul className={`logo-track ${reverse ? "logo-track-reverse" : ""}`}>
+        {copies.map((copy) =>
+          logos.map((id) => (
+            <li
+              key={`${reverse ? "rev" : "fwd"}-${copy}-${id}`}
+              className="logo-item"
+              data-clone={copy === 1 ? "" : undefined}
+              aria-hidden={copy === 1 ? true : undefined}
+            >
+              <Image
+                src={`/clients/${id}.webp`}
+                alt=""
+                width={144}
+                height={144}
+                sizes="76px"
+                className="h-full w-full object-cover"
+              />
+            </li>
+          )),
+        )}
+      </ul>
+    </div>
+  );
+}
+
+export default function LogoMarquee({
+  locale,
+  note,
+}: {
+  locale: Locale;
+  note?: string;
+}) {
+  return (
+    <section className="logo-marquee border-y border-brand-charcoal/8 bg-white py-8 sm:py-10" aria-labelledby="logo-marquee-heading">
+      <div className="safe-px mx-auto max-w-3xl text-center">
+        <h2 id="logo-marquee-heading" className="text-sm font-bold uppercase tracking-[0.18em] text-brand-purple">
+          {title[locale]}
+        </h2>
+        {note ? <p className="mt-2 text-xs leading-relaxed text-brand-muted">{note}</p> : null}
+      </div>
+      <div className="mt-6 space-y-4 sm:mt-7 sm:space-y-5">
+        <Track reverse />
+        <div className="logo-row-secondary">
+          <Track />
+        </div>
       </div>
     </section>
   );

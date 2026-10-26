@@ -106,7 +106,7 @@ export default async function AboutPage({ params }: Props) {
           <h2 className="mb-8 text-center text-3xl font-bold text-brand-charcoal">{t("values.title")}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {valueKeys.map((key) => (
-              <ScrollReveal key={key} direction="up">
+              <ScrollReveal key={key} direction="up" delay={valueKeys.indexOf(key) * 0.08} className="h-full">
                 <div className="h-full rounded-2xl border border-brand-charcoal/10 bg-white p-5">
                   <h3 className="font-bold text-brand-charcoal">{t(`values.items.${key}.title`)}</h3>
                   <p className="mt-2 text-sm text-brand-muted">{t(`values.items.${key}.description`)}</p>

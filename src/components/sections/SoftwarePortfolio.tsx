@@ -1,15 +1,14 @@
 import { Link } from "@/i18n/navigation";
 import { softwareProjects } from "@/lib/portfolio";
 import type { Locale } from "@/lib/site";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export default function SoftwarePortfolio({ locale }: { locale: Locale }) {
   return (
     <div className="grid gap-5 sm:grid-cols-2">
-      {softwareProjects.map((project) => (
-        <article
-          key={project.id}
-          className="flex h-full flex-col rounded-3xl border border-brand-charcoal/10 bg-white p-6 shadow-soft-sm"
-        >
+      {softwareProjects.map((project, index) => (
+        <ScrollReveal key={project.id} delay={index * 0.08} className="h-full">
+        <article className="surface-card surface-tint p-6 sm:p-7">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-purple">
             {project.kind[locale]}
           </p>
@@ -26,6 +25,7 @@ export default function SoftwarePortfolio({ locale }: { locale: Locale }) {
             </Link>
           ) : null}
         </article>
+        </ScrollReveal>
       ))}
     </div>
   );

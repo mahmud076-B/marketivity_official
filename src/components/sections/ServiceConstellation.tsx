@@ -60,7 +60,7 @@ export default function ServiceConstellation({
   const CurrentIcon = serviceIcons[selectedSlug] || Sparkles;
 
   return (
-    <section className="safe-px py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="section-block safe-px relative overflow-hidden border-t border-brand-charcoal/8 bg-white">
       {/* Ambient background glows */}
       <div className="absolute top-1/3 -left-32 w-80 h-80 bg-brand-orange/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/3 -right-32 w-80 h-80 bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none" />
@@ -100,7 +100,7 @@ export default function ServiceConstellation({
                     onMouseEnter={() => setSelectedSlug(slug)}
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.35 }}
+                    viewport={{ once: true, amount: 0.25 }}
                     whileHover={{ y: -4, scale: isSelected ? 1.02 : 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: serviceSlugs.indexOf(slug) * 0.05 }}

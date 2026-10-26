@@ -20,7 +20,7 @@ export default function CTASection({
   const tCta = useTranslations("home.footerCta");
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-brand-offwhite via-white to-brand-orange/10 text-brand-charcoal safe-px py-16 sm:py-24 md:py-32">
+    <section className="section-block safe-px relative overflow-hidden border-t border-brand-charcoal/8 bg-gradient-to-br from-white via-brand-offwhite to-brand-purple/5 text-brand-charcoal">
       {/* Cinematic Ambient Brand Glows & Volumetric Light Beams */}
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none" />
 

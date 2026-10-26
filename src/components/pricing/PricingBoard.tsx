@@ -12,6 +12,7 @@ import {
 } from "@/lib/pricing";
 import { whatsappLink, type Locale } from "@/lib/site";
 import { Link } from "@/i18n/navigation";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export default function PricingBoard({
   locale,
@@ -145,18 +146,16 @@ export function TierGrid({
   locale: Locale;
 }) {
   return (
-    <div className="mt-8 grid gap-5 lg:grid-cols-3">
-      {category.tiers.map((tier) => (
+    <div className="mt-8 grid items-stretch gap-5 lg:grid-cols-3">
+      {category.tiers.map((tier, index) => (
+        <ScrollReveal key={tier.id} delay={index * 0.1} className="h-full">
         <article
-          key={tier.id}
-          className={`flex h-full flex-col rounded-3xl border bg-white p-6 shadow-soft-md ${
-            tier.popular
-              ? "border-brand-orange ring-2 ring-brand-orange/30"
-              : "border-brand-charcoal/10"
+          className={`surface-card p-6 sm:p-7 ${
+            tier.popular ? "border-brand-purple/25 shadow-soft-lg" : ""
           }`}
         >
           {tier.popular ? (
-            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-orange">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-purple">
               {locale === "bn" ? "সবচেয়ে বেশি নেওয়া হয়" : "Most chosen"}
             </p>
           ) : (
@@ -165,7 +164,7 @@ export function TierGrid({
             </p>
           )}
           <h3 className="text-xl font-bold text-brand-charcoal">{tier.name[locale]}</h3>
-          <p className="mt-2 text-3xl font-extrabold text-brand-purple">
+          <p className="mt-2 text-3xl font-extrabold tracking-tight text-brand-charcoal">
             {formatTierPrice(tier, locale)}
           </p>
           <p className="mt-3 text-sm text-brand-muted">{tier.bestFor[locale]}</p>
@@ -194,6 +193,7 @@ export function TierGrid({
             {locale === "bn" ? "হোয়াটসঅ্যাপে লিখুন" : "Message on WhatsApp"}
           </a>
         </article>
+        </ScrollReveal>
       ))}
     </div>
   );

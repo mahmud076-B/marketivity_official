@@ -6,6 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 import PageActions from "@/components/sections/PageActions";
 import TrustStrip from "@/components/sections/TrustStrip";
 import CTASection from "@/components/sections/CTASection";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -40,7 +41,7 @@ export default async function ServicesPage({ params }: Props) {
 
   return (
     <>
-    <section className="safe-px py-16 md:py-20">
+    <section className="section-block safe-px">
       <div className="mx-auto max-w-6xl">
         <div className="max-w-3xl">
           <h1 className="text-4xl font-bold text-brand-charcoal md:text-5xl">{copy[locale].title}</h1>
@@ -53,10 +54,11 @@ export default async function ServicesPage({ params }: Props) {
             <PageActions locale={locale} topic={copy[locale].title} />
           </div>
         </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {serviceCategories.map((category) => (
-            <article key={category.slug} className="flex h-full flex-col rounded-3xl border border-brand-charcoal/10 bg-white p-6 shadow-soft-sm">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-orange">
+        <div className="mt-12 grid items-stretch gap-5 md:grid-cols-2">
+          {serviceCategories.map((category, index) => (
+            <ScrollReveal key={category.slug} delay={index * 0.08} className="h-full">
+            <article className="surface-card surface-tint p-6 sm:p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-purple">
                 {category.model[locale]}
               </p>
               <h2 className="mt-2 text-2xl font-bold text-brand-charcoal">{category.name[locale]}</h2>
@@ -71,6 +73,7 @@ export default async function ServicesPage({ params }: Props) {
                 </Link>
               </div>
             </article>
+            </ScrollReveal>
           ))}
         </div>
       </div>

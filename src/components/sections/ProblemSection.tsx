@@ -31,7 +31,7 @@ export default function ProblemSection({
   const tLab = useTranslations("home.lab");
 
   return (
-    <section className="safe-px py-16 sm:py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="section-block safe-px relative overflow-hidden border-t border-brand-charcoal/8 bg-brand-offwhite">
       {/* Ambient background glows */}
       <div className="absolute top-1/4 -right-32 w-80 h-80 bg-brand-orange/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-brand-purple/8 rounded-full blur-[100px] pointer-events-none" />

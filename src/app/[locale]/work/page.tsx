@@ -48,7 +48,7 @@ export default async function WorkPage({ params }: Props) {
 
   return (
     <>
-      <section className="gradient-hero safe-px py-16 text-center md:py-20">
+      <section className="gradient-hero section-block safe-px text-center">
         <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-extrabold text-brand-charcoal md:text-5xl">{copy[locale].title}</h1>
           <p className="mt-4 text-lg text-brand-muted">{copy[locale].description}</p>
@@ -58,21 +58,21 @@ export default async function WorkPage({ params }: Props) {
         </div>
       </section>
       <TrustStrip locale={locale} />
-      <section className="safe-px py-12">
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-brand-offwhite">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-2xl font-bold text-brand-charcoal">{copy[locale].ads}</h2>
-          <p className="mt-2 max-w-3xl text-sm text-brand-muted">{proofCopy.source[locale]}</p>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredCampaigns.map((campaign) => (
-              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} />
+          <h2 className="text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">{copy[locale].ads}</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-brand-muted">{proofCopy.source[locale]}</p>
+          <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredCampaigns.map((campaign, index) => (
+              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} index={index} />
             ))}
           </div>
           <ClientReportedNote locale={locale} />
         </div>
       </section>
-      <section className="safe-px py-12">
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-2xl font-bold text-brand-charcoal">{copy[locale].software}</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">{copy[locale].software}</h2>
           <p className="mt-2 max-w-3xl text-sm text-brand-muted">{copy[locale].softwareNote}</p>
           <div className="mt-6">
             <SoftwarePortfolio locale={locale} />

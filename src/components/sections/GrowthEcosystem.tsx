@@ -23,11 +23,11 @@ type GrowthEcosystemProps = {
 const stageMeta = [
   { id: "traffic", icon: Globe, color: "#F7931E" },
   { id: "attention", icon: Eye, color: "#FFAA4D" },
-  { id: "engagement", icon: MessageSquare, color: "#6F42C1" },
+  { id: "engagement", icon: MessageSquare, color: "#7B3FE4" },
   { id: "leads", icon: UserCheck, color: "#8B5FC4" },
   { id: "conversion", icon: CreditCard, color: "#F7931E" },
-  { id: "retention", icon: Repeat, color: "#6F42C1" },
-  { id: "growth", icon: TrendingUp, color: "#10B981" },
+  { id: "retention", icon: Repeat, color: "#7B3FE4" },
+  { id: "growth", icon: TrendingUp, color: "#F7931E" },
 ];
 
 export default function GrowthEcosystem({
@@ -46,7 +46,7 @@ export default function GrowthEcosystem({
   }));
 
   return (
-    <section className="safe-px py-16 sm:py-20 md:py-28 bg-gradient-to-br from-brand-offwhite via-white to-brand-orange/5 text-brand-charcoal relative overflow-hidden">
+    <section className="section-block safe-px relative overflow-hidden border-t border-brand-charcoal/8 bg-white text-brand-charcoal">
       {/* Background Ambient Glows */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-brand-purple/15 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-brand-orange/15 blur-[120px] pointer-events-none" />
@@ -77,9 +77,9 @@ export default function GrowthEcosystem({
                 <motion.button
                   type="button"
                   onClick={() => setActiveStage(idx)}
-                  initial={{ opacity: 0, y: 34, scale: 0.94, rotateX: 4 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.985 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-                  viewport={{ once: false, amount: 0.35 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   whileHover={{ y: -5, scale: isSelected ? 1.04 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 110, damping: 20, mass: 0.7, delay: idx * 0.035 }}

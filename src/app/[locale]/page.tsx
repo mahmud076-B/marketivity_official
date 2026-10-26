@@ -74,11 +74,11 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <section className="gradient-hero safe-px py-12 md:py-20">
+      <section className="gradient-hero safe-px section-block">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
             <div className="w-full min-w-0 text-center lg:col-span-6 lg:text-left">
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-ink md:text-sm">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple md:text-sm">
                 {tc("tagline")}
               </p>
               <h1 className="mb-5 font-display text-4xl font-extrabold leading-[1.12] text-brand-charcoal sm:text-5xl md:text-6xl">
@@ -119,20 +119,25 @@ export default async function HomePage({ params }: Props) {
         />
       </ScrollReveal>
 
-      <GrowthEcosystem
-        eyebrow={t("ecosystem.eyebrow")}
-        title={t("ecosystem.title")}
-        subtitle={t("ecosystem.subtitle")}
-      />
+      <ScrollReveal>
+        <GrowthEcosystem
+          eyebrow={t("ecosystem.eyebrow")}
+          title={t("ecosystem.title")}
+          subtitle={t("ecosystem.subtitle")}
+        />
+      </ScrollReveal>
 
-      <section className="safe-px bg-brand-offwhite py-16 sm:py-20">
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-brand-charcoal mb-3">
+          <ScrollReveal className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple">
+              {t("process.badge")}
+            </p>
+            <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
               {t("process.title")}
             </h2>
-            <p className="text-base sm:text-lg text-brand-muted leading-relaxed">{t("process.subtitle")}</p>
-          </div>
+            <p className="text-base leading-relaxed text-brand-muted sm:text-lg">{t("process.subtitle")}</p>
+          </ScrollReveal>
           <ProcessSteps steps={processSteps} />
         </div>
       </section>
@@ -152,19 +157,22 @@ export default async function HomePage({ params }: Props) {
         items={valuePropItems}
       />
 
-      <section className="safe-px py-20 bg-brand-offwhite">
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 text-center max-w-3xl mx-auto">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-brand-charcoal">
+          <ScrollReveal className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-purple">
+              {locale === "bn" ? "প্রমাণ" : "Proof"}
+            </p>
+            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
               {t("caseStudy.title")}
             </h2>
-            <p className="text-base sm:text-lg text-brand-muted leading-relaxed">
+            <p className="text-base leading-relaxed text-brand-muted sm:text-lg">
               {t("caseStudy.subtitle")}
             </p>
-          </div>
+          </ScrollReveal>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredCampaigns.map((campaign) => (
-              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} />
+            {featuredCampaigns.map((campaign, index) => (
+              <CaseStudyCard key={campaign.id} campaign={campaign} locale={locale} index={index} />
             ))}
           </div>
           <ClientReportedNote locale={locale} />
@@ -176,16 +184,18 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="safe-px py-16 bg-white">
+      <section className="section-block safe-px border-t border-brand-charcoal/8 bg-white">
         <div className="mx-auto max-w-7xl">
-          <h2 className="mb-3 text-center text-3xl font-extrabold text-brand-charcoal">
+          <ScrollReveal className="mx-auto mb-10 max-w-2xl text-center">
+          <h2 className="mb-3 text-3xl font-extrabold tracking-tight text-brand-charcoal sm:text-4xl">
             {locale === "bn" ? "সফটওয়্যার" : "Software"}
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-center text-brand-muted">
+          <p className="text-brand-muted">
             {locale === "bn"
               ? "প্রতিষ্ঠাতার তৈরি সফটওয়্যার। কোনো পারফরম্যান্স সংখ্যা নেই। অভ্যন্তরীণ টুলের লিঙ্ক নেই।"
               : "Software built by the founder. No performance figures. Internal tools are not linked."}
           </p>
+          </ScrollReveal>
           <SoftwarePortfolio locale={locale} />
         </div>
       </section>

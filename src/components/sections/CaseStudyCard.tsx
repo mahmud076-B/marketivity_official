@@ -5,13 +5,16 @@ import {
   type FeaturedCampaign,
 } from "@/lib/campaigns";
 import type { Locale } from "@/lib/site";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export default function CaseStudyCard({
   campaign,
   locale,
+  index = 0,
 }: {
   campaign: FeaturedCampaign;
   locale: Locale;
+  index?: number;
 }) {
   const Icon = campaign.kind === "messaging" ? MessagesSquare : ThumbsUp;
   const spend = `$${campaign.spend.toFixed(2)}`;
@@ -19,9 +22,10 @@ export default function CaseStudyCard({
   const reach = campaign.reach.toLocaleString("en-US");
 
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-brand-purple/15 bg-white p-6 shadow-soft-md">
+    <ScrollReveal delay={index * 0.08} className="h-full">
+    <article className="surface-card p-6 sm:p-7">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-orange">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-ink">
           <Icon className="h-3.5 w-3.5" aria-hidden />
           {campaignResultLabel(campaign.kind, locale)}
         </span>
@@ -61,5 +65,6 @@ export default function CaseStudyCard({
           : "Ads Manager figures. This is not a sales or revenue result."}
       </p>
     </article>
+    </ScrollReveal>
   );
 }
