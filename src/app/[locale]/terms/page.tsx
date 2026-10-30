@@ -46,7 +46,7 @@ export default async function TermsPage({ params }: Props) {
         },
         {
           title: "দাম ও বিজ্ঞাপন খরচ",
-          body: "প্রকাশিত দাম মার্কিন ডলার বা পাউন্ড স্টার্লিংয়ে, নির্ধারিত দাম, কনভার্সন নয়। যেখানে প্রযোজ্য, ভ্যাট ও অন্যান্য কর আলাদা। মেটা অ্যাডসের খরচ ফির মধ্যে নয়। আপনি সেই খরচ আপনার নিজের অ্যাড অ্যাকাউন্ট থেকে মেটাকে দেন।",
+          body: "প্রকাশিত দাম মার্কিন ডলার, পাউন্ড স্টার্লিং, বা টাকায়, নির্ধারিত দাম, কনভার্সন নয়। যেখানে প্রযোজ্য, ভ্যাট ও অন্যান্য কর আলাদা। মেটা অ্যাডসের খরচ ফির মধ্যে নয়। আপনি সেই খরচ আপনার নিজের অ্যাড অ্যাকাউন্ট থেকে মেটাকে দেন।",
         },
         {
           title: "আমরা যা প্রতিশ্রুতি দিই না",
@@ -84,7 +84,7 @@ export default async function TermsPage({ params }: Props) {
         },
         {
           title: "Prices and ad spend",
-          body: "Published prices are set in US dollars or pounds sterling. They are not a currency conversion, and they exclude VAT and other taxes where those apply. Meta ad spend is not part of the fee. You pay that spend to Meta from an ad account in your name.",
+          body: "Published prices are set in US dollars, pounds sterling, or taka. They are not a currency conversion, and they exclude VAT and other taxes where those apply. Meta ad spend is not part of the fee. You pay that spend to Meta from an ad account in your name.",
         },
         {
           title: "What we do not promise",

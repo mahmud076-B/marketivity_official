@@ -1,20 +1,22 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import {
+  CURRENCY_COOKIE,
+  type Currency,
+} from "@/lib/currency";
 import {
   formatExtraPrice,
   formatTierPrice,
   getCategory,
   priceTrust,
   startingPriceLabel,
-  type Currency,
   type Extra,
   type Tier,
 } from "@/lib/pricing";
-import { whatsappLink, type Locale } from "@/lib/site";
+import type { Locale } from "@/lib/site";
 
-const STORAGE_KEY = "marketivity-currency";
+const CURRENCIES = ["USD", "GBP", "BDT"] as const;
 
 const CurrencyContext = createContext<{
   currency: Currency;
@@ -24,33 +26,18 @@ const CurrencyContext = createContext<{
   setCurrency: () => {},
 });
 
-export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>("USD");
-
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved === "USD" || saved === "GBP") {
-        setCurrencyState(saved);
-        return;
-      }
-      const lang = navigator.language.toLowerCase();
-      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (lang === "en-gb" || lang.startsWith("en-gb") || timeZone === "Europe/London") {
-        setCurrencyState("GBP");
-      }
-    } catch {
-      /* keep USD */
-    }
-  }, []);
+export function CurrencyProvider({
+  initialCurrency,
+  children,
+}: {
+  initialCurrency: Currency;
+  children: React.ReactNode;
+}) {
+  const [currency, setCurrencyState] = useState<Currency>(initialCurrency);
 
   function setCurrency(next: Currency) {
     setCurrencyState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* ignore private mode */
-    }
+    document.cookie = `${CURRENCY_COOKIE}=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
   }
 
   return (
@@ -64,13 +51,16 @@ export function useCurrency() {
   return useContext(CurrencyContext);
 }
 
-export function CurrencyToggle({ locale }: { locale: Locale }) {
+export function CurrencyToggle() {
   const { currency, setCurrency } = useCurrency();
-  const label = locale === "bn" ? "মুদ্রা" : "Currency";
 
   return (
-    <div className="inline-flex rounded-full border border-brand-charcoal/15 bg-white p-1" role="group" aria-label={label}>
-      {(["USD", "GBP"] as const).map((code) => {
+    <div
+      className="grid w-full max-w-lg grid-cols-3 gap-1 rounded-2xl border-2 border-brand-charcoal/15 bg-white p-1.5 shadow-sm"
+      role="group"
+      aria-label="Currency"
+    >
+      {CURRENCIES.map((code) => {
         const selected = currency === code;
         return (
           <button
@@ -78,8 +68,8 @@ export function CurrencyToggle({ locale }: { locale: Locale }) {
             type="button"
             aria-pressed={selected}
             onClick={() => setCurrency(code)}
-            className={`min-h-11 min-w-14 rounded-full px-4 text-sm font-bold ${
-              selected ? "bg-brand-orange text-brand-charcoal" : "text-brand-muted"
+            className={`min-h-14 rounded-xl text-lg font-extrabold tracking-wide ${
+              selected ? "bg-brand-orange text-brand-charcoal" : "text-brand-muted hover:text-brand-charcoal"
             }`}
           >
             {code}
@@ -113,50 +103,6 @@ export function StartingPrice({
   const category = getCategory(slug);
   if (!category) return null;
   return <span className={className}>{startingPriceLabel(category, locale, currency)}</span>;
-}
-
-const bdtPricingHref = whatsappLink(
-  "Hi Marketivity, I'm a Bangladeshi business and would like BDT pricing.",
-);
-
-/** English only. No taka amount. */
-export function BdtPricingLine({
-  locale,
-  align = "center",
-}: {
-  locale: Locale;
-  align?: "center" | "start";
-}) {
-  if (locale !== "en") return null;
-  return (
-    <p className={align === "center" ? "mt-4 text-center" : "mt-4"}>
-      <a
-        href={bdtPricingHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-xs leading-snug text-brand-muted hover:text-brand-charcoal hover:underline"
-      >
-        <MessageCircle className="h-3.5 w-3.5 shrink-0" aria-hidden />
-        Bangladeshi business? Get BDT pricing on WhatsApp.
-        <span className="sr-only"> (opens in a new tab)</span>
-      </a>
-    </p>
-  );
-}
-
-export function BangladeshPriceNote({ locale }: { locale: Locale }) {
-  if (locale !== "bn") return null;
-  return (
-    <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-brand-charcoal">
-      বাংলাদেশের ক্লায়েন্টদের জন্য টাকায় প্যাকেজ জানতে{" "}
-      <a
-        href={whatsappLink("হ্যালো মার্কেটিভিটি, টাকায় প্যাকেজ জানতে চাই।")}
-        className="font-bold text-brand-ink underline"
-      >
-        WhatsApp-এ যোগাযোগ করুন
-      </a>
-    </p>
-  );
 }
 
 export function PriceTrust({ locale }: { locale: Locale }) {

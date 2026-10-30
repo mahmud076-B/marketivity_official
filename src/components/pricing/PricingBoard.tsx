@@ -4,8 +4,6 @@ import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { pricingFaq, serviceCategories, type ServiceCategory } from "@/lib/pricing";
 import {
-  BangladeshPriceNote,
-  BdtPricingLine,
   CurrencyToggle,
   ExtraPrice,
   PriceTrust,
@@ -36,7 +34,7 @@ export default function PricingBoard({
   return (
     <div>
       <div className="mb-6 flex justify-center">
-        <CurrencyToggle locale={locale} />
+        <CurrencyToggle />
       </div>
 
       <div
@@ -72,7 +70,6 @@ export default function PricingBoard({
       <TierGrid category={category} locale={locale} />
       <CategoryExtras category={category} locale={locale} />
       <PriceTrust locale={locale} />
-      <BangladeshPriceNote locale={locale} />
 
       <section className="mt-14 rounded-3xl border border-brand-orange/20 bg-white p-6 sm:p-8">
         <h2 className="text-2xl font-bold text-brand-charcoal">
@@ -232,7 +229,6 @@ export function TierGrid({
         </ScrollReveal>
       ))}
     </div>
-    <BdtPricingLine locale={locale} />
     </>
   );
 }

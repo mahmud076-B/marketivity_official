@@ -1,15 +1,18 @@
+import type { Currency } from "@/lib/currency";
 import type { Locale } from "@/lib/site";
 
+export type { Currency };
+
 /**
- * Founder-approved prices, October 2026.
- * USD and GBP are set prices, not a conversion.
- * Do not add a taka amount anywhere in this file.
+ * Founder-approved prices.
+ * USD, GBP and BDT are set prices, not a conversion.
  */
 
-export type Currency = "USD" | "GBP";
+
 export type PriceUnit = "month" | "project" | "account-month";
 
-export type Money = Record<Currency, number>;
+/** Null means that currency is not published. Do not invent a figure. */
+export type Money = Record<Currency, number | null>;
 
 export type Tier = {
   id: string;
@@ -48,7 +51,8 @@ const month = "month" as const;
 const project = "project" as const;
 const accountMonth = "account-month" as const;
 
-const money = (USD: number, GBP: number): Money => ({ USD, GBP });
+const money = (USD: number, GBP: number, BDT: number): Money => ({ USD, GBP, BDT });
+const extra = (USD: number, GBP: number): Money => ({ USD, GBP, BDT: null });
 
 export const serviceCategories: ServiceCategory[] = [
   {
@@ -67,7 +71,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "starter",
         name: { en: "Starter", bn: "স্টার্টার" },
-        price: money(299, 249),
+        price: money(299, 249, 8000),
         unit: month,
         bestFor: {
           en: "One page with one offer",
@@ -99,7 +103,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "growth",
         name: { en: "Growth", bn: "গ্রোথ" },
-        price: money(549, 449),
+        price: money(549, 449, 15000),
         unit: month,
         popular: true,
         bestFor: {
@@ -134,7 +138,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "scale",
         name: { en: "Scale", bn: "স্কেল" },
-        price: money(899, 749),
+        price: money(899, 749, 25000),
         priceFrom: true,
         unit: month,
         bestFor: {
@@ -175,7 +179,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "Waived when you start on a 3-month retainer.",
           bn: "৩ মাসের রিটেইনারে শুরু করলে সেটআপ ফি মওকুফ।",
         },
-        price: money(149, 119),
+        price: extra(149, 119),
         unit: project,
       },
       {
@@ -188,7 +192,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "Per ad account, per month. Reporting can go out under your agency name.",
           bn: "প্রতি অ্যাড অ্যাকাউন্ট, প্রতি মাস। রিপোর্ট আপনার এজেন্সির নামে যেতে পারে।",
         },
-        price: money(249, 199),
+        price: extra(249, 199),
         priceFrom: true,
         unit: accountMonth,
       },
@@ -206,7 +210,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "starter",
         name: { en: "Starter", bn: "স্টার্টার" },
-        price: money(249, 199),
+        price: money(249, 199, 7000),
         unit: month,
         bestFor: {
           en: "A page that needs a steady calendar",
@@ -233,7 +237,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "growth",
         name: { en: "Growth", bn: "গ্রোথ" },
-        price: money(449, 369),
+        price: money(449, 369, 12000),
         unit: month,
         popular: true,
         bestFor: {
@@ -263,7 +267,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "scale",
         name: { en: "Scale", bn: "স্কেল" },
-        price: money(749, 599),
+        price: money(749, 599, 20000),
         unit: month,
         bestFor: {
           en: "A busier page, with a third profile where it helps",
@@ -298,7 +302,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "Profile check, highlights and the first calendar.",
           bn: "প্রোফাইল যাচাই, হাইলাইট ও প্রথম ক্যালেন্ডার।",
         },
-        price: money(99, 79),
+        price: extra(99, 79),
         unit: project,
       },
     ],
@@ -315,7 +319,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "starter",
         name: { en: "Starter", bn: "স্টার্টার" },
-        price: money(690, 549),
+        price: money(690, 549, 18000),
         unit: project,
         bestFor: {
           en: "A small business that needs a clear site",
@@ -344,7 +348,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "business",
         name: { en: "Business", bn: "বিজনেস" },
-        price: money(1490, 1190),
+        price: money(1490, 1190, 40000),
         unit: project,
         popular: true,
         bestFor: {
@@ -378,7 +382,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "ecommerce",
         name: { en: "E-commerce / Custom", bn: "ই-কমার্স / কাস্টম" },
-        price: money(2900, 2290),
+        price: money(2900, 2290, 80000),
         priceFrom: true,
         unit: project,
         bestFor: {
@@ -412,7 +416,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "Hosting check, dependency updates and up to 1 hour of small edits a month.",
           bn: "হোস্টিং যাচাই, ডিপেন্ডেন্সি আপডেট এবং মাসে সর্বোচ্চ ১ ঘণ্টা ছোট সম্পাদনা।",
         },
-        price: money(49, 39),
+        price: extra(49, 39),
         unit: month,
       },
       {
@@ -422,7 +426,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "The care plan, plus up to 3 hours of small edits and a monthly backup check.",
           bn: "কেয়ার প্ল্যান, সাথে মাসে সর্বোচ্চ ৩ ঘণ্টা ছোট সম্পাদনা ও একটি ব্যাকআপ যাচাই।",
         },
-        price: money(99, 79),
+        price: extra(99, 79),
         unit: month,
       },
     ],
@@ -443,7 +447,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "assistant",
         name: { en: "AI Assistant", bn: "এআই অ্যাসিস্ট্যান্ট" },
-        price: money(1490, 1190),
+        price: money(1490, 1190, 35000),
         priceFrom: true,
         unit: project,
         bestFor: {
@@ -471,7 +475,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "mvp",
         name: { en: "MVP", bn: "এমভিপি" },
-        price: money(3900, 3100),
+        price: money(3900, 3100, 80000),
         priceFrom: true,
         unit: project,
         popular: true,
@@ -502,7 +506,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "product",
         name: { en: "Full product", bn: "ফুল প্রোডাক্ট" },
-        price: money(8500, 6790),
+        price: money(8500, 6790, 180000),
         priceFrom: true,
         unit: project,
         bestFor: {
@@ -541,7 +545,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "starter",
         name: { en: "Starter", bn: "স্টার্টার" },
-        price: money(3500, 2790),
+        price: money(3500, 2790, 70000),
         priceFrom: true,
         unit: project,
         bestFor: {
@@ -567,7 +571,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         id: "business",
         name: { en: "Business system", bn: "বিজনেস সিস্টেম" },
-        price: money(7500, 5990),
+        price: money(7500, 5990, 180000),
         priceFrom: true,
         unit: project,
         popular: true,
@@ -621,7 +625,7 @@ export const serviceCategories: ServiceCategory[] = [
           en: "Requirements, outline screens and a written estimate. The fee is credited to the build.",
           bn: "প্রয়োজনীয়তা, স্ক্রিনের রূপরেখা ও একটি লিখিত অনুমান। এই ফি বিল্ডে সমন্বয় হয়।",
         },
-        price: money(490, 390),
+        price: extra(490, 390),
         unit: project,
       },
     ],
@@ -664,8 +668,8 @@ export const pricingFaq: { q: Record<Locale, string>; a: Record<Locale, string> 
       bn: "দাম কোন মুদ্রায়?",
     },
     a: {
-      en: "US dollars or pounds sterling. The two are set prices, not a live conversion. They exclude VAT and other taxes. A written proposal confirms the fee before work starts. This site does not publish a local-currency price.",
-      bn: "মার্কিন ডলার বা পাউন্ড স্টার্লিং। দুটিই নির্ধারিত দাম, লাইভ কনভার্সন নয়। ভ্যাট ও অন্যান্য কর আলাদা। কাজ শুরুর আগে লিখিত প্রস্তাবে ফি নিশ্চিত হয়। এই সাইটে স্থানীয় মুদ্রার দাম প্রকাশ করা হয় না।",
+      en: "US dollars, pounds sterling, or taka. The three are set prices, not a live conversion. They exclude VAT and other taxes. A written proposal confirms the fee before work starts.",
+      bn: "মার্কিন ডলার, পাউন্ড স্টার্লিং, বা টাকা। তিনটিই নির্ধারিত দাম, লাইভ কনভার্সন নয়। ভ্যাট ও অন্যান্য কর আলাদা। কাজ শুরুর আগে লিখিত প্রস্তাবে ফি নিশ্চিত হয়।",
     },
   },
   {
@@ -714,8 +718,8 @@ export const pricingFaq: { q: Record<Locale, string>; a: Record<Locale, string> 
       bn: "পেমেন্ট কীভাবে?",
     },
     a: {
-      en: "By the method on the invoice, usually an international bank transfer in USD or GBP. We confirm it in the proposal. We do not take ad spend through this website.",
-      bn: "ইনভয়েসের পদ্ধতিতে, সাধারণত ডলার বা পাউন্ডে আন্তর্জাতিক ব্যাংক ট্রান্সফার। প্রস্তাবে এটি নিশ্চিত করা হয়। এই ওয়েবসাইটের মাধ্যমে বিজ্ঞাপন খরচ নেওয়া হয় না।",
+      en: "By the method on the invoice, in USD, GBP, or BDT. We confirm it in the proposal. We do not take ad spend through this website.",
+      bn: "ইনভয়েসের পদ্ধতিতে, ডলার, পাউন্ড, বা টাকায়। প্রস্তাবে এটি নিশ্চিত করা হয়। এই ওয়েবসাইটের মাধ্যমে বিজ্ঞাপন খরচ নেওয়া হয় না।",
     },
   },
 ];
@@ -732,6 +736,9 @@ export function formatMoney(amount: number, currency: Currency): string {
   if (currency === "GBP") {
     return `£${amount.toLocaleString("en-GB")}`;
   }
+  if (currency === "BDT") {
+    return `৳${amount.toLocaleString("en-US")}`;
+  }
   return `$${amount.toLocaleString("en-US")}`;
 }
 
@@ -747,14 +754,18 @@ export function formatTierPrice(tier: Tier, locale: Locale, currency: Currency):
   if (tier.price == null) {
     return locale === "bn" ? "কাস্টম কোট" : "Custom quote";
   }
-  const amount = `${formatMoney(tier.price[currency], currency)}${unitSuffix(tier.unit, locale)}`;
+  const value = tier.price[currency];
+  if (value == null) return "Ask on WhatsApp";
+  const amount = `${formatMoney(value, currency)}${unitSuffix(tier.unit, locale)}`;
   if (!tier.priceFrom) return amount;
   return locale === "bn" ? `থেকে ${amount}` : `from ${amount}`;
 }
 
-export function formatExtraPrice(extra: Extra, locale: Locale, currency: Currency): string {
-  const amount = `${formatMoney(extra.price[currency], currency)}${unitSuffix(extra.unit, locale)}`;
-  if (!extra.priceFrom) return amount;
+export function formatExtraPrice(item: Extra, locale: Locale, currency: Currency): string {
+  const value = item.price[currency];
+  if (value == null) return "Ask on WhatsApp";
+  const amount = `${formatMoney(value, currency)}${unitSuffix(item.unit, locale)}`;
+  if (!item.priceFrom) return amount;
   return locale === "bn" ? `থেকে ${amount}` : `from ${amount}`;
 }
 

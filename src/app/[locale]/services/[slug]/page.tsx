@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { CategoryExtras, TierGrid } from "@/components/pricing/PricingBoard";
-import { BangladeshPriceNote, CurrencyToggle, PriceTrust, StartingPrice } from "@/components/pricing/currency";
+import { CurrencyToggle, PriceTrust, StartingPrice } from "@/components/pricing/currency";
 import { getCategory, pricingFaq, serviceCategories } from "@/lib/pricing";
 import { isServiceSlug } from "@/lib/services";
 import { isLocale, type Locale } from "@/lib/site";
@@ -52,7 +52,7 @@ export default async function ServicePage({ params }: Props) {
             <StartingPrice slug={category.slug} locale={locale} />
           </p>
           <div className="mt-5 flex justify-center">
-            <CurrencyToggle locale={locale} />
+            <CurrencyToggle />
           </div>
           <div className="mt-8 flex justify-center">
             <PageActions locale={locale} topic={category.name[locale]} align="center" />
@@ -68,7 +68,6 @@ export default async function ServicePage({ params }: Props) {
           <TierGrid category={category} locale={locale} />
           <CategoryExtras category={category} locale={locale} />
           <PriceTrust locale={locale} />
-          <BangladeshPriceNote locale={locale} />
         </div>
       </section>
 
