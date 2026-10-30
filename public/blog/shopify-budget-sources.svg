@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" role="img" aria-labelledby="t d">
+  <title id="t">Published starting budgets for a small Shopify Meta campaign</title>
+  <desc id="d">Shopify, Talk Shop and Meta describe different starting points. There is no single correct daily budget.</desc>
+  <rect width="880" height="460" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Three answers, three jobs</text>
+  <g font-family="system-ui,sans-serif" font-size="16" fill="#24202C">
+    <rect x="36" y="80" width="808" height="88" rx="16" fill="#FFFFFF"/>
+    <text x="52" y="114" font-weight="800">Meta</text>
+    <text x="52" y="142">About 50 results in a week usually ends the learning phase. Not a dollar minimum.</text>
+    <rect x="36" y="182" width="808" height="88" rx="16" fill="#FFFFFF"/>
+    <text x="52" y="216" font-weight="800">Shopifys 2025 cost article</text>
+    <text x="52" y="244">They write $1 a day for impression billing, and recommend $5 a day for traffic or sales.</text>
+    <rect x="36" y="284" width="808" height="88" rx="16" fill="#FFFFFF" stroke="#F7931E" stroke-width="3"/>
+    <text x="52" y="318" font-weight="800">Talk Shop, 2026</text>
+    <text x="52" y="346">Their matrix starts at $5$10 a day before the shop has sales. That is their playbook.</text>
+    <text x="36" y="420" fill="#4A4553" font-size="14">Pick a number you can lose for 14 days. Then read Ads Manager, not a blog average.</text>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" role="img" aria-labelledby="t d">
+  <title id="t">Five checks before scaling a Meta campaign</title>
+  <desc id="d">Name the result, keep the account, count about fifty results a week, change one thing, and separate a sale from an Ads Manager result.</desc>
+  <rect width="880" height="420" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Before you raise the budget</text>
+  <g font-family="system-ui,sans-serif" font-size="16" fill="#24202C">
+    <rect x="36" y="76" width="808" height="56" rx="14" fill="#FFFFFF"/><text x="56" y="110">1. Name the result: message, call, visit, or a sale you counted yourself.</text>
+    <rect x="36" y="144" width="808" height="56" rx="14" fill="#FFFFFF"/><text x="56" y="178">2. The ad account, pixel and page stay in the clients name.</text>
+    <rect x="36" y="212" width="808" height="56" rx="14" fill="#FFFFFF"/><text x="56" y="246">3. About 50 results in a week is Metas usual exit from learning.</text>
+    <rect x="36" y="280" width="808" height="56" rx="14" fill="#FFFFFF"/><text x="56" y="314">4. Change budget or creative, not both on the same day.</text>
+    <rect x="36" y="348" width="808" height="52" rx="14" fill="#FFFFFF" stroke="#F7931E" stroke-width="3"/><text x="56" y="380">5. Do not call a message a sale.</text>
+  </g>
+</svg>

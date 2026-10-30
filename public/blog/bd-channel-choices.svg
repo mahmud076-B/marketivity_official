@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" role="img" aria-labelledby="t d">
+  <title id="t">Three places a Bangladesh business can sell</title>
+  <desc id="d">A Facebook page, a website you own, and a paid Meta campaign. Each does a different job.</desc>
+  <rect width="880" height="360" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Page, site, then ads</text>
+  <g font-family="system-ui,sans-serif" font-size="16" fill="#24202C">
+    <rect x="36" y="80" width="250" height="230" rx="18" fill="#FFFFFF"/>
+    <text x="52" y="124" font-weight="800">Page</text>
+    <text x="52" y="164">People already</text>
+    <text x="52" y="192">message you</text>
+    <text x="52" y="230" fill="#4A4553">You do not own</text>
+    <text x="52" y="258" fill="#4A4553">the feed</text>
+    <rect x="310" y="80" width="250" height="230" rx="18" fill="#FFFFFF"/>
+    <text x="326" y="124" font-weight="800">Website</text>
+    <text x="326" y="164">Your offer,</text>
+    <text x="326" y="192">your domain</text>
+    <text x="326" y="230" fill="#4A4553">Worth it when</text>
+    <text x="326" y="258" fill="#4A4553">orders repeat</text>
+    <rect x="584" y="80" width="260" height="230" rx="18" fill="#FFFFFF" stroke="#7B3FE4" stroke-width="3"/>
+    <text x="600" y="124" font-weight="800">Ads</text>
+    <text x="600" y="164">Pay Meta for</text>
+    <text x="600" y="192">a named result</text>
+    <text x="600" y="230" fill="#4A4553">Fee and spend</text>
+    <text x="600" y="258" fill="#4A4553">are separate</text>
+  </g>
+</svg>

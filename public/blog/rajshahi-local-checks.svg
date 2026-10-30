@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" role="img" aria-labelledby="t d">
+  <title id="t">Local listing checks for a Rajshahi business</title>
+  <desc id="d">Google Business Profile, a consistent name address and phone, and a page that states the neighbourhood.</desc>
+  <rect width="880" height="400" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Three places a local search can fail</text>
+  <g font-family="system-ui,sans-serif" font-size="16" fill="#24202C">
+    <rect x="36" y="80" width="250" height="270" rx="18" fill="#FFFFFF"/>
+    <text x="52" y="120" font-weight="800">Profile</text>
+    <text x="52" y="160">Hours match</text>
+    <text x="52" y="190">the door</text>
+    <text x="52" y="230">Photos of</text>
+    <text x="52" y="260">the real shop</text>
+    <rect x="310" y="80" width="250" height="270" rx="18" fill="#FFFFFF"/>
+    <text x="326" y="120" font-weight="800">Name</text>
+    <text x="326" y="160">Same name,</text>
+    <text x="326" y="190">phone and</text>
+    <text x="326" y="220">address on</text>
+    <text x="326" y="250">the site</text>
+    <rect x="584" y="80" width="260" height="270" rx="18" fill="#FFFFFF" stroke="#F7931E" stroke-width="3"/>
+    <text x="600" y="120" font-weight="800">Page</text>
+    <text x="600" y="160">Say Rajshahi</text>
+    <text x="600" y="190">and the area</text>
+    <text x="600" y="230">in normal</text>
+    <text x="600" y="260">sentences</text>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" role="img" aria-labelledby="title desc">
+  <title id="title">Published website price bands in Bangladesh, beside Marketivity tiers</title>
+  <desc id="desc">A cream diagram comparing cited Bangladesh website price bands with Marketivity's set fees. Not a screenshot.</desc>
+  <rect width="880" height="520" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="26" font-weight="800">What people publish for a small site</text>
+  <text x="36" y="78" fill="#4A4553" font-family="system-ui,sans-serif" font-size="14">Ranges disagree. These are other studios' pages, not a national average.</text>
+  <g font-family="system-ui,sans-serif" font-size="15" fill="#24202C">
+    <rect x="36" y="108" width="808" height="54" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="140" font-weight="700">Triple A Tech, JanFeb 2026</text>
+    <text x="430" y="140">Agency brochure site ó20,000ó45,000</text>
+    <rect x="36" y="174" width="808" height="54" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="206" font-weight="700">Softwix, 2026 guide</text>
+    <text x="430" y="206">510 page business site ó20,000ó80,000</text>
+    <rect x="36" y="240" width="808" height="54" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="272" font-weight="700">Codesbreak, 2025 guide</text>
+    <text x="430" y="272">Small business ó25,000ó65,000</text>
+    <rect x="36" y="320" width="808" height="150" rx="18" fill="#FFFFFF" stroke="#F7931E" stroke-width="3"/>
+    <text x="52" y="356" font-weight="800" fill="#8A4500">Marketivity set fees, same three tiers</text>
+    <text x="52" y="390">Starter ó18,000 · also $690 or £549 · up to 5 pages</text>
+    <text x="52" y="418">Business ó40,000 · also $1,490 or £1,190 · up to 10 pages</text>
+    <text x="52" y="446">E-commerce / Custom from ó80,000 · also from $2,900 or £2,290</text>
+  </g>
+</svg>

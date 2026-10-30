@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" role="img" aria-labelledby="t d">
+  <title id="t">Bangladesh Facebook cost ranges from three published guides</title>
+  <desc id="d">Three private guides give different CPM and CPC ranges. None of them is Metas official price list.</desc>
+  <rect width="880" height="440" fill="#F7F3F1"/>
+  <text x="36" y="46" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">The guides do not agree</text>
+  <text x="36" y="74" fill="#4A4553" font-family="system-ui,sans-serif" font-size="14">Read them as opinions from ad accounts, not as Metas rate card.</text>
+  <g font-family="system-ui,sans-serif" font-size="15" fill="#24202C">
+    <rect x="36" y="100" width="250" height="36" rx="8" fill="#24202C"/>
+    <text x="48" y="124" fill="#F7F3F1" font-weight="700">Source</text>
+    <rect x="294" y="100" width="270" height="36" rx="8" fill="#24202C"/>
+    <text x="306" y="124" fill="#F7F3F1" font-weight="700">What they publish</text>
+    <rect x="572" y="100" width="272" height="36" rx="8" fill="#24202C"/>
+    <text x="584" y="124" fill="#F7F3F1" font-weight="700">Treat it as</text>
+    <rect x="36" y="148" width="808" height="70" rx="12" fill="#FFFFFF"/>
+    <text x="48" y="176" font-weight="700">IH Tahim, mid-2026</text>
+    <text x="306" y="176">Broad CPM ó4090</text>
+    <text x="306" y="198">Interest CPM ó60150</text>
+    <text x="584" y="186">One buyers account ranges</text>
+    <rect x="36" y="228" width="808" height="70" rx="12" fill="#FFFFFF"/>
+    <text x="48" y="256" font-weight="700">Kuiperz, 2025</text>
+    <text x="306" y="256">CPC often ó520</text>
+    <text x="584" y="266">A rough guide, their words</text>
+    <rect x="36" y="308" width="808" height="70" rx="12" fill="#FFFFFF"/>
+    <text x="48" y="336" font-weight="700">Digital Marketing Dhaka</text>
+    <text x="306" y="336">CPM ó60180, cold CPC ó414</text>
+    <text x="584" y="346">Their 2026 page, not an audit</text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" role="img" aria-labelledby="t d">
+  <title id="t">Published commission on a twenty pound takeaway order</title>
+  <desc id="d">Uber Eats and Just Eat published percentages applied to a twenty pound order. Deliveroo does not publish a standard percentage.</desc>
+  <rect width="880" height="460" fill="#F7F3F1"/>
+  <text x="36" y="46" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">A £20 order, published rates only</text>
+  <text x="36" y="74" fill="#4A4553" font-family="system-ui,sans-serif" font-size="14">VAT on the fee is extra. Your contract can differ.</text>
+  <g font-family="system-ui,sans-serif" font-size="16" fill="#24202C">
+    <rect x="36" y="100" width="808" height="64" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="128" font-weight="700">Uber Eats, their couriers</text>
+    <text x="520" y="128">30% = £6, plus VAT on the fee</text>
+    <text x="52" y="150" fill="#4A4553" font-size="13">Uber One orders on that page: 33% before VAT</text>
+    <rect x="36" y="176" width="808" height="64" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="214" font-weight="700">Uber Eats, you deliver or they collect</text>
+    <text x="520" y="214">13% = £2.60, plus VAT</text>
+    <rect x="36" y="252" width="808" height="64" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="278" font-weight="700">Just Eat, they deliver</text>
+    <text x="520" y="278">30% + VAT = £7.20 on £20</text>
+    <text x="52" y="300" fill="#4A4553" font-size="13">Eclyde, 10 Sep 2026, quoting Just Eats UK partner page</text>
+    <rect x="36" y="328" width="808" height="64" rx="14" fill="#FFFFFF"/>
+    <text x="52" y="354" font-weight="700">Just Eat, your drivers</text>
+    <text x="520" y="354">14% + VAT = £3.36 on £20</text>
+    <rect x="36" y="404" width="808" height="36" rx="12" fill="#FFFFFF" stroke="#7B3FE4"/>
+    <text x="52" y="428">Deliveroo publishes the formula, not a standard UK percentage.</text>
+  </g>
+</svg>
