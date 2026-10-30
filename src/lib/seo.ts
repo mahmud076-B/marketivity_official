@@ -7,6 +7,7 @@ type PageMetaInput = {
   path?: string;
   title: string;
   description: string;
+  image?: string;
 };
 
 export function pageMetadata({
@@ -14,9 +15,11 @@ export function pageMetadata({
   path = "",
   title,
   description,
+  image,
 }: PageMetaInput): Metadata {
   const suffix = path.startsWith("/") || path === "" ? path : `/${path}`;
   const canonical = `${site.url}/${locale}${suffix}`;
+  const ogImage = image ? `${site.url}${image}` : undefined;
 
   return {
     metadataBase: new URL(site.url),
@@ -37,6 +40,7 @@ export function pageMetadata({
       siteName: site.name,
       locale: locale === "bn" ? "bn_BD" : "en_GB",
       type: "website",
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: title }] : undefined,
     },
     twitter: {
       card: "summary_large_image",

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" role="img" aria-labelledby="t d">
+  <title id="t">Boosted post compared with Ads Manager for a UK takeaway</title>
+  <desc id="d">Two columns. Boost is a quick ad from an existing post. Ads Manager is a full campaign with an objective, ad sets and reporting.</desc>
+  <rect width="880" height="480" fill="#F7F3F1"/>
+  <text x="36" y="48" fill="#24202C" font-family="system-ui,sans-serif" font-size="24" font-weight="800">Same food photo. Different job.</text>
+  <rect x="36" y="80" width="390" height="360" rx="20" fill="#FFFFFF"/>
+  <rect x="454" y="80" width="390" height="360" rx="20" fill="#FFFFFF" stroke="#F7931E" stroke-width="3"/>
+  <g font-family="system-ui,sans-serif" fill="#24202C">
+    <text x="56" y="122" font-size="20" font-weight="800">Boost a post</text>
+    <text x="474" y="122" font-size="20" font-weight="800">Ads Manager</text>
+    <g font-size="15">
+      <text x="56" y="168">Starts from a post you already published</text>
+      <text x="56" y="200">A goal, a budget, a duration</text>
+      <text x="56" y="232">Fewer targeting and creative options</text>
+      <text x="56" y="264">Useful for a weekend special</text>
+      <text x="56" y="296">Harder to separate tests</text>
+      <text x="56" y="360" fill="#4A4553">Meta calls this the simple path.</text>
+      <text x="474" y="168">Objective, then ad sets, then ads</text>
+      <text x="474" y="200">Radius around the shop is explicit</text>
+      <text x="474" y="232">Messages, calls, or the website</text>
+      <text x="474" y="264">You can pause one ad, not the lot</text>
+      <text x="474" y="296">The account stays in your name</text>
+      <text x="474" y="360" fill="#8A4500" font-weight="700">Use this once orders matter.</text>
+    </g>
+  </g>
+</svg>
