@@ -3,7 +3,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { BdtPricingLine } from "@/components/pricing/currency";
 import { serviceCategories } from "@/lib/pricing";
 import { isLocale, site } from "@/lib/site";
 
@@ -112,8 +111,6 @@ export default async function Footer() {
                 <span>{tc("addressValue")}</span>
               </li>
             </ul>
-            <BdtPricingLine locale={locale} align="start" />
-
             <div className="mt-6">
               <SocialLinks />
             </div>

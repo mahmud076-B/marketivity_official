@@ -12,14 +12,14 @@ const copy = {
   en: {
     title: "Pricing",
     description:
-      "USD or GBP pricing for Meta Ads, social media, websites, AI web apps and custom software. Three tiers in each category. Ad spend is separate.",
-    note: "Prices are set in US dollars or pounds sterling, not a conversion. Prices exclude VAT/taxes where applicable. A written proposal confirms the fee.",
+      "USD, GBP, or BDT pricing for Meta Ads, social media, websites, AI web apps and custom software. Three tiers in each category. Ad spend is separate.",
+    note: "Prices are set in US dollars, pounds sterling, or taka, not a conversion. Prices exclude VAT/taxes where applicable. A written proposal confirms the fee.",
   },
   bn: {
     title: "মূল্য",
     description:
-      "মেটা অ্যাডস, সোশ্যাল মিডিয়া, ওয়েবসাইট, এআই ওয়েব অ্যাপ ও কাস্টম সফটওয়্যারের ডলার বা পাউন্ড মূল্য। প্রতিটি বিভাগে তিনটি টিয়ার। বিজ্ঞাপন খরচ আলাদা।",
-    note: "দাম মার্কিন ডলার বা পাউন্ড স্টার্লিংয়ে নির্ধারিত, কনভার্সন নয়। যেখানে প্রযোজ্য, দামে ভ্যাট ও অন্যান্য কর নেই। লিখিত প্রস্তাবে ফি নিশ্চিত হয়।",
+      "মেটা অ্যাডস, সোশ্যাল মিডিয়া, ওয়েবসাইট, এআই ওয়েব অ্যাপ ও কাস্টম সফটওয়্যারের ডলার, পাউন্ড, বা টাকার মূল্য। প্রতিটি বিভাগে তিনটি টিয়ার। বিজ্ঞাপন খরচ আলাদা।",
+    note: "দাম মার্কিন ডলার, পাউন্ড স্টার্লিং, বা টাকায় নির্ধারিত, কনভার্সন নয়। যেখানে প্রযোজ্য, দামে ভ্যাট ও অন্যান্য কর নেই। লিখিত প্রস্তাবে ফি নিশ্চিত হয়।",
   },
 };
 

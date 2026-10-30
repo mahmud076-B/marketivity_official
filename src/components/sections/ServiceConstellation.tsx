@@ -15,7 +15,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
-import { StartingPrice } from "@/components/pricing/currency";
+import { CurrencyToggle, StartingPrice } from "@/components/pricing/currency";
 import { serviceSlugs, type ServiceSlug } from "@/lib/services";
 import type { Locale } from "@/lib/site";
 
@@ -80,6 +80,9 @@ export default function ServiceConstellation({
           <p className="text-base sm:text-lg text-brand-charcoal/70 leading-relaxed">
             {subtitle}
           </p>
+          <div className="mt-6 flex justify-center">
+            <CurrencyToggle />
+          </div>
         </div>
 
         {/* Constellation Grid (Interactive Node Selector on Left, Deep Dossier on Right) */}
