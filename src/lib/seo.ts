@@ -72,6 +72,12 @@ export function organizationJsonLd() {
       addressLocality: "Rajshahi",
       addressCountry: "BD",
     },
+    logo: {
+      "@type": "ImageObject",
+      url: `${site.url}/android-chrome-512x512.png`,
+      width: 512,
+      height: 512,
+    },
     sameAs: [site.facebook, site.instagram, site.linkedin, site.github],
   };
 }
@@ -80,8 +86,8 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: site.name,
-    alternateName: ["marketivity", site.domain],
-    url: `${site.url}/`,
+    name: "Marketivity",
+    alternateName: ["Marketivity Agency", "marketivity.agency"],
+    url: "https://www.marketivity.agency/",
   };
 }
