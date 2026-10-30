@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 
 const GA_PATTERN = /^G-[A-Z0-9]+$/i;
 const PIXEL_PATTERN = /^\d{5,20}$/;
+const CLARITY_ID = "z3sxw85xvg";
+
 function loadAnalytics() {
   if (typeof window === "undefined") return;
 
@@ -32,6 +34,13 @@ function loadAnalytics() {
     document.head.appendChild(inline);
   }
 
+  // 3. Microsoft Clarity
+  if (CLARITY_ID && !document.getElementById("microsoft-clarity")) {
+    const inline = document.createElement("script");
+    inline.id = "microsoft-clarity";
+    inline.text = `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",${JSON.stringify(CLARITY_ID)});`;
+    document.head.appendChild(inline);
+  }
 }
 
 export default function Analytics() {
