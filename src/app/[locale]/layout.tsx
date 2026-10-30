@@ -63,9 +63,18 @@ export async function generateMetadata({
         "x-default": `${site.url}/en`,
       },
     },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+        { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     openGraph: {
       type: "website",
-      siteName: site.name,
+      siteName: "Marketivity",
       title: messages.metadata.title,
       description: messages.metadata.description,
       locale: safe === "bn" ? "bn_BD" : "en_GB",
